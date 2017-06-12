@@ -154,6 +154,8 @@ Chapter 2 - Application Layer
 			- Improves response times for certain sites and client requests.
 			- Reduce traffic on origin server
 
+			- cheaper and faster than adding fatter connection pipe
+
 		Conditional GET
 			Goal: only send object if newer than one that we already have.
 			- Cache date of object
