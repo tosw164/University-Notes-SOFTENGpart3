@@ -1,0 +1,173 @@
+CatherineTLDRch2
+
+Chapter 2 - Application Layer
+	2.1 - Principles of Network Applications
+		Creating Network App
+			- must run on different end systems and communicate over the network
+			- core doesn't run user applications
+
+		Architecture
+			Client-Server
+				- Always on server host, permanentIP
+				- Clients communicate with server, 
+					don't necessarily have staticIP, 
+					don't communicate with each other directly
+			PeerToPeer
+				- No always on server
+				- end systems directly communicate
+				- peers request data and others send. 
+				- Complex management (security very important)
+				- Uses lots of bandwidth (potentially)
+				- More users = more processing power and more bandwidth required
+
+		Process Communication
+			client process: initiate communication
+			server process: waits for contact
+
+		Socket
+			- interface between process and computer network
+			- process send/receive through sockets
+			- similar to a door
+
+		Addressing
+			- messages must have an identifier
+			- host has 32 bit IP address
+			- Idenfitier based off IPaddre + port
+
+			port80 = HTTP server
+			port25 = mail server
+
+			Protocols dictate how this information is structures and its properties
+			- types of message
+			- syntax
+			- semantics
+			- rules for responding/sending
+
+		Transport Service Requirements
+			Data Integrity
+				- some tings need 100% reliability
+				- some can tolerate loss
+			Timing
+				- Some time sensitive and some not
+			Throughput
+				- Some things like video need high throughput to work
+				- Some elastic/dynamic
+			Security
+				- Data integrity, encryption
+
+		Transport Services
+			TCP (Transport Control Protocol) service
+				- reliable
+				- flow & congestion control
+				- no timing, throughput guarantee or security
+				- connection oriented. Need to establish
+
+			UDP (User Datagram Protocol) service
+				- Unreliable
+				- No reliability, flow control, ongestion, timing, or throughput guarantee, security or connection setup
+				- Much faster than TCP
+
+			SSL (Secure Socket Layer) at app layer
+				- Encrypted TCP connection
+				- Data integrity
+				- end-to-end authentication
+
+	2.2 - Web and HTTP[Hyper text transport protocol]
+		General
+			- Websites contain objects
+			- baseHTML file
+			- addressed by URL
+			- Is web application layer
+			- client send request, server return objects
+			- Uses TCP @ port 80
+			- Stateless (doesn't know about past requests)
+
+		Types
+			PersistentHTTP
+				- Multiple objects sent over single TCP connection
+				- as little as one RTT per object retrieved.
+
+			nonPersistentHTTP
+				- At most one object sent over TCP connection, then connection closed
+				- If need multiple objects then need to make multiple conntections
+				- 2RTT + object transfer time per object (establish connection + GET)
+
+		HTTP request
+			Two types:
+				- request message
+				- response message
+			- Encoded in ASCII
+				- Contains things like HTTP type, request line, language, host, etc
+
+			Uploading Content:
+				HTTP POST method
+					- web page with form input
+					- input/s uploaded to server as entity body
+
+				URL mehtod
+					- uses HTTP GET
+					- input put in URL sent
+
+		Method Types
+			HTTP 1.0
+				- GET, POST, HEAD (ask server to leave out requested object from response)
+
+			HTTP 1.1
+				- GET, POST, HEAD
+				- PUT (upload file in entity body)
+				- DELETE (delete file in URL)
+
+		HTTP Response
+			- Also in ASCII and contains information about server, etc..
+
+			200 = OK. Request good and object in message
+			301 = Moved Permanently, object has moved. New location in msg
+			400 = Bad Request. msg not understood
+			404 = Not found. Can't find document
+			505 = HTTP version not supported
+
+		Cookies
+			- File kept in host to retain information about previous sessions.
+
+			- If no cookie already present, will make one for you and then execute request.
+			- If cookie present will execute request
+
+			Uses:
+				- Authorisation
+				- Shopping Carts
+				- Recommendations
+				- User session state
+
+			- Cookies let sites learn lots about you
+
+		Proxy Servers/Caches
+			Goal: Process client request without using origin server.
+
+			- Your web browser connects to the cache.
+			- If request and object in cache then return object.
+			- Otherwise then proxy will request object from origin then return that object
+
+			- Cache is both client and server
+				- client as they request from origin sometimes
+				- server as it returns objects to end hosts
+
+			- Improves response times for certain sites and client requests.
+			- Reduce traffic on origin server
+
+		Conditional GET
+			Goal: only send object if newer than one that we already have.
+			- Cache date of object
+			- Then GET request can request of object [if modified since XXX]
+			- if not then send HTTP 304 (not modified)
+			- otherwise send new object with HTTP200
+
+	2.3 - Email
+
+	2.4 - DNS
+
+	2.5 - P2P applications
+
+	2.6 - Video Streaming and CDN
+
+	2.7 - Socket Programming, UDP & TCP
+

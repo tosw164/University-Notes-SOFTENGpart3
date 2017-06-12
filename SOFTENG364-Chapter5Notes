@@ -1,0 +1,252 @@
+SOFTENG364-Chapter 5
+
+5.1_Introduction
+	Network Layer Functions
+		-Forwarding [Data Plane] Moving packets from router to router
+		-Routing [Control Plane] Determine path packet takes from source to destination
+
+		Goal: Find out how forwarding tables generated and maintained
+
+	Per-router control plane
+		Routing components in each and every router
+		Interact with each other to generate forwarding table
+
+	Logically centralised control plane
+		Distinct & Remote controller interacts iwth local agents in router to make forwarding table
+
+5.2_Routing Protocols
+	General
+		Goal: Compute good paths from sender to receiver
+
+		Terminology:
+			G = graph
+			N = set of routers {a,b,c}
+			E = links {(a,b), (b,c)}
+			c(x,y) = cost from x to y
+
+		Global: All routers have full topology (Link state algorithms)
+		Decentralised: Only know physical neighbours and iteratively change information (Distance vector algorithms)
+
+		Static: Route changes slowly over time
+		Dynamic: Faster changes, in reponse to cost changes
+
+		Load sensitivity based off level of congestion
+
+	Link State - Dijkstra's Algorithm
+		- Global, each router knows topology
+		- Done by link state broadcase
+		- Creates forwarding table for given node
+		- Only positive edge weights
+		- O(n^2) compliexity, but can become O(nlogn)
+
+		- Iterative checking each node and traversing to lowest cost neighbour
+
+	Distance Vector - Bellman Ford Algorithm
+		- Shortest path to each node from given node
+		- Slower than Dijkstra's
+		- Works for negative edge weights
+		- Communicate to neighbour if change occurs
+		- Asynchronous and distributed
+		- Complexity varies
+
+		- Uses dynamic programming to compute final solution
+		- Abuses transitive relations to find least c(x,y) and is recursive
+
+		- Small changes propogate and update quickly
+		- Large updates take a long time to calculate
+			- Infinite look can happen before shortest route happens. To alleviate this sometimes set actual shortest path to INFINITE momentarily to let traffic through. This is only a baidaid fix (Poison reverse)
+
+			Split Horizon:
+				If A-B-C then if trying to go (A,C) then when doing to B, A won't be broadcasted. Prevents going back.
+
+
+	Difference:
+		Message Complexity
+			LS = NE messages
+			DV = Variable as only talk to neighbours
+
+		Convergance Speed
+			LS = O(n^2)
+			DV = Variable as might have infinite loop at some point
+
+		Robustness
+			LS = Can advertise wrong LINK cost && each node only compute its own tables
+			DV = Can advertise wrong PATH cost && errors propogate through the network
+
+5.3_Intra AS routing
+	
+	Real world isn't the same as idealised situation with identical hardware.
+	Real world contains multiple/billions of destinations for all things and can't store them all in tables.
+	ISPs may want to control things their own way.
+
+	Autonomous Systems -  IntraAS routing
+		-Scalable routing is having subgroups of routers (Domain/AS)
+		- Each of these must run same IntraAS routing algorithm WITHIN their own AS
+		- Routers in different AS can run different routing algorithms, but must run same in rest of AS.
+		- InterAS algorithms exist to connect 2 or more AS together. Done through gateway router within AS
+		- Overall forwarding table generated through use of both of these intra/inter AS routing algorithms
+
+		AKA Interior Gateway Protocol (IGP)
+		Commonly used ones:
+			RIP = Routing information protocol
+			OSPF = Open shortest path first
+			IGRP = Interior gateway routing protocol
+
+		OSPF
+			- Open & publicly available
+			- uses link state (dijkstras)
+			- router floods ads to all other routers in AS
+				- Directly over IP instead of UDP/TCP
+			- Secure (all messages authenticated)
+			- Multiple same cost paths allowed (RIP only has 1)
+			- Has different cost metrics for different types of service (TOS)
+
+			Heirarchical OSPF in large domain/AS
+				- Subdomains exist with boundary and backbone routers
+				- each subdomain has a connection to backbone called area border routers
+				- Backbone routers connect these ABRs
+				- Congestion at ABR due to communications between subdomains
+				- Boundary routers connect to other domain/AS
+
+5.4_Router among ISP
+	Border Gateway Protocol (BGP)
+		- Main in use interdomain routing protocol
+		- BGP session is almost permanent TCP connection
+
+		eGBP - Obtain subset reachability from neighbouring AS
+		iBGP - Propogate reachability information to all AS
+
+		Pathing
+			prefix + attributes = route
+
+			AS-PATH = List of AS through which prefix ad has passed
+			NEXT-HOP = specific internal AS router to next hop AS
+
+			PREFIX: contains current path taken to get to where it is
+
+			Policy determines which final path is taken
+
+		BGP messages
+			OPEN: Open TCP connection to BGP peer & authenticate
+			UPDATE: Advertise new path
+			KEEPALIVE: Keeps connection up if not many UPDATES, used to ACK OPEN request
+			NOTIFICATION: Report errors, close connection
+
+		Forwarding table entries
+			- Each router has indexed physical connections. each destination in table points to index of where to go next.
+
+			Once again, policy decides where to go if multiple routes available to get from x to y
+
+			Hot potato: Chose local gateway with least intradomain cost. Just pass it on and not worry about it anymore
+
+		Policy from advertisements
+			Example when ISP only wants to route traffic to/from customer network. If w attached to A then Aw must be in route. So if A,B,C connected going from C to w won't be CBAw, always CAw
+
+			- Dual homed when w connected to A & B, will never be ABw or BAw, and always Aw or Bw
+
+		Different intra/interAS routing?
+			Policy:	Admins want control of how things are run
+			Scale: Not everything has same size, so some routing more suited for size than others
+			Performance:
+				IntraAS focus on performance
+				InterAS, policy holds higher over performance
+
+5.5_Software Defined Networking
+	- Is logically centralised control plane
+		- Easier network management
+		- Table based forwarding OpenFlow API
+		- Open implementation
+		- Uses distributed, per-router approach
+
+	- Cant split traffic, choose path, or handle multiple things at once
+
+	SDN:
+		1:	Generalised flow based forwarding OpenFlow
+		2:	Control plane separation
+		3:	Control plane functions separate to physical switches
+		4: Programmable controlling
+
+		- Control plane switches separate from dataplane switches
+		-TLDR: Each router sends information up and algorithm computes forwarding table and sends back to the physical routers how data should flow.
+
+
+	Data Plane Switches (Lowest layer)
+		- Fast & simple
+		- siwtch flow table installed, computed, and controlled by controller and API (OpenFlow)
+
+	SDN controller (Middle layer)
+		- Maintain network state information
+		- NORTHBOUND API: to communicate with apps in higher layer
+		- SOUTHBOUND API: interact with switches below.
+		- Separate APIs to how information sent up/down during network activity.
+
+		Components:
+			Interface layer
+				[network graph][RESTful][Intent]
+				-Abstratcions
+
+			Network state management layer
+				[statistics][flow table][linkstate/host/switch information]
+				-Keeps state of network link, siwtches and services. Distributed database.
+
+			Communication layer
+				[OpenFlow][SNMP]
+				-Communication between SDN controller and switches it controls.
+
+				OpenFlow protocol
+					-Betwen controller & switch
+					- TCP (optional encryption)
+
+					Controller to Switch
+						Features:	query switch feature
+						Configure:	sets parameters
+						ModifyState: Add/Del/Mod flow entries in tables
+						PacketOut: Send packet out of switch
+
+					Switch to Controller
+						PacketIn: transfer packet to controller. Lets controller knows if any updates
+						FlowRemoved: flow table entry deleted at switch
+						PortStatus: Let controller know of change on port.
+
+		Implementations:
+			OpenDaylight ODL controller
+				- OpenSource with 2 interfaces.
+				- Network apps & external to SDN controlled by user defined method.
+				- External apps communicate with HTTP RESTAPI
+				- Service Abstraction Layer: connect internal and external apps & services.
+
+			ONOS controller
+				- Control apps separate from controller
+				- Uses intents
+				- Emphasis on distributed systems for functionality.
+				- Doesn't care what's below it. Trusts API to handle information transmission.
+
+	Network-control apps (Top layer)
+		- "brains", implementation of lower level functions
+		- Not bound, can use 3rd party products for this stuff. And uses common standards for easy reuse.
+		
+		
+5.6_ICMP (Internet Control Message Protocol)
+	-Let hosts & routers communicate network level information
+		-Errors, unreachable things (port, host, netowrk)
+	- Above IP
+
+	Message contains TYPE, CODE, [first 8 bytes of IP datagram causing error]
+
+	Traceroute:
+		-traces route between 2 hosts
+		- Source sends UDP to destination at unlikely port number
+		- ICMP messgae contains IP address and router name
+		- If reach target, RTT, name and IP saved and port unreachable sent.
+
+5.7_Network Management & SNMP
+	Deployment, integration & coordination of hard&software of network & its control
+
+	Managed devices have objects that is sent to database.
+
+	SNMP = Simple network management protocol
+		Request/Response Mode
+			sending and receiving information
+
+		Trap Mode
+			agents sending data to managing entity. Usually about an event that happened.

@@ -1,0 +1,167 @@
+SE364 Catherine's Section TLDR notes
+
+Chapter 1 - Introduction
+	1.1 - What is the Internet
+		Internet: Billions of connected devices that run network applications
+		
+		- Bandwidth: Rate of data transfer
+		- Packets are forwarded by switches
+		- End systems run protocols that control sending/receiving of information
+
+		Standards
+			RFC		Request for comments
+			IETF	Internet Engineering Task Force
+
+		Service View
+		- Provides services to applications
+		- Provides programming interface to applications.
+
+		Protocol
+		Define format, order of messages sent/received amongst entities.
+
+	1.2 - Network Edge
+		Network Structure
+			Network Edge
+			- Hosts run applications and are clients and servers
+			- Servers located in data centres
+
+			Access Network/Physical Media
+			- Wired, or wireless communication links
+
+			Network Core
+			- Interconnected Routers
+			- Network of networks
+
+		Digital Subscriber Line (DSL)
+			- Uses pre-existing phone lines 
+			- Uses Access multiplexors (DSLAM)
+
+			Internet: goes to internet line after the phone line
+			Phone: goes to telephone line after the phone line
+
+			<2.5Mb/s UPLOAD		<24Mb/s DOWNLOAD
+
+		Cable Network
+			- Uses frequency division multiplexing to divide types of data being transmitter over it.
+			- Uses cable TV infrastructure & shares broadcast medium
+
+			HFC (Hybrid fibre coax)
+			2Mb/s UPLOAD		30Mb/s DOWNLOAD
+
+		Ethernet/Enterprise Access Network
+			- Used in large scale scenarios
+			- High transmission rates (from 10Mb/s to 10Gb/s)
+
+		Wireless Access
+			Having a robust redisential  network infrastructure is important
+			- WLAN (local) and within building
+			- WWAN (wide) provided by telecommunications provider (cellular data)
+
+		Physical media
+			Guided Media = Data travels in specified medium (wire)
+			Unguided Media = travels freely (radio)
+
+			Twisted Pair (TP)
+				- 2 insulated copper wires
+				- CAT5=100/1000mbs, CAT6=10gbs
+
+			Coaxial cable
+				- 2 Copper conductors
+				- Bidirectional, broadband
+
+			Fibre
+				- Glass fibres carry information through light pulses.
+				- High throughput (100Gbs) with low error rate (No EMI)
+
+			Radio
+				- Uses radio waves, bidirectional
+				- Heavily affected by environment
+
+				Microwave, LAN/WiFi, WWAN, Satellite
+
+	1.3 - Network Core
+		General
+			- Send messages, but first need to break it up into packets
+			- Takes L/R to send packet through link.
+			- Entire packet must be recieved before it can be transmitted.
+			- End-to-end delay = 2L/R (zero propagation delay)
+			- FDM = Frequency Division Multiplexing
+			- TDM = Time Division Multiplexing
+		
+		Delay & Loss
+			- Due to whole packet having to be there before can be passed further, causes queue
+			- If more packets arrive than queue can handle then packet dropped and have to be resent
+
+		Functions
+			Routing: determine path for packets to take
+			Forwarding: move packets from router to router
+
+		Circuit Switching
+			- When connection established, act as if physical connection exists between 2 hosts
+			- Only disconnected when all transactions done
+			- Maximum throughput as segment is locked by pair
+			- Unused segments remain idle
+
+		Packet Switching
+			- Lets more users use network than circuit switch
+			- Messages broken down into parts that are sent independantly
+			- N users with each having bandwidth of total bandwidth.
+
+		Architecture
+			- End system connect to ISP
+			- ISPs connect to global ISPs through IXPs
+
+	1.4 - Delay, Loss & Throughput
+		How
+			- Can lose packet of queue used up, next packed dropped.
+
+		Packet Delay
+			- Nodal Processing: check bit, determining output link
+			- Queuing Delay: Waiting for output link for transmission
+			- Transmission Delay: time to push packet to network
+			- Propagation Delay: length of physical link
+
+			Traffic intensity
+			- 0 = small queuing delay
+			- approaching 1 = large queuing delay
+			- > 1 = more work arriving then can be processed (loss)
+
+		Traceroute
+			- Will let you figure out path packet takes, and delays for each one
+
+		Packet Loss 
+			- dropped when queue full. May or may not be retransmitted
+
+		Throughput
+			- rate that bits can be transfered between sender and receiver
+			- Instantaneous and average throughput
+			- Only as good as bottleneck (in whole system)
+
+	1.5 - Protocol Layers
+		Why: To identify relationships between sections of internet.
+
+		Application Layer: Network applications (HTTP)
+		Transport Layer: process-process data transfer (TCP)
+		Network Layer: Routing of datagrams from source to dest (IP)
+		Link Layer: Transfer data between neighbouring elements (802.11, Ethernet)
+		Phyiscal Layer: bits on wire
+
+		ISO/OSI
+			- Adds presentation and session betweenn application and transport layer
+
+			Presentation: application interpreting data
+			Session: synchronising data. Recovery of data
+
+		Encapsulation
+			- Things in different layers contained in own wrapper denoted by a header in packet. One header for each protocol
+
+	1.6 - Networks Under Attack: Security
+		Internet not originally created with security in mind.
+
+		Malware
+			- Virus: self replicating infection received by executing something
+			- Worm: Self replication infection by passively receiving object that self executes
+		DDOS: bogus TCP connections that saturate connection and mean legitimate traffic can't get through.
+
+		Packet Sniffing: looking at your packets
+		IP Spoofing: pretending you're someone else by using their IP address
