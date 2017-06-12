@@ -294,6 +294,22 @@ Chapter 2 - Application Layer
 				- make things query servers lots
 
 	2.5 - P2P applications
+		General
+			- No always on server, all done through end system
+			- peers exchange IPaddresses
+			- BitTorrent/VoIP/Streaming
+			- The more peers the faster the file transfer
+
+		BitTorrent
+			- file divided to 256k chunks
+			- tracker track participating
+			- The more you seed the better connection you get to other files
+				- A sends chunks to top 4 of those who are sending to her
+				- This updates every 10 seconds
+
+			- Whle downloading you upload chunks to peers
+			- A asks periodically to peers to see what chunks they have. Request rarest chunks
+			- Every 30s choose random peer to start sending to
 
 	2.6 - Video Streaming and CDN
 
