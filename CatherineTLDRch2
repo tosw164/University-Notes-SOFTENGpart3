@@ -164,6 +164,47 @@ Chapter 2 - Application Layer
 			- otherwise send new object with HTTP200
 
 	2.3 - Email
+		Components
+			- User agents
+				- mail readers
+				- edit, read, make emails
+				- outgoing and incoming messages stored on server
+
+			- Mail servers
+				- mailbox (contain incoming mail for user)
+				- message queue (outgoing messages to be sent)
+
+		SMTP (Simpe mail transfer protocol)
+			- between mail servers to send messages
+			- uses TCP for reliability (part25)
+			- messages as 7bit ASCII
+			- has request/response likt HTTP
+			- persistent connections
+
+			phases
+			- handshake
+			- transfer
+			- closure
+
+			Scenario:
+				- A sends message to mail server X
+				- X connects with Y
+				- Y sends message to B
+
+			- Unlike HTTP SMTP messages have multiple objects sent in multiple parts. HTTP has each object in its own message
+
+			Protocols
+				- POP Post Office Protocol
+					- Only copy kept on client
+					- If deleted then lost
+					- Stateless across sessions
+
+				- IMAP Internet Mail Access Protocol
+					- Messages held in sever
+					- user can organise mail
+					- State kept between sessionsqqq
+
+				- HTTP (gmail, hotmail, etc..)
 
 	2.4 - DNS
 
