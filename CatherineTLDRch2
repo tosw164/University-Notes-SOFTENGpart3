@@ -206,7 +206,92 @@ Chapter 2 - Application Layer
 
 				- HTTP (gmail, hotmail, etc..)
 
-	2.4 - DNS
+	2.4 - DNS Domain Name System
+		General
+			- maps IP addresses and names
+			- Distributed database in heirarchy
+			- Applicaton layer protocol, resolves names to IP addresses
+				- Does this for hosts and mail servers
+			- Decentralised so no single point of failure
+
+		Heirarchy
+			- Root DNS server
+			- com/org/edu DNS server
+			- google.com/facebook.com DNS servers
+
+			- Root queried to get extension
+			- Extension queried to get sitename
+			- Sitename queried to get IP address of website
+
+		TLD/Authoritative servers
+			TLD = Top level domain
+				- responsible for com/org nz/eu
+
+			Authoritative DNS
+				- Organisation owns own server
+				- Proved hostname-IP for own hosts
+				- Maintained by org, or service provider
+
+		LocalDNS
+			- Doesn't strictly belong to heirarchy
+			- each ISP (residential/company/uni) has one [Default NS]
+			- Act as proxy as something in there queries this first
+
+		Resolution
+			Iterative
+				- Ask local
+				- Local ask root and return TLD
+				- local ask TLD that return authoritative
+				- ask authoritative which return IP
+
+			Recursive
+				- local ask root
+				- root ask TLD
+				- TLD ask authoritative
+				- All gets pushed back to host
+
+		Caching
+			- once learns mapping will cache it
+			- this mapping has TTL
+
+		Record types
+			In format (name, value, type, ttl)
+
+			TYPE(A)
+				name = hostname
+				value = IP address
+
+			TYPE(CNAME)
+				name = alias for real name
+				value = canonical name
+
+			TYPE(NS)
+				name = domain
+				value = hostname of authoritative server
+
+			TYPE(MX)
+				value = mailserver name
+
+		Messages
+			- both query and response same format
+			- 16bit header for identification
+			- bunch of flags afterwards
+
+		Inserting Records
+			- register name at DNS registrar
+			- Creat authoritative A and MX record
+
+		Attacking
+			DDOS
+				- bombard root with traffic
+				- bombard TLD (maybe more danger)
+
+			Redirect
+				- man in middle
+				- send bogus information (poison)
+
+			Use DNS for DDOS
+				- make things query servers lots
 
 	2.5 - P2P applications
 
