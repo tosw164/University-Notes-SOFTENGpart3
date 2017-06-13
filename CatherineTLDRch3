@@ -1,6 +1,20 @@
 CatherineTLDRch3
 Chapter 3 - Transport Layer
 	3.1 - Transport Layer Services
+		General
+			- Provides logical communication between app processes on different hosts
+			- transport protocol run on end system
+			- breakup sending app msg, remake received app msgs
+
+		Network & Transport layer
+			NETWORK: logical communcation between hosts
+			TRANSPORT: logical communication between processes
+
+		Protocols
+			TCP: reliable with congestion/flow control
+			UDP: unreliable but fast
+
+			- Neither guarantee delays or bandwidth
 
 	3.2 - Multiplexing and Demultiplexing
 
