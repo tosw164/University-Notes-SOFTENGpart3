@@ -148,7 +148,14 @@ Chapter 3 - Transport Layer
 				- Instead send multiple packets and see what ACKs you get.
 				- If multiple ACKs with same seq# then know something was probably lost.
 
-				- Will receive multiple ACK with seq# of first unreceived segment 
+				- Will receive multiple ACK with seq# of first unreceived segment
+
+		3.5.3 - Flow Control
+			- Try match rate of sender with what receiver can accept
+
+			- Receiver advertises free buffer. RWND in header
+			- Therefore sender accomodates how much they send by the RWND value
+			- Ensure no overflow 
 
 	3.6 - Principles of Congestion Control
 
