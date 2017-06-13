@@ -1,12 +1,27 @@
 CatherineTLDRch4
 
 Chapter 4 - Network Layer
-	4.1 - Introduction
+	4.1 - Overview of Network Layer
+		- network layer protocols in every host and router
+		- router looks at headers in datagrams that pass through
 
-	4.2 - Virtual Circuit & Datagram Network
+		4.1.1 - Data Plane
 
-	4.3 - Inside Router
+		4.1.2 - Control Plane
 
-	4.4 - Internet Protocol
 
-	
+	4.2 - Inside Router
+
+	4.3 - Internet Protocol
+		4.3.1 - Datagram Format
+
+		4.3.2 - Fragmentation
+
+		4.3.3 - IPv4 Addressing
+
+		4.3.4 - Network Address Translation
+
+		4.3.5 - IPv6
+
+	4.4 - Generalised Forward and SDN
+
