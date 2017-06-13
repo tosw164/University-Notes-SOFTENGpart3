@@ -213,3 +213,45 @@ Chapter 3 - Transport Layer
 				- Uses bit flags to signify.
 
 	3.7 - TCP congestion control
+		General
+			- Idea is to increase bandwidth use until loss occur. Then know maximum rate you can send stuff
+
+			Additive Increase: increase CWND (congestion window) by linear number of MSS (max seq size) until loss
+			Multiplicative decrease: cut CWND in half if loss
+
+			Loss determined by timeout
+
+		TCP slow start
+			- start with small amount of information, double each time. So goes exponentially.
+			- If loss then restart at CWND=1
+
+		TCP RENO
+			- Start with TCP slow start
+			- if tripleACK then halve CWND and increase lineraly
+
+			Loss to tripleACK is better than timeout
+
+			If Reno gets timeout then reset to 1
+
+		TCP TAHOE
+			- Start with TCP slow start
+			- if timeout then reset to 1MSS
+
+		Switching from SlowStart
+			- sshthresh: variable set to CWND/2 when can't fit that size anymore.
+			-Then after this use linear probing
+
+		TCP Throughput
+			- is function of window size (at loss) and RTT
+
+		TCP fairness
+			- Goal: If K sessions and max R then each should have R/K bandwidth.
+
+			- Fair because additive increase has linear slope and multiplicative decrease proportionally decreases throughput.
+
+			UDP - Don't really regard this and send packets tolerating some loss (multimedia streaming)
+
+			TCP parallel connections
+			- Apps open multiple connections in parallel.
+			- Get bandwidh related to how many connections opened
+			- web browsers do this.
