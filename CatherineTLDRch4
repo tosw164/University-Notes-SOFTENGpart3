@@ -5,12 +5,29 @@ Chapter 4 - Network Layer
 		- network layer protocols in every host and router
 		- router looks at headers in datagrams that pass through
 
+		Forwarding: move packet from input to correct output
+		Routing: Determine how packet goes from src to dest
+
 		4.1.1 - Data Plane
+			- Local & per router
+			- Determine where to put received datagram on output port
+			- does forwaring
 
 		4.1.2 - Control Plane
+			- Network wide logic
+			- Determine how datagram routed
 
+			2 approaches
+			- traditionally implemented in routers
+				- routing algorithm in every router in control plane.
+			- decentralised SDN (software defined networking) to do computation.
+				- distinct remote server interacts with routers.
+
+		Network Service Model 
+			[DONT EVEN KNOW]
 
 	4.2 - Inside Router
+		
 
 	4.3 - Internet Protocol
 		4.3.1 - Datagram Format
