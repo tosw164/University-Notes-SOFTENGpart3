@@ -17,7 +17,38 @@ Chapter 3 - Transport Layer
 			- Neither guarantee delays or bandwidth
 
 	3.2 - Multiplexing and Demultiplexing
+		MULTIPLEXING
+			- done at sender
+			- handle data from multiple sockets
+			- add transport header
 
+		DEMULTIPLEXING
+			- done at receiver
+			- send received packet to right socket
+
+			Datagram
+				- source & dest IP 
+				- source & dest port#
+			Host uses IPaddress + Port# to send segment to right socket
+
+		Connectionless Demultiplexing (UDP)
+			- when get UDP segment check port# and send segment to relevant socket
+
+			IPdatagram wth same dest&port# but different sourceIP/sourcePort# will be put in same socket at dest
+
+		Connection Oriented Demultiplexing (TCP)
+			4-tuple ID for TCP socket
+			- Source IP
+			- Source Port#
+			- Dest IP
+			- Dest Port#
+
+			-Demultiplexing uses all 4 values to find correct socket
+			-host may have multiple TCP connections and therefore IDed by the 4tuple
+			- Web servers handle differently, have different socket for each connecting client
+
+			All destined to IPaddr B on same port have different socket if different src
+			
 	3.3 - Connectionless Transport (UDP)
 
 	3.4 - Principles of Reliable data transfer
