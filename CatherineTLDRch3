@@ -155,7 +155,29 @@ Chapter 3 - Transport Layer
 
 			- Receiver advertises free buffer. RWND in header
 			- Therefore sender accomodates how much they send by the RWND value
-			- Ensure no overflow 
+			- Ensure no overflow
+
+		3.5.4 - Connection Management
+			- Have to first handshake the 2 hosts before data transfer
+			- Agree on connection parameters
+
+			Usual
+				1	A send SYN to B
+				2	B ACK A, connection established
+
+			3-Way-Handshake
+				1	A send SYN to B
+				2	B send SYNACK to A
+				3	A send final ACK to B, connection established
+
+				A chooses num X for initial SYN
+				B choosed num Y, send that and X+1 in SYNACK
+				A send Y+1 in final ACK
+
+			Closing Connection
+				Once done, both client and server finish with FIN=1. Still has to be ACKed (usually with other FIN=1)
+
+				Similar to 3wayhandshake with the X, X+1, Y and Y+1
 
 	3.6 - Principles of Congestion Control
 
