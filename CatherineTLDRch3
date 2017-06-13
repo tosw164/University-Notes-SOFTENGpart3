@@ -77,6 +77,78 @@ Chapter 3 - Transport Layer
 	3.4 - Principles of Reliable data transfer
 
 	3.5 - Connection Oriented Transport (TCP)
+		General
+			- one sender one receiver
+			- reliable, in order
+			- pipelined (flow and congestion control)
+			- need handshaking
+			- sender can't overwhelm receiver
+			- bidirection data flow using max segment size
+
+		3.5.1 - Segment Structure 32bit wide
+			| src port		| dest port		|
+			| sequence number				|
+			| ACK number					|
+			| BunchOfFlags	| receive window|
+			| checksum		|				|
+			| options						|
+			| payload						|
+
+			ACKs
+			- used to signify sequence# of next byte. Used to reorder at later time
+			- used to let them know that they got packet, ACK will echo message X back
+
+			Timeout & RTT
+				- TCP RTT > RTT
+				- don't want premature timeout so don't make too short
+				- don't want slow reaction so don't make too long
+
+				- Uses old values of SampleRTT to calculate expectedRTT of newer packet
+
+				[FORMULA GO HERE]
+
+				TImeout interval calculated with expectedRTT + some deviation just in case
+
+		3.5.2 - Reliable Data Transfer
+			TCP creates layer of reliability over IP's unreliable nature
+			- pipeline segments
+			- use of ACKs
+			- single transmission timer
+
+			Retransmissions if something suspected to be lost
+			- timeouts
+			- duplicate ACKs
+
+			As sender:
+				1	break up data into segments
+				2	create segment with seq#
+				3	send it & start timer
+				4	IF TIMEOUT
+						resend & restart timer
+					ELSE ACKed
+						update known ACKs
+						send new seq and restart timer
+
+			TCP ACK generation (at receiver)
+
+				EVENT: get out of order ACK
+				ACTION: Delay ACK, wait and if older one doesn't come send ACK
+
+				EVENT: get in order segment, with another segment ACK pending
+				ACTION: immediately send cumulativeACK
+
+				EVENT: get out of order segment at higher seq#
+				ACTION: send duplcicateACK
+
+				EVENT: get segment that fills gap created above
+				ACTION: send ACK
+
+			TCP Fast Retransmit
+				- Sometimes timeout times for segments too long and therefore take to long to send data
+				- Instead send multiple packets and see what ACKs you get.
+				- If multiple ACKs with same seq# then know something was probably lost.
+
+				- Will receive multiple ACK with seq# of first unreceived segment 
 
 	3.6 - Principles of Congestion Control
 
