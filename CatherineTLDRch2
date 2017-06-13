@@ -213,6 +213,7 @@ Chapter 2 - Application Layer
 			- Applicaton layer protocol, resolves names to IP addresses
 				- Does this for hosts and mail servers
 			- Decentralised so no single point of failure
+			- Uses UDP for speed
 
 		Heirarchy
 			- Root DNS server
@@ -364,4 +365,7 @@ Chapter 2 - Application Layer
 			5	download video over DASH
 
 	2.7 - Socket Programming, UDP & TCP
+		General
+			GOAL	make client/server apps that use sockets to communicate
 
+			Use either UDP or TCP depending on speed/reliability restraints
