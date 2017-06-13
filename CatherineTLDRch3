@@ -75,6 +75,41 @@ Chapter 3 - Transport Layer
 				- if has 1 in extra digit then add 1 to sum
 
 	3.4 - Principles of Reliable data transfer
+		General
+			- Putting a layer of reliability on system (TCP) on something inherantly unreliable (IP)
+			- Transport layer only looks t the packet numer, source and destination IPs & port# and not inside actual packet
+
+		RDT 3.0
+			- Uses ACK system with alternating values attached (ACK0 and ACK1) to signify which packets being ACKed
+
+			timeout
+			- If no ACK0/ACK1 received due to timeout then resend packet
+			- receiver will see duplicate pkt0/pkt1 and then delete it.
+
+			premature timeout
+			- receiver has difficulty and has to potentially delete multiple packets.
+
+		Stop and Wait
+			- If have to do this for every packet then not actually using network to 100% effectiveness
+			- [NETWORK UTILISATION EQUATION]
+			- Since packets are small then waiting for RTT means network not used.
+
+		Pipelining
+			- Sending multiple in flight packets that are yet to be ACKed
+			- Alleviates issues of stop and wait as will use more of network to send packets instead of waiting for every packet.
+
+		Go back N
+			- Sender has N unACKed packets in pipeline.
+			- Receiver send cumulativeACKs
+			- Sender has timer for oldest unACKed packet.
+				- if that timer expires send N packets starting at lost packet again regardless if they have been received or not.
+
+
+		Selective Repeat
+			- Sender has N unACKed packets in pipeline.
+			- Receiver sends individual ACK per packet. The bundling only happens one way
+			- Sender has timer for each packet and retransmit that one if timer runs out
+			- Potential issue with this when choosing numbers as delayed ACKs may be ambiguous to which bundle it came from.
 
 	3.5 - Connection Oriented Transport (TCP)
 		General
