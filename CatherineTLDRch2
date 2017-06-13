@@ -312,6 +312,56 @@ Chapter 2 - Application Layer
 			- Every 30s choose random peer to start sending to
 
 	2.6 - Video Streaming and CDN
+		- Have to find a way to deal with the large bandwidth requirements of streaming media (video)
+
+		Streaming Video
+			- sequence of images at 24fps
+			- Try find way to reduce data use with redundancy of these frames.
+				Spatial Coding - send (col, num) paids
+				Temporal Coding - send diff between 2 frames
+
+			CBR = constant bit rate
+			VBR = variable bit rate
+
+		DASH
+			Dynamic Adaptive Streaming over HTTP
+			- Intelligence at client level
+				WHEN to get chunk
+				WHAT bitrate
+				WHERE to request chunk from
+
+			Server
+				- splits video into chunks
+				- chunks stored at different bitrates
+				- manifest has URL for differnt chunks
+			
+			Client 
+				- Periodically measured available bandwidth
+				- Selects bitrate chunk to get based off this in manifest
+
+		CDN - Content Delivery Networks
+			streaming content to many simultaneous users
+			- Having one large server is not scalable. Single point of failure, large distance between some users, congestion issues
+
+			- Alternatively store multiple copies at differnt servers in different places
+				ENTER DEEP: put CDNs closer to users, deep into network. (Akamai)
+				BRING HOME: smaller number of larger clusters near (not in) access networks (Limelight)
+			- Users only download copy of file, where they choose from if closest congested
+
+		Process
+			1	A request video @ vid.com/123
+			2	Resolve with DNS
+			3	Request video from IP
+			4	manifest returned
+			5	query manifest URLs
+			6	download video
+
+		Netflix
+			1	Authenticate with netflix server
+			2	Query AWS to find video
+			3	get manifest for video
+			4	Request URL for video
+			5	download video over DASH
 
 	2.7 - Socket Programming, UDP & TCP
 
