@@ -43,13 +43,36 @@ Chapter 3 - Transport Layer
 			- Dest IP
 			- Dest Port#
 
-			-Demultiplexing uses all 4 values to find correct socket
-			-host may have multiple TCP connections and therefore IDed by the 4tuple
+			- Demultiplexing uses all 4 values to find correct socket
+			- host may have multiple TCP connections and therefore IDed by the 4tuple
 			- Web servers handle differently, have different socket for each connecting client
 
 			All destined to IPaddr B on same port have different socket if different src
 			
 	3.3 - Connectionless Transport (UDP)
+		General
+			Packets sent to receiver and hope it gets there. No handshaking
+			- Packets can get lost and received out of order
+			- can add reliability in application layer
+
+			Uses
+			- Multimedia Streaming (loss tolerant, time sensitive)
+			- DNS
+			- SNMP Simple Network Management
+
+		Segments
+			- small header (8bit, TCP=20bit)
+
+			Structure 32bit wide
+			| source | dest port# |
+			| length | checksum   |
+			| payload             |
+
+			Checksum
+				- used to detect errors
+				- sender treats segment as list of 16bit numbers and sums
+				- receiver computers segment contents and check with checksum
+				- if has 1 in extra digit then add 1 to sum
 
 	3.4 - Principles of Reliable data transfer
 
