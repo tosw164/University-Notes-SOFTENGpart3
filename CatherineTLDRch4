@@ -27,7 +27,94 @@ Chapter 4 - Network Layer
 			[DONT EVEN KNOW]
 
 	4.2 - Inside Router
-		
+		Architecture overview
+			Input Ports
+
+			Output Ports
+
+			Routing Processor
+				- routing and management 
+				- software level, works in ms
+
+			High-Seed Switching Fabric
+				- forwarding
+				- hardware level, works in ns
+
+		Input Port
+			[line terminate]
+				- physical layer
+
+			[link layer protocol]
+				- link layer
+
+			[lookup forwaring + queuing]
+				Decentralised Switching
+					- uses header values to determine how to put into fabric
+					- has queue if datagram arrive faster than forwarding rate
+
+					Destination forwarding
+					- look at destIP address
+
+					Generalised Forwarding
+					- based off other header field values
+
+			[switch fabric]
+				- transfer packet from input buffer to output buffer
+
+				3 types:
+				- memory
+					- controlled with CPU
+					- packet copied to memory (therefore limited by it)
+					- 2 bus crossing per datagram
+
+				- bus
+					- move datagram from input to output through shared bus
+					- limited by bus bandwidth
+					- 32Gb/s good enough
+
+				- crossbar
+					- no bus limitation
+					- look like kb matrix
+
+		Longest Prefix Matching
+			- Used when looking for forwarding table entry for dest addr
+			- Done using TCAM (ternary content addressable memories)
+
+		Input Port Queuing
+			- queue may occur when fbric slower than input ports combined
+
+			- HOL Head of Line blocking: datagram in queue stop others from moving up.
+
+		Output Port Queuing
+			- buffering required from fabric otherwise packets may be lost
+			- occur when arrival rate from switch exceeds output line speed
+			- need to schedule these packets too (net neutrality, performance equality)
+
+			[BUFFERING EQUATION]
+
+		Scheduling
+			- choosing next packet to send
+
+			FIFO scheduling
+			- send first packet to come
+			- discarding if buffer full:
+				- last one to arrive
+				- random one
+				- based on priority value
+
+			Priority Scheduling
+			- send highest priority packet
+			- not net neutral
+			- dependant on header, destination or another field
+
+			Round robin
+			- multiple classes
+			- try and send one complete packet from each class
+
+			Weighted Fair Queuing
+			- Generalised round robin
+			- each class gets a weighting
+			- then send trying to weigh things equally.
 
 	4.3 - Internet Protocol
 		4.3.1 - Datagram Format
