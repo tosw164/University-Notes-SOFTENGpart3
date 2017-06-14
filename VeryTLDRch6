@@ -1,0 +1,50 @@
+VeryTLDRch6
+
+Chapter 5 - Link Layer
+	5.1 - Introduction
+		- responsible for transferring packet from one node to physically adjacent node over link.
+		-  In every host through NIC
+
+		Services
+			Flow control
+				Keep good pace between sending nodes
+
+			Error Detection
+				- Find errors caused by things like noise
+				- Receiver detects these errors
+
+			Error Correction
+				Receiver IDs and correct errors without retransmission
+
+			Half/Full Duplex
+				Half: only one way concurrent transmission
+				Full: both way concurrent transmission
+
+	5.2 - Error Detection/Correction
+		Is not 100% reliable
+
+		Parity check 
+			- On both x y, and bits
+
+		Internet Checksum
+			- Treat everything as 16bit int and make checksum to put into UDP checksum field
+			- Receiver recompute to check
+
+		Cyclic Redundancy Check
+			- Better/Powerful error detection
+
+			[DO CRC algorithm here]
+
+	5.3 - MAC
+		- Is broadcast link and not point to point. (Sharing medium)
+		- Therefore have to accomodate for collisions somehow
+
+		Channel Partitioning
+
+	5.4 - LANs
+
+	5.5 - Link virtualisation MPLS
+
+	5.6 - Data centre networking
+
+	5.7 - day in life of web request
