@@ -3,10 +3,81 @@ Why is there so much content for this chapter?
 
 Chapter 8 - Network Security
 	8.1 - What it is
+		Confidentiality
+			Make sure that only expected recepient can read it
+
+		Authentication
+			Can make sure you are sending to correct person
+
+		Message Integrity
+			Ensure message has not been tampered with
+
+		Access & Availability
+			Communication service easily accessed
+
+		Lots of stuff need to be secure
+		- online banking
+		- website accounts
+		- emails, personal messages
+
+		Things bad people can do
+		- eavesdrop
+		- impersonate
+		- hijack
+		- Denial of service
 
 	8.2 - Principles of Cryptography
+		Symmetric key
+			- same key can be used to encrypt and decrypt message
+			- XOR good example of this
+			- Ceaser Shift also good for this
+				- can apply different number for each character
+			- easy to figure out mappings for characters
+
+			DES Data Encryption Standard
+			- 56bit symmetric key
+			- cipher block chaining
+			- publicly known algorithm but use of private key makes it difficult do decrypt without it
+
+			AES Advanced Encryption Standard
+			- uses 128 bit blocks, with 128-256bit keys
+			- new messages are XOR with old messages
+
+		Public Key - RSA
+			- RSA use semi primes
+			- Such that K(K(m)) = m
+
+			n = pq		z = (p-1)(q-1)
+			e: e<n		e and z are relatively prime
+			d: ed - 1 % z = 0
+
+			private (n,d) 	public (n,e)
+
+			encrypt: c = m**e % n
+			decrypt: m = c**d % n
+
+			- computationally intensive
 
 	8.3 - Message Integrity, Authentication
+		Digital Signatures
+			- send original message and one encrypted with private key
+			- recepient can check with public key to see if it was you
+
+			- can be expensive if message long so use many to one hash function like MD5 or SHA
+				MDA: 128bit message in 4 steps
+				SHA: 160bit message
+
+			- A send m encrypted with own private key and m encrypted with B public key
+			- B can then prove by decrypting both to see same message
+
+		Message Authentication Code
+			- A sends message m in plaintext, and H(m+s), where s is secret key
+			- If B adds s to m received and hash, should produce what A sent.
+
+		Certificate Authorities
+			- register public key with it
+			- place then encrypts it with own private key
+			- if B wants to get your public key then ask for it, and ask for authority public key to decrypt it
 
 	8.4 - Securing Email
 
