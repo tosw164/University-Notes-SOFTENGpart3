@@ -117,11 +117,63 @@ Chapter 4 - Network Layer
 			- then send trying to weigh things equally.
 
 	4.3 - Internet Protocol
+		General
+			- IP protocol
+				- network layer
+				- addressing conventions
+				- datagram format
+				- packet handling convention
+
 		4.3.1 - Datagram Format
+			Overhead:
+			- 20 bytes tcp
+			- 20 bytes IP
+			therefore 40 bytes of application layer overhead
 
 		4.3.2 - Fragmentation
+			- can't ignore the fact that network link has maximum transfer size.
+			- therefore large packets need to be split up further when sent
+			- there packets are only reassembled at dest
+			- IP header bits used to identify fragments
 
 		4.3.3 - IPv4 Addressing
+			4.3.3.1 - Introduction
+				- IP address is 32 bit number (for host router interface)
+				- Interface is connection between host/router and physical links
+					- router have many interfaces
+					- host usually has one/two
+				- IP addresses associated with each interface
+
+			4.3.3.2 - Subnets
+				IP address
+				- high order = subnet bits
+				- low order = host bits
+
+				Subnet: devices interfacing with subnet part of IP address
+				- physically reach each other withing intervening router
+
+				each isolated network is a subnet
+
+
+			4.3.3.3 - IP addressing CIDR & DHCP
+				Classless InterDomain Routing
+
+				123.123.123/24 means that 24 prefix bits signify subnet and last 8 bits are for others
+
+				DHCP = Dynamic Host Configuration Protocol
+				Goal: allow host to dynamically get IP address when connecting to network
+				- Plug and play
+
+				Process:
+				- DHCP discover
+					- new host send message to all saying they would like to connect.
+				- DHCP offer
+					- returns available IP addresses
+				- DHCP request
+					- new host requests one of those IP addresses
+				- DHCP ACK
+					- server acknowledges that request and gives them that address
+
 
 		4.3.4 - Network Address Translation
 
