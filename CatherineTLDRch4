@@ -205,6 +205,31 @@ Chapter 4 - Network Layer
 			- IPv6 should be thing that solves this problem
 
 		4.3.5 - IPv6
+			General
+				- 32bit address space on IPv4 running out.
+				- is now fixed length 40 byte header, with no fragmentation
+
+			4.3.5.1 - Datagram Format
+				- has priority
+				- flow label
+				- next header: upper layer data protocl
+
+				from IPv4:
+				- removed checksum completely. Reducing processing time
+				- options allowed, outside of header though
+				- ICMP updated with new msg types
+
+			4.3.5.2 - IPv4 to IPv6
+				- Not all routers can be instantly upgraded
+				- IPv6 made to be backwards compatible, through tunneling
+
+			4.3.5.3 - Tunneling
+				- Using IPv4 (and fragmentation) infrastructure to do IPv6.
+				- Wrap IPv6 stuff in IPv4
+
+			4.3.5.4 - Adoption of IPv6
+				- 8% of google clients use it
+				- gonna take a long time.
 
 	4.4 - Generalised Forward and SDN
 
