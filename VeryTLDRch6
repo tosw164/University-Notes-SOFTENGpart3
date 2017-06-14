@@ -179,6 +179,24 @@ Chapter 5 - Link Layer
 					- adds addition header information needed for trunk port stuffs
 
 	5.5 - Link virtualisation MPLS
+		[ Multiprotocol Label Switching ]
+		Goal: high speed IP forwarding using fixed length label (instead of IP addr)
+		- Fast lookup instead of longest prefix
+		- datagram still has IP addr
+
+		MPLS routers
+		- forwarding only based on label
+		- doesn't look at IPaddr
+		- decisions can be altered
+		- All routers have to support it for it to be usable
+
+		-IP determined by destIP alone
+		- MPLS based on srcIP and destIP
+
+		Table
+		- consists of out label, destination and out interface
+		- if have label then will have given destination.
+		- Out label of prev is in label of next
 
 	5.6 - Data centre networking
 
