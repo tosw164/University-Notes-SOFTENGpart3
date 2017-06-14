@@ -199,5 +199,23 @@ Chapter 5 - Link Layer
 		- Out label of prev is in label of next
 
 	5.6 - Data centre networking
+		PROBLEM
+			- have many clients to serve
+			- have to manage and balance load, and bottlenecks
+
+			Load Balancing
+			- Having a dedicated piece hardware route things on switches to so client doesn't have to worry where data is stored, and just that they get it
+
+			Data Centre Networks
+			- Multiple tiers of switches with redundant connections in case of failure. Also increases throughput
 
 	5.7 - day in life of web request
+		- connect laptop to network
+		- make DHCP request to get IPaddr
+		- Ethernet demux to IP to UDP to DHCP
+		- Siwtch learning to figure out how to switch to you
+		- you make HTTP request to google.com
+		- request made to local DNS
+			- either return cached
+			- or do iterative 
+		-
