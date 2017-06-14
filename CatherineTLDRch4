@@ -174,8 +174,35 @@ Chapter 4 - Network Layer
 				- DHCP ACK
 					- server acknowledges that request and gives them that address
 
+				DHCP also:
+				- address of FIRST-HOP
+				- name & IP of local DNS
+				- network mask (showing host portion of IP address)
+
+			4.3.3.4 - Heirarchical addressing
+				- due to subnet having x/y then can find out best match by matching as many digits as possible if looking for range of addresses
+
+				- ICANN = Internet Corp for Assignment Names and Numbers
+				- allocate addresses
+				- manage DNS
+				- assignment of domain names
 
 		4.3.4 - Network Address Translation
+			- using port numbers to emulate more IP addresses from a single router's IP address.
+			- bandaid solution
+
+			- lets you change IP address of local devices without letting outside know.
+			- change main IP address without changing local Ip addresses
+
+			- pairing of: (both ways)
+			outsideIP, port -> LAN IP, port
+
+			- since port numbers are 16bit, can accomodate 60k connections with one external IP address
+
+			Controversy
+			- router should only process up to layer 3 of internet stack.
+			- violate end-to-end
+			- IPv6 should be thing that solves this problem
 
 		4.3.5 - IPv6
 
