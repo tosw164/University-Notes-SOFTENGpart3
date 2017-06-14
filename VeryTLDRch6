@@ -38,10 +38,145 @@ Chapter 5 - Link Layer
 	5.3 - MAC
 		- Is broadcast link and not point to point. (Sharing medium)
 		- Therefore have to accomodate for collisions somehow
+		- Cable access is MAC
 
 		Channel Partitioning
+			- Dividing to smaller pieces
+			- Tries to not have collisions
+
+			>TDMA time division multiple access
+			- Similar to time division multiplex
+			- unused slots idle
+
+			>FDMA Frequency Division Multiple Access
+			- Similar to Frequency division multiplex
+			- unused slots still idle
+
+		Random Access
+			- Channel not divided
+			- Have to recover from collisions
+
+			>Slotted ALOHA
+			- time broken into sections
+			- If free then transmit
+			- if collision then abort, then with probability retransmit at next window.
+			- 37% efficiency
+
+			>Unslotted ALOHA (pure)
+			- not time based unlike slotted
+			- if free then transmit
+			- if collision then percentage try again after some time
+			- 18% efficiency due to collision before and after
+
+			>CSMA Carrier Sense Multiple Access
+			- if idle trandmit whole frame
+			- if busy, wait
+			- issues with propogation delay and collisions
+
+			>CSMA/CD (CSMA with collision detection)
+			- If collision then both abort
+			- Then add number to range, choose number in that range, wait that amount of time then try again
+			- best when Dprop is 0 or when Ttime is infinite
+
+		Taking Turns
+			- Nodes take turns to do their own thing which make take different times
+
+			>Polling
+			- Master goes around asking slaves if they want to transmit
+			- single point of failure (master)
+			- latency issue
+
+			>Token Passing
+			- pass token around, if got token then transmit otherwise don't.
+			- Someone can forget to pass token or hog it for long time.
+
+		DOCSIS
+			- Uses both FDM and TDM.
+			- TDM on some things that need persistent connection
 
 	5.4 - LANs
+		5.4.1 - Addressing, ARP
+			MAC address
+				-32 bit IP address. Network layer
+				- Used to get frame from one interface to another physically connected one.
+
+			ARP Address Resolution Protocol
+				Table of devices in LAN based off IP address, MAC address and TTL (20min avg)
+
+				- Broadcast IP address and FFFFF to everyone to get that guy's MAC address
+				- Use IP and MAC to route from A to B
+
+		5.4.2 - Ethernet
+			- Cheap and fast
+			- Used to be shared bus, now use start with switch in the middle
+
+			Frame structure
+			|preamble|destAddr|srcAddr|type|payload|CRC|
+			- Preamble = 7 bytes
+
+			- Connectionless and unreliable (no handshaking)
+			- Data in dropped frame lost unless 
+
+			- Ethernet MAC protocol: unslotted CSMA/CD with binary backoff
+
+			- Has many standards
+
+		5.4.3 - Switches
+			Ethernet Switch
+				- Ethernet switch is link layer device with active role.
+				- Store and forward Ethernet frames.
+				- Try to be transparent so host unaware of presence of these.
+				- Self learning and plug&play
+
+				- Hosts directly communciate to switch
+				- switches buffer packets and Ethernet used on each link with full duplex
+
+				- if A->B and C-> then no collision, only buffering occurs when one host expecting multiple packets
+
+			Forwarding Table
+				- ARP has IP and MAC
+				- Switch table has MAC and interface linking it and host
+				- Self learning through TTL
+
+				if sent packet
+					check MAC address
+					if exist in table
+						if src = dst
+							drop frame
+						else
+							send that way
+					else
+						flood every other interface in case
+
+				- Switches can be connected to other switches and have same effect
+
+			Switches vs Routers
+				- both store&forward
+					switches: link layer
+					router: network layer
+				- both use forwarding tables
+					switches: learned through flooding and MAC addresses
+					routers: use routing algorithms and IP addresses
+
+		5.4.4 - VLANs
+			General
+				- Basically making multiple LAN from a single physical LAN. Cheaper than doing it physically
+				- Moving people around is more expensive physically.
+				- good  for security/privacy purposes
+
+			Port based VLAN
+				- ports on switch organised such that each block is allocated to a VLAN
+				- Is only logical split
+
+				Traffic isolation
+				- Frames to/from 1-8 can only go to/from 1-8
+				- ports can be dynamically added/modified at a later date.
+
+				Spanning multiple switches
+				TRUNK PORT: carries frames between VLANs defined over multiple switches.
+				- Allgood since only logical split and not physical split so can share this
+				- Must be over 802.1q must be used
+					- adds addition header information needed for trunk port stuffs
 
 	5.5 - Link virtualisation MPLS
 
