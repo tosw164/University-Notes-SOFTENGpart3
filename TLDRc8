@@ -80,8 +80,19 @@ Chapter 8 - Network Security
 			- if B wants to get your public key then ask for it, and ask for authority public key to decrypt it
 
 	8.4 - Securing Email
+		- Want it to be
+			- Secret
+			- Sent to correct person
+			- Not be tampered
+
+		A send m, and H(m) encrypted with symmetric key.
+		A also send symmetric key encrypted with B public key
+
+		B can then decrypt to get symmetric key
+		Use symmetric key to get message and encryped hash, which he uses A public key to decrypt and confirm message contents
 
 	8.5 - Securing TCP connections. SSL
+		- Act between applicaiton and transport to secure TCP
 
 	8.6 - Securing Network Layer. IPsec
 
