@@ -93,8 +93,50 @@ Chapter 8 - Network Security
 
 	8.5 - Securing TCP connections. SSL
 		- Act between applicaiton and transport to secure TCP
+		- send byte stream for session and keep secure
+		- Certificate exchange to ensure data goes to right person
+
+		Process:
+		- Handshake	
+			- use of certificate & privatepublic key pairs to authenticate and exachange secret
+		- Key derive
+			- use secret to make set of keys
+		- Data Transfer
+			- data broken up into records
+		- Connection Close
+			- special message to end connection
+
+		- use of nonce to prevent replay attacks
+
 
 	8.6 - Securing Network Layer. IPsec
+		- used in VPN
+
+
+
+		Provides:
+		- data integrity
+		- origin authentication
+		- replay attack prevention
+		- confidentiality
+
+		Modes:
+		- transport mode
+			- only host do IPsec
+
+		- tunnel mode
+			- both host and edge routers know IPsec
+
+		Protocols:
+		- Authenticaiton Header AH
+			- src Auth, data integrity
+			- no confidentiality
+
+		- Encapsulation Security Protocol ESP
+			- src Auth, data integrity
+			- confidentiality 
+			- used more than AH
+
 
 	8.7 - Securing WLAN
 
