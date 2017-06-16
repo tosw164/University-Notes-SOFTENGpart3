@@ -22,3 +22,52 @@ Lecture 1 - Introduction
 		- design with user in mind
 		- think about new ways people could interact with computers in order to carry out tasks
 
+Lecture 2 - User Requirements
+	Learning Objectives
+		- when user requirements gathered
+		- analysis of problem domain
+		- understand types of stakeholders
+		- collecting data (interviews, focus groups, questionnaires)
+		- Create user profiles
+
+	2.1	User requirements
+		Ranking:
+			- Mandatory
+			- Desirable
+			- Optional
+			- future thought
+		- Get at beginning
+
+	2.2 - Requirements Collection
+		Have to identify
+			- People involved
+			- things they use
+			- processes involved
+			- info required
+			- constraints
+			- inputs required
+			- outputs created
+
+		Model information:
+			- describe those that do the work
+			- document use cases & stories
+			- create formal diagrams
+
+	2.3 - Exploring Domain
+		- Identify all stakeholders
+		- Consider all, focus on primary
+
+		Four Types:
+		- Primary: uses design directly
+		- Secondary: provide input & output for design
+		- Facilitator: maintain/develop it
+		- Indirect: affevted by use but doesn't use it (supervisor)
+
+		- Understand competition, use what works well for others
+		- Sometimes better to use another system than make a new one from scratch
+
+	2.4 - Discovery Process
+
+
+
+
