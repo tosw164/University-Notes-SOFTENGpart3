@@ -67,7 +67,87 @@ Lecture 2 - User Requirements
 		- Sometimes better to use another system than make a new one from scratch
 
 	2.4 - Discovery Process
+		Filter:
+			Physical - physical aspect of activity
+			Cultural - relationships between people
+			Functional - What happens
+			Informational - Information involved
 
+		Collect this data and organise it
 
+	2.5 - Collection
 
+		- Observation: watch others perform activity
+		- Elliciation: indirectly obtain information about it
+		
 
+	2.6 - Ellicitation
+		Direct:
+			-Interviews:
+				ONSITE - Let them remember aspects about job
+				OFFSITE - People aren't distracted by work around them
+			-Focus Group:
+				- Need moderator to keep discussion
+				- Need clear outcomes defined
+				- Best if have peer relationship
+
+				ADVANTAGES:
+					- Inexpensive/easy to setup
+					- Insight into people attitude
+					- Identify outlier opinion
+				DISADVANTAGES:
+					- Only represent one group's view
+					- Strong voice and influence group
+					- Not statically significant
+					- No usability information
+		Indirect:
+			- Corporate documentation/Logs/Notes/Questionnaires
+
+			Questionnaires:
+				- Familiar, can ask open & closed ended questions
+				- Multitide of possible response formats (radio buttons, short answer, yes/no, ranges)
+				-SurveyMonkey/LimeSurvey
+
+				ADVANTAGES:
+					- No face to face contact
+					- Get infomation for primary stokeholder profile
+					- double check feedback from 1to1 interviews
+					- can reach larger audience
+
+				DISADVANTAGES:
+					- Questions can be vague
+					- People don't like long questionnaires
+					- Closed ended Qs, restrict response
+					- Open ended Qs, hard to quantify
+					- Total survey error
+
+	2.7 - Observation
+		Direct:
+			- Ethnographic methods, going to worksite and observing people
+			- Your presence will have an impact (change how they would normally do things/ annoy them/ raise unecessary questions (privacy))
+
+		Indirect:
+			- Use of recording devices to do this remontely
+
+		-Distributed Cognition:	offloading cognitive tasks to objects (post it/whiteboard)
+
+	2.8 - Modelling/Documenting Requirements:
+		-Collate all data from discovery
+
+		Make:	- Mission Statement
+			-Project Goals
+				- Value proposition
+				- how it addresses needs
+			- Project Scope
+				- what design includes
+				- external constraints (time/money)
+				- how to decide if meets proposal
+
+		- Requirements Document
+			- Users (Who, what they're like, what tasks they will do)
+			- Requirements (Functional features, Informational features)
+			- IO medium
+			- Constraints 
+			
+		- Project Management Document
+		- Usability Requirements
