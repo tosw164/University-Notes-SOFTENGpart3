@@ -5,6 +5,135 @@ Lectures
 	2	Physical Design
 
 Lecture 1: Design Principles
-	
+	Learning Objectives:
+		- apply design principles to UI design
+		- characterise principles for efficacy
+		- conceptualise priciples in terms of interaction framework
+
+		Efficacy: ability to produce desired result based on efficiency and effectiveness
+
+	1.1: Principles of Interaction Design
+		- make elegant solution to compled problem
+		- how to make powerful and aesthetically pleasing design
+		- clear, minimal, to the point and powerful
+		- complicated is also good
+		- there are always tradeoffs
+
+		- Design principles to guide design decisions
+		- don't prescribe outcomes, but point in right direction
+
+	1.2: Framework for Design Principles
+		Functionality -> Presentation Filter | Usability -> Usefulness
+		| = compresensibility barrier
+		Usability & Usefulness is Efficacy
+
+		Functionality: systems have enough functionality for certain task
+		Presentation Filter: functionality must be accessible through this (is the interface)
+		Comprehensibility Barrier: user needs to understand how to access functionality
+		Learnability: comprehensible and learnable direct correlation
+		Usability: can user do task
+		Usefulness: can user do task enjoyably
+
+	1.3: Comprehensibility
+		- if easy to comprehend will be efficient and effecitve
+		- affordance and metaphor important
+		- don't want to confuse user with use of metaphors
+
+	1.4: Learnability
+		- if can't understand, can't learn
+
+	1.5: Efficacy
+		- efficiency + effectiveness
+
+		Effectiveness: has right functionality
+		Efficiency: user can do task fast and easily
+
+		1.5.1: Effectiveness
+			Utility:
+				- what user can do with system
+
+			Safety:
+				- the safer, the less risky it is
+				- recovery hard to implement but important
+
+			Flexbility:
+				- can be used in multiple environments.
+				- address diverse needs
+				- customisation will improve this
+
+			Stability:
+				- is system robust
+				- consistent functioning is good
+
+		1.5.2: Efficiency/Usability
+			Simplicity:
+				- easier to learn, easier to remember
+				- simplest is best (Ockham's Razor)
+				- 80/20: 80% of usage is on 20% of functionality
+				- Satisficing: find balance between satisfying requirements and good enough to fit with design
+
+				Progressive Disclosure:
+				- only show user basics
+				- use of "more" button
+
+				Constraints:
+				- grey out buttons they shouldn't be able to use anyway
+				- limiting actions
+
+				Conventions:
+				- exploit learned behaviours to influence
+
+				Symbols:
+				- define meaning to little images (affordance and metaphor)
+
+
+			Memorability:
+				- easy to learn and use
+
+				parameters:
+				- location
+				- logical grouping
+				- conventions
+				- redundancy
+
+			Predictability:
+				- user ability to determine action ahead of time
+				- consistency very imporatnt
+				- reinforce association
+
+				Generalisability: use of previous experience
+				COnventions: use of intuition
+				Familiarity: names help locate things more easily
+				Location: use of important parts of screen (top left)
+				Modes: change how objects function (caps lock)
+
+			Visibility:
+				- make user aware of functionality and components
+
+				Feedback (GOOD): let user know feedback about actions
+				Overload (BAD): don't show too much
+
+				Recognition/Recall
+				- we're better at recognising things than recalling stuff.
+
+				Orientation: make user sure of where they are in the design
+
+	1.6: Affordance & Metaphor
+		1.6.1: Affordance
+			- particular items suggest how they should be used
+			- ensure that certain functionality is put in component that makes sense for use. Don't put title in text box
+			- rely on user knowing the link between real world concept
+
+			[Buttons and clicking]
+
+		1.6.2: Metaphor
+			- use physical world concepts and use on computers
+			- most icons are metaphors
+			- rely on users knowing link between real world concept
+			- make recognition faster if well implemented
+
+			[Windows, Documents, Folders]
+
+
 
 Lecture 2: Physical Design
