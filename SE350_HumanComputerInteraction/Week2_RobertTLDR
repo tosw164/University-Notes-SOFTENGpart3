@@ -134,3 +134,63 @@ Lecture 2: Heuristic Evaluation
 			Advantages: Closer to real interface and can better represent functionality
 
 			Disadvantages: Lock down design to something concrete, limits creativity
+
+Lecture 3: Usability Testing 1
+	Learning Objectives:
+		- why and when to usability test
+		- make usability test plan
+		- write usability test report
+
+	3.1: Usability studies
+		Empirical user test
+			- get real users to do task and observe/record
+			- analyse results, find fixes for things
+
+	3.2: Usability Testing
+		- test with representative users
+		- have someone observe & record
+
+		Goal: identify usability problems & measure satisfaction
+
+		- Start with paper prototype and make it more formal as time goes on.
+		- Ensure that product will work well for you needs
+
+		3.2.1: When to test
+			- early and often
+			- cheaper to fix problems early
+			- continuous feedback
+			- use paper prototypes (metaphors)
+
+		3.2.2: How to test
+			- know your goals
+				- focus on key aspects
+			- set tasks
+			- recruit participants
+			- test
+			- observe
+			- record
+
+			Remote testing: log audio and video of user testing something.
+
+		3.2.3: Things to record
+			- time taken to do task
+			- where people run into trouble
+			- what kinds of errors made
+			- participant satisfaction
+
+			This identifies changes needed & measures performance
+
+		3.2.4: Results from Testing
+			- tabulate what you find
+			- compare with other participants
+			- summarise findings into major & minor issues
+
+			- have a summary
+				- hard to sell results
+				- numbers are good
+				- video of user reactions good
+
+	3.3: Test Planning
+		- having good plan makes a good test
+		- better the plan the better
+		- increase formality as project proceeds
