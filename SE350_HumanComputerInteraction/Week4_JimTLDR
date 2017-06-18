@@ -137,3 +137,81 @@ Lecture 1: Design Principles
 
 
 Lecture 2: Physical Design
+	Learning Objectives:
+		- see value or prototyping
+		- know different options available for certain problems
+		- make useful prototypes to elicit user feedback
+
+	2.1: Low Fidelity Prototype
+		2.1.1: General
+			- design process determine looks, components and UI layout
+			- want lots of feedback early
+			- easier to critisize simple paper prototype
+
+			Neilsen types:
+				Horizontal: 
+				- lots of functionality but none in depth
+				- used when need to see overall picture
+
+				Vertical: 
+				- Not much functionality but ones that exist are implemented thoroughly
+				- used when one feature very important
+
+			Criteria:
+				- Easy and inexpensive to make
+				- easily changed
+				- complete enough for specific functionality
+
+		2.1.2: Creation
+			- pen and paper
+			- nothing too neat, meant to look rough
+			- post its let you change things easily and make various UI elements
+			- use real objects to represent various elements (dial)
+
+		2.1.3: Use
+			- Wizard of Oz prototyping very important
+			- one person computer and other as user
+			- can modify on the fly according to user feedback
+
+		2.1.4: Advantages & Disadvantages
+			Advantages:
+				- early and often
+				- inexpensive
+				- visual representation
+
+			Disadvantages:
+				- not interactive
+				- no response timings
+				- no colour or font choice considerations
+
+		2.1.5: Tidying up prototype
+			- the nicer the more people enjoy using it
+			- but people less critical when given formal prototype and therefore less changes made.
+
+	2.2: Electronic Prototype
+		- still quick and easy, but with interaction too
+		- Powerpoint can be used for logical sequence of screens
+			- can add buttons for various functionality
+		- Balsamiq example of one that is used
+
+		- Make dummy data, don't leave blank
+		- Ipsum Lorem if needed
+
+	2.3: Storyboard
+		- comic strip of scenario
+		- visioning use of system
+
+	2.4: Whiteboard prototype
+		- good for early design
+		- collaborative, good for brainstorm and walkthrough
+
+	2.5: Cognitive Walkthrough
+		- evalation team walk through scenario
+		- focus on problems and not solutions
+		- think like how they would use program to identify good/bad things
+
+	2.6: Iteration
+		- go through processes multiple time
+		- discover ways to change/improve things
+		- change things like scenarios, requirements, etc...
+		
