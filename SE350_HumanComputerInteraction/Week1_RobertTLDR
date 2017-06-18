@@ -6,18 +6,18 @@ Lectures:
 	3	Modelling & Documentation
 	
 Lecture 1 - Introduction
-	1.1 - What is HCI
+	1.1: What is HCI
 		Definition
 			Discipline concerned with DESIGN, EVALUATION and IMPLEMENTATION of interative computing systems for human use.
 
 		- people use computers to do task
 		- Good HCI implementation feel transparent & natural
 
-	1.2 - User Interface
+	1.2: User Interface
 		Definition
 			point where two systems meet and interact
 
-	1.3 - HCI in practice
+	1.3: HCI in practice
 		Goal: providing good user experience (UX)
 		- design with user in mind
 		- think about new ways people could interact with computers in order to carry out tasks
@@ -30,7 +30,7 @@ Lecture 2 - User Requirements
 		- collecting data (interviews, focus groups, questionnaires)
 		- Create user profiles
 
-	2.1	User requirements
+	2.1: User requirements
 		Ranking:
 			- Mandatory
 			- Desirable
@@ -38,7 +38,7 @@ Lecture 2 - User Requirements
 			- future thought
 		- Get at beginning
 
-	2.2 - Requirements Collection
+	2.2: Requirements Collection
 		Have to identify
 			- People involved
 			- things they use
@@ -53,7 +53,7 @@ Lecture 2 - User Requirements
 			- document use cases & stories
 			- create formal diagrams
 
-	2.3 - Exploring Domain
+	2.3: Exploring Domain
 		- Identify all stakeholders
 		- Consider all, focus on primary
 
@@ -66,7 +66,7 @@ Lecture 2 - User Requirements
 		- Understand competition, use what works well for others
 		- Sometimes better to use another system than make a new one from scratch
 
-	2.4 - Discovery Process
+	2.4: Discovery Process
 		Filter:
 			Physical - physical aspect of activity
 			Cultural - relationships between people
@@ -75,13 +75,13 @@ Lecture 2 - User Requirements
 
 		Collect this data and organise it
 
-	2.5 - Collection
+	2.5: Collection
 
 		- Observation: watch others perform activity
 		- Elliciation: indirectly obtain information about it
 		
 
-	2.6 - Ellicitation
+	2.6: Ellicitation
 		Direct:
 			-Interviews:
 				ONSITE - Let them remember aspects about job
@@ -121,7 +121,7 @@ Lecture 2 - User Requirements
 					- Open ended Qs, hard to quantify
 					- Total survey error
 
-	2.7 - Observation
+	2.7: Observation
 		Direct:
 			- Ethnographic methods, going to worksite and observing people
 			- Your presence will have an impact (change how they would normally do things/ annoy them/ raise unecessary questions (privacy))
@@ -131,7 +131,7 @@ Lecture 2 - User Requirements
 
 		-Distributed Cognition:	offloading cognitive tasks to objects (post it/whiteboard)
 
-	2.8 - Modelling/Documenting Requirements:
+	2.8: Modelling/Documenting Requirements:
 		-Collate all data from discovery
 
 		Make:	- Mission Statement
