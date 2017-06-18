@@ -86,3 +86,110 @@ Lecture 1: Usability Testing 2
 			- tread devs with respect
 			- ensure report is fair, accurate, tidy and make sense
 
+Lecture 2: Conceptual Design
+	Learning Objectives:
+		- know why conceptual design before physical design
+		- know how to design conceptually
+			- persona & scenario
+			- brainstorm, card sort, mind map
+			- process diagram	
+
+	2.1: General
+		- consider who you're designing for
+		- organise design ideas
+
+		- structuring information space and creating alternate solutions
+		- determine which concept to do
+
+	2.2: Persona
+		- archetypes of actual users
+		- defined by their goals and attributes
+		- reflection of information form data collections
+		- can contain characteristics from multiple potential users
+
+		Format/Structure
+		- name & photo
+		- goals and motivation
+		- behaviours and personality
+		- relevant background
+
+		- should be able to imagine/refer to them as real person.
+
+		Advantages:
+			- quick and easy to crate
+			- consistent model for team members
+			- make user "real"
+		Disadvantages:
+			- difficult to create if target audience is international
+			- too many personas make work harder
+			- risk of making too many assumptions
+
+		Example from slides
+			- name and photo
+			- what they need (simplicity, efficiency, whatever)
+			- background paragraph
+			- age
+			- occupation
+			- financial situation
+			- location
+			- educaitonal background
+			- family size
+			- behaviours on a scale
+			- technology, and confidence using it
+			- goals
+			- likes and dislikes
+
+	2.3: Scenarios
+		- plain English description of task
+		- describes 
+			- goal
+			- initial conditions
+			- activities
+			- outcomes
+		- paired with persona
+		- uses persona and not abstraction (use-case uses this)
+
+		- PACT:
+			- People
+				- person/persona
+			- Activities
+				- what they want to do
+			- Context
+				- physical context of them doing it
+			- Technology
+				- what technology used to help them do it
+
+			Then describe scenario
+
+	2.4: Design Ideation
+		2.4.1: Brainstorm
+			- team activity
+			- gets ideas out quickly
+			- work in parallel by breaking up into smaller groups
+			- makes lots of material that needs to be organised
+
+		2.4.2: Card Sort
+			- group by user types
+			- generates text for various UI elements
+
+			Advantages:
+				- quick and easy
+				- let you know how people organise information
+			Disadvantages:
+				- solutions and imply structures
+				- hard to navigate if big
+
+		2.4.3: Mind map
+			- semi structured brainstorm
+
+			Advantages:
+				- easy
+				- cluster similar things
+				- graphical view
+			Disadvantages:
+				- knowledge of problem space required
+				- no formal semantics
+
+		2.4.4: Process Diagram
+			- flow charts
+			- STNs
