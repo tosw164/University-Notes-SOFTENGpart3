@@ -62,3 +62,75 @@ Lecture 1: Usability Evaluation
 
 		1.8.2: Hick-Hyman Law:
 			Time taken to make decision for N choices increases by LOG FACTOR
+
+Lecture 2: Heuristic Evaluation
+	Learning Objectives:
+	- Be aware of heuristic evaluation options
+		Nielsen's Heuristics
+	- Undesrstand evaluation challenges of early prototypes with limited functionality
+
+
+	2.1: Heuristic Evaluation
+		- Performed by experts using criteria to measure usability of a design
+		- Evaluator goes through scenario and tests each step on the way
+		- Lets you understand a system before a usability test
+		- Can be done standalone: make observation/give recommendations
+
+		Nielsen's Heuristics:
+		1: Visiblity of System Status
+			- Keep user informed of what's going on
+
+		2: Match between System and Real World
+			- Matching vocabulary with user expecataton/knowledge
+			- Does workflow match task being performed
+			- Correct affordance
+
+		3: User Control and Freedom
+			- Ensure common control features (EXIT, UNDO, REDO) clearly marked
+
+		4: Consistency and Standards
+			- Follow platform conventions 
+			- have consistent terminology used?
+
+		5: Error Prevention
+			- Remove error prone conditions
+			- Make error checking present, and user prompted?
+
+		6: Recognition Rather than Recall
+			- Minimise brain memory load
+			- make things that they want to do visible
+
+		7: Flexibility and Efficiency of Use
+			- Add accelerators for those that are familiar with the system
+
+		8: Aesthetic and Minimilst Design
+			- Remove irrelevant or uncessary information
+
+		9: Help user Recognise/Diagnose/Recover from Error
+			- Make error messages easy to read and understand so user can try find a solution
+
+		10: Help & Documentation
+			- Easy to read/search and focussed on the task at hand
+
+	2.2: Advice for evaluations
+		- Not always a concrete and objective way to do something. May need to do some further testing and validation of even the evaluators.
+		- many heuristics exist of different types. Each to serve their own purpose.
+
+	2.3: Evaluating prototypes.
+		- Evaluation of early protype differnt to that of finished system
+		- due to lack of features/functionality.
+
+		2.3.1: Wizard of Oz evaluation
+			- Using a human to emulate the functionality of a system whilst having 0 actual functionality
+			- used to see reactions to using your system. 
+			- The less realistic the prototype the more creative the responses will be.
+
+	2.4: Functional Prototypes
+		Interactive prototypes that represent some functionality of the end system, but not all of it.
+
+		Can be created using prototyping tool BALSAMIQ, or fully fledged programming languages/IDEs
+
+		Prototyping tools:
+			Advantages: Closer to real interface and can better represent functionality
+
+			Disadvantages: Lock down design to something concrete, limits creativity
