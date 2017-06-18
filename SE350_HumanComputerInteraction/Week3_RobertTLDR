@@ -193,3 +193,29 @@ Lecture 2: Conceptual Design
 		2.4.4: Process Diagram
 			- flow charts
 			- STNs
+
+Lecture 3: GWEBS
+	3.1: Auckland Layout Manager
+		- java GUI manager for resizing
+		- recalculate how big htings should be based on layout specifications
+		- no hardcoding
+		- gridbag tied to grid specifications created in code
+		- ALM uses coordinated to do this
+		- partial tabstop order
+		- has window stacking and tiling
+
+	3.2: Acti-Gaze
+		- problem being those who can't use traditional input methods
+			- could be things like RSI or disabilities
+		- use eye tracking as input method
+		- uses colouring of various links in visual area
+
+	3.3: Levels of HCI
+		Deep Level
+			- make systems stable and reliable for good UI
+
+		GUI technology level
+			- improve GUI technology to make better GUI effectively
+			
+		Interaction Design level
+			- design good UI, look and feel
