@@ -151,3 +151,56 @@ Lecture 2 - User Requirements
 			
 		- Project Management Document
 		- Usability Requirements
+
+Lecture 3: Modelling & Documentation
+	Learning Objectives: Learn to describe
+		- Stakeholders
+		- Tasks
+		- Pathways between taskss
+		- Major Uses
+
+	3.1: Primary Stakeholder Profile
+		Defines target user
+		- context of use
+		- cognitive ability
+		- physical ability
+		- individual profile
+
+	3.2: Task Analysis
+		- Documents how people do tasks
+		- Explore requiements of proposed system OR document existing system
+
+		[HTA] Hierarchical Task Analysis
+			-Top down structured approach to documenting process
+
+			Goal - Top level goal of task
+			Plans - Order and condition to proceed
+			Information - needed to do task
+			Objects - physical objects involved
+			Methods - How to do subtasks
+
+			Structure
+			1	open eyes
+			2	get out of bed
+				2.1	take blanket off
+				2.2 turn around
+				2.3	feet on ground
+				2.4 stand up
+
+		[STN] State transition network
+			- Description of actions/evens possible at different point of system use/state
+
+			- Can have heirarchical STN if multiple "modules" exist
+			- Can potentially have many many states if have to accomodate for every possible combination of a form
+
+		Try avoid having "escapes" for every possible part of doing tasks.
+		Also same with putting "help menus" everywhere
+
+	3.3: Use Cases
+		- represent formal approach to interpret workflow/proecesses
+		- Incorporated into UML
+
+	3.4: Requirements to design
+		- HCI emphasise users with wants & needs
+		- User profile used to create persona
+		- Task Analysis/Use cases make scenarios
