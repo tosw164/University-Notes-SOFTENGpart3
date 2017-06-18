@@ -10,3 +10,79 @@ Lecture 1: Usability Testing 2
 		- Develop usability test plans
 		- write usability test report
 		- understand ethical requirements
+
+	1.1: Planning
+		- plan everything 
+		- include obvious things as they may be overlooked later
+
+		Overview:
+			Product under test
+			Test objectives
+			Participants Required
+			Equipment needed
+			Tasks to Undertake
+			Data to be collected
+			Test procedure
+			Data analysis plan
+
+		1.1.1: Participants
+			- let people be themselves
+				- role play if can't
+			- match aspects of target audience
+			- 10-12 good for single product
+			- 30 good for comparing products & statistically valid results
+
+		1.1.2: Tasks
+			- be specific in what you want participants to do
+			- record completion paths possible
+				- don't show to participants
+				- do it yourself to figure out how
+				- do mini heuristic evaluation
+
+			Task Order: (learning effect)
+				- consider what order you want them to do
+					- some make sense to try before another
+				- record differences that participants take in order to complete tasks
+
+		1.1.3: Data Collection
+			- questionnaire easy way to get satisfaction data
+			- open questions give you good data about problems
+			- closed quesitons let you quantify things
+
+		1.1.4: Procedures
+			- figure out how to reward participants
+			- cater for long sessions
+			- power plugs
+			- time to reset between participants
+
+		1.1.5: Writing Script
+			- write one to ensure you don't forget instructions
+
+		1.1.6: Analysis Plan
+			- how to turn raw data into somehting that can be compared
+			- plan how to report findings
+			- time, error count, and questionnaire findings are good metrics to use
+
+			Pilot test on people 
+			- test on few people to get feel
+
+		1.1.7: Report
+			- document reporting findings
+			- video of participatns doing their thing
+
+	1.2: Ethics
+		- need ethics approval if doing things involving people/animals
+		- lots of paperwork, and need to do to publish at journals
+		- companies require this too
+
+		Basics:
+			- Informed consent: people know what they're getting into
+			- people don't have to participate
+				- can refuse/withdraw at any time
+			- questionnaires are private
+
+		Professionalism
+			- treat people with respect
+			- tread devs with respect
+			- ensure report is fair, accurate, tidy and make sense
+
