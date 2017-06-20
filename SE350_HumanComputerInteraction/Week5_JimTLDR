@@ -49,4 +49,90 @@ Lecture 1: Visual Perception
 	1.5: Reading
 		- word shapes good
 		- therefore allcaps bad
-		
+
+Lecture 2: Visual Aesthetics
+	Learning Objectives:
+		- Principles of Aesthetics
+		- How they apply to UI design
+		- Interface patterns (how they improve designs)
+		- Standards and Toolkits in terms of usability
+
+	2.1: Aesthetics
+		- Philosophical: Finding criteria for aesthetics
+		- Emperical: Experimental measuring of what people find aesthetic
+
+		-Visual Aesthetics affect user perception
+			- more usable
+			- more trustworthy
+			- more error tolerant
+
+		- Good lookig software has advantage over others
+
+		TED TALK
+			- positive experience makes you more creative
+			- fear makes you focus
+
+	2.2: Design Guide Principles
+		2.2.1: Balance
+			- Balance is having equal weight of screen elements at top/right/bottom/left sides
+
+			Symmetry	- formal balance
+						- mirror image
+						- can be in any orientation
+
+			Asymmetry	- informal balance
+						- balance that doesn't rely on symmetry
+						- No rule/limit to asymmetrical balance
+
+		2.2.2: Emphasis
+			Can control attention by creating dominance
+
+			- Contrast
+				- Can use luminance
+			- Placement
+				- Central vison dominant
+			- Isolation
+				- Dominance by thing being there alone
+
+		2.2.3: Unity
+			Relationship of how individual parts mesh together
+
+			- Careful placement of components
+				- Grouping
+				- Connecting/Disconnecting things from each other
+
+			- Use pre-existing things that are good
+
+	2.3: Design patterns
+		Review of solution to design challenge
+
+		Format:
+			-Problem
+			-Solution
+			-Examples
+			-Implementation/Comments
+
+	2.4: Guidelines/Standards
+		- Things that are common, have become standard
+		- Endorsement 
+			- By national/international body (ANSI, ISO)
+			- Community run/nonprofit (W3C)
+		- May not actually comply to standard even if they say they do
+
+
+		Examples:
+			-ISO
+			-Government (UK, USA, NZ)
+			-OS
+			-W3c word lwide web consortium
+
+	2.5: Toolkits
+		- lets you add functionality created by others easily and quickly
+			- provides "easy way out"
+			- good for agile dev
+
+		- Can have big communities using the modules
+			- consistency
+			- can ask others if doesn't work for you
+
+		Drupal.org has many open source Content Management System (CNS) for website/apps
