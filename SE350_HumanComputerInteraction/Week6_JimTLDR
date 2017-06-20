@@ -65,3 +65,61 @@ Lecture 1: Grouping
 	1.3: Lines and Borders
 		- visual clues for grouping
 		- lines don't have to be actual life
+
+Lecture 2: Lines and Borders
+	Learning Outcomes:
+		- relationship of wireframing
+		- why use
+		- style options
+		- how used in data and tables
+
+	2.1: Wireframing
+		- make physical design from conceptual one
+		- identify areas needing separations (lines & borders)
+
+		- hand draw/balsamiq (lofi prototyping)
+
+	2.2: Lines and Borders
+		- create physical grouping
+
+		examples of use:
+			- boders use same colour, thickness and curviture of font
+			- keep consistency with font scheme
+
+			- some things make use of hairline borders to separate things
+			- create pseudogrid structure
+
+			- don't have to be solid lines, dotted lines work well too
+
+	2.3: Corner Treatment
+		- don't have to be orthogonal
+		- can be diagonal or curved
+		- keep corner scheme consistent over interface
+
+	2.4: Angles
+		- don't have to make site completely vertical and horizontal lines
+		- will make site stand out if contain non-traditional angles
+
+	2.5: Curves
+		- add motion and liveness
+		- circular design calming
+
+	2.6: Doing it wrong
+		- don't put lines between paragraphs of text (disrupt)
+		- group correctly
+
+	2.7: Tables
+		- use of columns and rows to visually separate data
+		- all cells in column should have strong similarity
+		- alignment also important
+
+		- heading should be separate but not dominant
+		- same with colour and line scheme
+
+		- can encode data with coloured backgrounds to show more information
+
+	2.8: Graphs
+		- makes things easier to compare and see trends
+		- can make use of images/icons to encode more information
+
+
