@@ -1,0 +1,93 @@
+Week7_JimTLDR
+
+Lecture:
+	1	Text
+	2	Colour
+	3	Forms & Control
+
+Lecture 1: Text
+	Learning Objectives:
+		- describe purpose of text
+		- balance between readility and artistic font
+		- why fonts are readable
+		- use characters of text
+		- choose appropriate scheme for use
+
+	1.1: Human Issues
+		- people still scan text if search bar exist
+		- still very much use text to navigate UI
+		- paper based interface good, kindles exist
+		- active reading helps (putting pen/cursor over text you're reading)
+
+	1.2: Text in design
+		- commentary text: system status
+		- instrumental text: "working/functioning" text
+
+		- needs to be:
+			- legibile: discern words
+			- readible
+			- external factors (screen resolution & brightness)
+
+		- we read lowercase better than UPPERCASE (shapes)
+
+	1.3: Typography
+		- xheight = height between base and mean line
+		- ascender = bit sticking up like top of "d"
+		- descender = bit pointing down like in "p"
+		- body size = ascender to desencder height
+
+		- serif = flicky bits
+		- sans serif = no flicky bits
+		- not sure which is more readible
+
+	1.4: Font Features
+		1.4.1: Title Fonts
+			- display fonts better for titles and headings
+			- get attention
+			- not installed on all machines
+			- hard to read paragraphs
+
+		1.4.2: Body Fonts
+			- easier to read in paragraphs
+			- consistency
+			- more neutral
+
+		1.4.3: Proportional & Monospaced
+			- proportional more readable
+			- monospaced has its place (code)
+
+		1.4.4: Font Size
+			- uses pt, or em, or px
+			- varies by device properties
+			- perceived size not same as real size as font structures different
+
+			- smaller fonts need better resolution
+			- reading from further needs larger font size
+			- good contrast needed to read things efficiently
+			- text can be scanned or read char for char
+
+ 		1.4.5: Font weight & Style
+ 			Weight:
+ 				- if different weight then create visual contrast
+
+ 			Font Style:
+	 			- italics and underline
+	 			- underline generally used for hyperlink
+
+	 		- don't use too many of these things, makes it look confusing
+
+	 	1.4.6: Spacing
+	 		- spacing between lines of text
+	 		- is called ledding
+	 		- increasing this improves reading speed (at cost of space)
+
+	 	1.4.7: Alignment
+	 		- use left or justified
+	 		- right is harder to read
+
+	 	1.4.8: Lengths and margins
+	 		- longer lines harder to read
+	 		- aim for 75-100
+
+	 		- aim for short lines with large margins for read speed
+	 		- try medium if doesn't work for you
