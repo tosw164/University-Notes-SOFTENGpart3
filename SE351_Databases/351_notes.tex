@@ -10,17 +10,20 @@
 	tmargin=1cm,
 	bmargin=3cm,
 	]{geometry}
+\usepackage{enumitem}
+\setlist{noitemsep}
+\usepackage[none]{hyphenat}
 
 \begin{document} \maketitle{} 
 
-\section{Lecture One: Fundamentals of Database Systems}
+\section{Fundamentals of Database Systems}
 	\subsection{General Information}
 		\paragraph{Database}
 		large integrated collection of data. 
-		\newline Contains [Entities, Relationships] 
+		\\ Contains [Entities, Relationships] 
 
 		\paragraph{DBMS}(Database Management System): 
-		\newline software package to store and manage databases
+		\\ software package to store and manage databases
 
 		\paragraph{Database System}: DBMS with database
 
@@ -36,22 +39,22 @@
 	\subsection{Why Databases}
 		\paragraph{}
 		Need to shift from computation to storage of large amounts of information
-		\newline \newline Accomodate for changes in:
-		\newline \tab \textbf{Variety:} types of data
-		\newline \tab \textbf{Velocity:} movement of data
-		\newline \tab \textbf{Veracity:} uncertainty of data
-		\newline \tab \textbf{Volume:} amount of data
+		\\ \\ Accomodate for changes in:
+		\\ \tab \textbf{Variety:} types of data
+		\\ \tab \textbf{Velocity:} movement of data
+		\\ \tab \textbf{Veracity:} uncertainty of data
+		\\ \tab \textbf{Volume:} amount of data
 
 		\paragraph{Structures/Models}
 		Need to have a model to describe data, and a schema used to give an abstract description of the data model
 
 	\subsection{Levels of Abstraction}
 		\tab \textbf{Views:} describe how data seen
-		\newline \tab \textbf{Logical Schema:} how data structures organised (variable types)
-		\newline \tab \textbf{Physical Schema:} how files structured
-		\newline \tab \textbf{Data Definition Language:} How to define database schema
-		\newline \tab \textbf{Data Manipulation:} how to update values in database 
-		\newline \tab \textbf{Query Language:} used to access data 
+		\\ \tab \textbf{Logical Schema:} how data structures organised (variable types)
+		\\ \tab \textbf{Physical Schema:} how files structured
+		\\ \tab \textbf{Data Definition Language:} How to define database schema
+		\\ \tab \textbf{Data Manipulation:} how to update values in database 
+		\\ \tab \textbf{Query Language:} used to access data 
 
 	\subsection{Data Independence}
 		\tab \textbf{Logical Data Independence}
@@ -73,8 +76,62 @@
 			\item don't want to access disk lots. It is slow and inefficient
 			\item let multiple users access and keep data consistent
 			\item let users feel like they're the only ones using system
-
 		\end{itemize}
+
+\section{Relational Model of Data}
+	\subsection{General Information}
+		\begin{itemize}
+			\item is logical model of data
+			\item distinguish between data syntax and semantics
+			\item simple and powerful
+			\item sql based off this
+		\end{itemize}
+
+	\subsection{Simple approach}
+		\begin{itemize}
+			\item use tuples to store data
+			\item relations are sets of these tuples
+			\item tables to represent sets of data
+			\item properties (columns) are called attributes
+			\item attributes associated with domains (variable types)
+		\end{itemize}
+
+	\subsection{Relational Schemata}
+
+		Use of attributes creates relation schema such as:
+		\\ MOVIE(title: $string$, production\_year: $number$)
+		\\ \\
+		\textbf{Relation Schema} provide abstract description of tuples in relation
+		\\ \\
+		\textbf{Database Schema} is set $S$ of relational schemata. Is basically the set of all tables and their attributes
+
+	\subsection{Keys}
+		Are used to uniquely identify tuples over all data in a given table.
+		\\ They are used to restrict number of database instances, to something more realistic and identify objects efficiently
+		\\ \\ 
+		\textbf{Superkey} over relation schema is a subset of attributes that satisfies this uniqueness property
+		\\ \textbf{Key} is a minimal superkey, is key if no other superkeys exist for R
+		\\ \textbf{Foreign Key}: is a key used to index values from other values. Used to make reference between relational schemata. 
+		\\ \tab - ensures referential integrity
+		\\ \tab - no need to copy info from other tables
+		\\ \tab - need to ensure that [x,y] $\subseteq$ [x,y] and not [y,x] (Order matters)
+		\\ \\ \textbf{Example}
+		\\ MOVIE(title: string, production\_year: number, director\_id: number) 
+		\\ with key [title, production\_year]
+		\\ \\ DIRECTOR(id: number, name: string)
+		\\ with key [id]
+		\\ \\ with foreign key: MOVIE[director\_id] $\subseteq$ DIRECTOR[id]
+
+	\subsection{Integrity Constraints}
+		\begin{itemize}
+			\item Db schema should be meaningful, and satisfy all constraints
+			\item should stay true to keys, and foreign keys
+			\item constraints should interact with each other correctly
+			\item should process queries and update efficiently
+			\item should do this and make as few comprimises as possible
+		\end{itemize}
+
+\section{SQL as Data Definition and Manipulation Language}
 
 
 \end{document}
