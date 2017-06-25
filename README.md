@@ -5,4 +5,5 @@ Current contents:
 Software Engineering (Third Year)
   - Human Computer Interaction course
   - Networking course
-  - Databases course (TODO)
+  - Databases course (In Progress)
+Also using opportunity to learn LaTeX for databases portion of notes
