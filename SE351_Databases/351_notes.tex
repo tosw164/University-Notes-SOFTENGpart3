@@ -37,9 +37,8 @@
 		\end{itemize}
 
 	\subsection{Why Databases}
-		\paragraph{}
-		Need to shift from computation to storage of large amounts of information
-		\\ \\ Accomodate for changes in:
+		\tab Need to shift from computation to storage of large amounts of information
+		\\ \\ \tab Accomodate for changes in:
 		\\ \tab \textbf{Variety:} types of data
 		\\ \tab \textbf{Velocity:} movement of data
 		\\ \tab \textbf{Veracity:} uncertainty of data
@@ -132,6 +131,83 @@
 		\end{itemize}
 
 \section{SQL as Data Definition and Manipulation Language}
+	\subsection{General Information}
+		\begin{itemize}
+			\item \textbf{S}tructured \textbf{E}nglish \textbf{QUE}ry \textbf{L}anguage
+			\item used as a standardised language in relational Db systems
+			\item is query, data definition, and data management language
+			\item names not case sensitive
+		\end{itemize}
+
+	\subsection{Keywords}
+		\paragraph{CREATE} used to create tables. [CREATE TABLE $<tablename> <attribute specs>$]
+		\paragraph{Attributes}: defined as [$<attribute\_name> <domain>$]
+		\paragraph{NOT NULL}: used to ensure that attribute is not null.
+		\paragraph{DROP TABLE}: removes relation schemata from Db system
+		\paragraph{ALTER TABLE}: change existing relation schemata
+		\\ \\ \textbf{CHARACTER} and \textbf{VARCHAR} are fixed or variable length strings. Variable length string are $VARCHAR(32)$
+		\paragraph{NATIONAL CHARACTER}: string characters from other languages
+		\\ \\ \textbf{INTEGER} and \textbf{SMALLINT} used for integers
+		\\ \\ \textbf{NUMERIC} and \textbf{DECIMAL} used for fixed point numbers
+		\\ \\ \textbf{FLOAT, REAL} and \textbf{DOUBLE PRECISION} used for floating point numbers
+		\\ \\ \textbf{DATE} used for dates (year, month, day)
+		\\ \\ \textbf{TIME} used for times (hour, minute, second)
+
+	\subsection{Null and Duplicate Tuples}
+		\paragraph{NULL} used to insert tuple where some of the information is not known. This is not good as it can create inconsistencies in information. SQL does this through use of a null marker
+
+		\paragraph{Duplicate Tuples} are when another tuple exist with same values. NULL can make this confusing.
+		\\ \tab - these duplicated really expensive to remove
+		\\ \tab - relations do not contain these tuples
+
+	\subsection{SQL Semantics}
+		\paragraph{Table Schema} set of attributes
+		\paragraph{Table over R} set of partial tuples
+		\\ \\ These relations are idealised with no duplicates
+
+	\subsection{Constraints}
+		\begin{itemize}
+			\item can add uniqueness parameters like primary keys on table
+			\item NOT NULL makes sure that partial tuples don't exist
+			\item \textbf{UNIQUE} $<attribute\_list>$ ensures that values for attributes exist only once
+			\item \textbf{PRIMARY KEY} used on tables that are also UNIQUE, and ensures that NOT NULL applied to it too
+			\item \mbox{$FOREIGN KEY <attributelist> REFERENCES <tablename> <attributelist>$}  used to create foreign key dependencies
+			\item $CONSTRAINT <name> <constraint>$ \\used to give names to constraints
+		\end{itemize}
+
+	\subsection{Referential Actions}
+		Are used to specify what happens if tuples updated or deleted
+		\\ \\ SQL provies:
+		\begin{itemize}
+			\item \textbf{CASCADE} forces refercing tuples to be deleted
+			\item \textbf{SET NULL} sets referencing tuples to NULL
+			\item \textbf{SET DEFAULT} sets the tuple values to specified default
+			\item \textbf{NO ACTION} does nothing
+		\end{itemize}
+
+		\paragraph{Example usage:}
+		\mbox{FOREIGN KEY(title, year) REFERENCES MOVIE(title, year) ON DELETE \textbf{CASCADE}} \\ will delete director tuple if movie deleted
+		\\\\ \mbox{FOREIGN KEY(title, year) REFERENCES MOVIE(title, year) ON DELETE \textbf{SET NULL}} \\ will keep tuple in director but won't know what he directed if movie deleted
+
+	\subsection{CREATE statement}
+		\begin{itemize}
+			\item \textbf{CREATE ASSERTION} <name> CHECK defines integrity constraints
+			\item \textbf{CREATE DOMAIN} define domains and check clause
+			\item \textbf{CREATE VIEW $<name> \textbf{AS} <query>$} define views
+			\item \textbf{CREATE GLOBAL TEMPORARY TABLE} makes a table for current SQL session
+			\item \textbf{CREATE LOCAL TEMPORARY TABLE} makes table for current module or session
+		\end{itemize}
+
+	\subsection{Use as Data Manipulation Language}
+		Allow insert, delete or update
+
+		\begin{itemize}
+			\item INSERT INTO $<tablename>$ VALUES $<tuple>$
+			\item INSERT INTO $<tablename> <attributelist>$ VALUES $<tuples>$
+			\item INSERT INTO $<tablename> <query>$
+			\item DELETE FROM $<tablename>$ WHERE $<condition>$
+			\item \mbox{UPDATE $<tablename>$ SET $<value-assignment-list>$ WHERE $<conditions>$}
+		\end{itemize}
 
 
 \end{document}

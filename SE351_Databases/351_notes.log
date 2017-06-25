@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.24)  25 JUN 2017 22:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.24)  25 JUN 2017 23:43
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -130,7 +130,7 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 32.
 
-Underfull \hbox (badness 10000) in paragraph at lines 41--47
+Underfull \hbox (badness 10000) in paragraph at lines 40--46
 
  []
 
@@ -138,45 +138,134 @@ Underfull \hbox (badness 10000) in paragraph at lines 41--47
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 102.
+(Font)              <7> on input line 101.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 102.
+(Font)              <5> on input line 101.
 
-Underfull \hbox (badness 10000) in paragraph at lines 101--107
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 101--107
+Underfull \hbox (badness 10000) in paragraph at lines 100--106
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 109--124
+Underfull \hbox (badness 10000) in paragraph at lines 100--106
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 109--124
+Underfull \hbox (badness 10000) in paragraph at lines 108--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 109--124
+Underfull \hbox (badness 10000) in paragraph at lines 108--123
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 109--124
+Underfull \hbox (badness 10000) in paragraph at lines 108--123
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 108--123
 
  []
 
 [2]
-Overfull \hbox (39.71056pt too wide) in paragraph at lines 134--134
+Overfull \hbox (39.71056pt too wide) in paragraph at lines 133--133
 []\OT1/cmr/bx/n/14.4 SQL as Data Def-i-ni-tion and Ma-nip-u-la-tion Lan-guage 
  []
 
-[3] (./351_notes.aux) ) 
+
+Overfull \hbox (43.93875pt too wide) in paragraph at lines 143--144
+ \OT1/cmr/bx/n/10 CRE-ATE[] \OT1/cmr/m/n/10 used to cre-ate ta-bles. [CRE-ATE T
+A-BLE $\OML/cmm/m/it/10 < tablename >< attributespecs >$\OT1/cmr/m/n/10 ] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 147--149
+
+ []
+
+
+Overfull \hbox (0.96658pt too wide) in paragraph at lines 147--149
+\OT1/cmr/bx/n/10 CHARACTER \OT1/cmr/m/n/10 and \OT1/cmr/bx/n/10 VAR-CHAR \OT1/c
+mr/m/n/10 are fixed or vari-able length strings. Vari-able
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--155
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--155
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--155
+
+ []
+
+
+Overfull \hbox (4.08525pt too wide) in paragraph at lines 149--155
+\OT1/cmr/bx/n/10 FLOAT, REAL \OT1/cmr/m/n/10 and \OT1/cmr/bx/n/10 DOU-BLE PRE-C
+I-SION \OT1/cmr/m/n/10 used for float-ing point num-bers 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--155
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 149--155
+
+ []
+
+[3]
+Underfull \hbox (badness 10000) in paragraph at lines 165--167
+
+ []
+
+
+Overfull \hbox (63.7283pt too wide) in paragraph at lines 174--175
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 179--182
+
+ []
+
+
+Overfull \hbox (149.13939pt too wide) in paragraph at lines 189--191
+ \OT1/cmr/bx/n/10 Ex-am-ple us-age:[] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 189--191
+
+ []
+
+
+Overfull \hbox (62.89537pt too wide) in paragraph at lines 189--191
+[] 
+ []
+
+
+Overfull \hbox (7.7919pt too wide) in paragraph at lines 197--198
+[]\OT1/cmr/bx/n/10 CREATE GLOBAL TEM-PO-RARY TA-BLE \OT1/cmr/m/n/10 makes a ta-
+ble for cur-rent
+ []
+
+[4]
+Overfull \hbox (69.57973pt too wide) in paragraph at lines 209--210
+[][] 
+ []
+
+[5] (./351_notes.aux) ) 
 Here is how much of TeX's memory you used:
  1086 strings out of 494953
  15718 string characters out of 6180977
@@ -184,7 +273,7 @@ Here is how much of TeX's memory you used:
  4415 multiletter control sequences out of 15000+600000
  7895 words of font info for 28 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 23i,6n,19p,175b,218s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 23i,6n,19p,220b,218s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10
@@ -192,10 +281,10 @@ cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10
 usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/sha
 re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texl
 ive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on 351_notes.pdf (3 pages, 94346 bytes).
+Output written on 351_notes.pdf (5 pages, 111315 bytes).
 PDF statistics:
- 42 PDF objects out of 1000 (max. 8388607)
- 29 compressed objects within 1 object stream
+ 48 PDF objects out of 1000 (max. 8388607)
+ 33 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
