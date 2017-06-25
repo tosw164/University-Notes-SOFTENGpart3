@@ -1,34 +1,80 @@
 \documentclass{article} 
+\newcommand\tab[1][0.5cm]{\hspace*{#1}}
 
 \title{SOFTENG351 Notes 2017} 
 \author{Theodore Oswandi} 
 
 \usepackage[
 	lmargin=2.5cm,
-	rmargin=5cm,
+	rmargin=7cm,
+	tmargin=1cm,
+	bmargin=3cm,
 	]{geometry}
 
 \begin{document} \maketitle{} 
 
-\section{Lecture One: Introduction}
-	\subsection{Databases}
-		\textbf{Database}: large integrated collection of data. 
+\section{Lecture One: Fundamentals of Database Systems}
+	\subsection{General Information}
+		\paragraph{Database}
+		large integrated collection of data. 
 		\newline Contains [Entities, Relationships] 
-		\newline \newline
-		\textbf{DBMS}: (Database Management System)
-		\newline software package used to store and manage databases
 
+		\paragraph{DBMS}(Database Management System): 
+		\newline software package to store and manage databases
 
+		\paragraph{Database System}: DBMS with database
 
-
-
-
+		\paragraph{DBMS and uses}
 		\begin{itemize}
-			\item \textbf{Database}: large integrated collection of data
-			\item hello
-
+			\item store large amounts of information
+			\item code for queries
+			\item protect from inconsistencies and crashes
+			\item security
+			\item concurrent access
 		\end{itemize}
 
+	\subsection{Why Databases}
+		\paragraph{}
+		Need to shift from computation to storage of large amounts of information
+		\newline \newline Accomodate for changes in:
+		\newline \tab \textbf{Variety:} types of data
+		\newline \tab \textbf{Velocity:} movement of data
+		\newline \tab \textbf{Veracity:} uncertainty of data
+		\newline \tab \textbf{Volume:} amount of data
+
+		\paragraph{Structures/Models}
+		Need to have a model to describe data, and a schema used to give an abstract description of the data model
+
+	\subsection{Levels of Abstraction}
+		\tab \textbf{Views:} describe how data seen
+		\newline \tab \textbf{Logical Schema:} how data structures organised (variable types)
+		\newline \tab \textbf{Physical Schema:} how files structured
+		\newline \tab \textbf{Data Definition Language:} How to define database schema
+		\newline \tab \textbf{Data Manipulation:} how to update values in database 
+		\newline \tab \textbf{Query Language:} used to access data 
+
+	\subsection{Data Independence}
+		\tab \textbf{Logical Data Independence}
+		\begin{itemize}
+			\item external handling separate from logical organisation
+			\item mappings change, not external schema
+			\item applications only see external schema
+		\end{itemize}
+		\tab \textbf{Physical Data Independence}
+		\begin{itemize}
+			\item changes to physical schema doesn't affect logical layer
+			\item abstract from DBMS storage organisation
+			\item can perform optimisation/tuning
+		\end{itemize}
+
+	\subsection{Concurrency Control}
+		\begin{itemize}
+			\item many users have to be able to access information at the smae time and make updates without negatively affecting database
+			\item don't want to access disk lots. It is slow and inefficient
+			\item let multiple users access and keep data consistent
+			\item let users feel like they're the only ones using system
+
+		\end{itemize}
 
 
 \end{document}
