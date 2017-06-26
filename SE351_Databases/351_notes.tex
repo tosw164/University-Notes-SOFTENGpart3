@@ -296,6 +296,49 @@
 	\subsection{Incremental Query Formulation}
 		Can use multiple Queries to break up calculation to make it more readable. Ths will also reduce the amount of copying needed as you can use previous results in subsequent calculations.
 
+\section{Relational Query Language: Calculus}
+	\subsection{General}
+		\begin{itemize}
+			\item let users describe what they want
+			\item simple to write query and translate to SQL
+			\item sometimes relational algebra can get convulated
+			\item based on first order logic
+			\item if safe then can automatically be transformed to SQL style
+			\item \textbf{Tuple Relational Calculus TRC} variables represent tuples
+			\item \textbf{Domain Relational Calculus DRC} variables represent values in domain
+		\end{itemize}
+
+	\subsection{Object Properties}
+		have variables or may set its value in query
+		variable values must be in its domain
+		can make complex properties by using negation, conjunction and exisential quantification
+		remove brackets if doesn't increase ambiguity
+
+	\subsection{Shortcuts}
+		\begin{itemize}
+			\item \textbf{Inequation} $A \neq B$ equivalent to $\neg A = B$
+			\item \textbf{Disjunction} DeMorgan's: $A \vee B$ shortcuts $\neg(\neg A \wedge B)$
+			\item \textbf{Universal Quantification} DeMorgan's: $\forall x (A)$ shortcuts $\neg \exists x (\neg A)$
+			\item \textbf{Implication} $A \Rightarrow B $ shortcuts $ \neg A \vee B$
+			\item \textbf{Equivalence} $A \Leftrightarrow B$ shortcuts $(A\Rightarrow B) \wedge (B \Rightarrow A)$ 
+			\item \textbf{Successive Exestential Quantification} $\exists x_1 ( \exists x_2 (A))$ same as $\exists x_1,x_2(A)$
+			\item \textbf{Successive Univeral Quantification} $\forall x_1 ( \forall x_2 (A))$ same as $\forall x_1,x_2(A)$
+		\end{itemize}
+
+	\subsection{Free variables}
+
+	\subsection{Domain Relational Calculus}
+
+	\subsection{Tuple Relational Calculus}
+
+	\subsection{Safe Range Normal Form}
+
+
+
+
+
+
+	$\neq \Leftrightarrow \Leftarrow \Rightarrow \forall \exists \neg x \vee \wedge$
 		
 
 \end{document}
