@@ -377,7 +377,89 @@
 		% $\neq \Leftrightarrow \Leftarrow \Rightarrow \forall \exists \neg x \vee \wedge$
 
 
-\section{SQL as language}
+\section{SQL: As a Query Language}
+	\textbf{Basic structure:}
+		\\\tab$SELECT <attribute list> FROM <table list> WHERE <condition>$
+	\\\\\textbf{Renaming} (tables and attributes):
+		\\\tab$<name> AS <new name>$
+	\\\\\textbf{Select and remove duplicates}
+		\\\tab$SELECT DISTINCT \dots$
+	\\\\\textbf{Sort results} (can sort by multiple in heirarchy):
+		\\\tab $ORDER BY <attribute list>$
+		\\\tab add $ASC$ or $DESC$ to determine if want increasing/decreasing
+
+	\subsection{Operators:}
+		\tab$=, <, >, \leq, \geq, <>$(not equal to)
+
+	\subsection{Where Structure}
+		\tab$[<expression> <operator> <expression>]$
+
+	\subsection{Values in a range}
+		\tab$[<attribute> BETWEEN <value> AND <value>]$
+		\\\tab$[<attribute> IN <value list>]$
+
+	\subsection{Aggregate functions}
+		\begin{itemize}
+			\item \textbf{COUNT}: returns number of values
+			\item \textbf{AVG}: return average argument values. Only work if domain some kind of number
+			\item \textbf{MIN}: returns minimum argument value
+			\item \textbf{MAX}: returns maximum argument value
+			\item \textbf{SUM}: returns sum of argumet values. Only works if domain is number.
+		\end{itemize}
+
+		Results of above functions different if distinct used
+
+	\subsection{Grouping}
+		\begin{itemize}
+			\item used when only want to apply aggregate on group of tuples
+			\item use $GROUP BY <attribute list>$
+			\item if want to only do some groups then add  $HAVING <condition>$
+			\item the HAVING condition must apply to group and not tuples in groups
+		\end{itemize}
+
+	\subsection{Subqueries}
+		\begin{itemize}
+			\item can utilise further queries in the WHERE conditions
+			\item $\textbf{IN} <subquery>$ checks if tuple exists in subquery
+			\item $\textbf{EXISTS} <subquery>$ checks if subquery returns non empty relation
+			\item $\textbf{UNIQUE} <subquery>$ checks if result contains no duplicates
+			\item can \textbf{NOT} above queries if you want
+		\end{itemize}
+
+	\subsection{Reachability}
+		\begin{itemize}
+			\item basically seeing if given a graph if you can go from A to X in $n$ number of stops
+			\item If n is known then can use iteration
+			\item However if n is flexible then must use recursion somehow
+		\end{itemize}
+
+	\subsection{Recursion}
+		wat.
+
+	\subsection{Writing Difficult SQL Query}
+		\begin{enumerate}
+			\item Formalise query in safe calculus
+			\item Transform query into SRNF
+			\item Transform SRNF to SQL
+		\end{enumerate}
+
+	\subsection{Division}
+		Basically if $R \div S$, then return all attributes in R that satisfy all values in S, except columns in S.
+		utilises 2 nested WHERE NOT EXISTS
+
+	\subsection{Outer Joins}
+		\begin{itemize}
+			\item used when $t_1 \in R_1$ don't match $t_2 \in R_2$. So can't just do $R_1 \bowtie R_2$
+			\item \textbf{FULL OUTER JOIN}\\\tab
+			if $r$ FULL OUTER JOIN $s$ then do join, keep all information from both tables and make unknown attributes NULL
+			\item \textbf{LEFT OUTER JOIN}\\\tab
+			if $r$ LEFT OUTER JOIN $s$, then do the join, and keep entirety of $r$, those values not in $s$ make resulting column for that tuple NULL
+			\item \textbf{RIGHT OUTER JOIN}\\\tab
+			if $r$ RIGHT OUTER JOIN $s$, then do join and keep entirety of $s$ but only match $r$ if exists. Unknown values become NULL
+		\end{itemize}
+
+
+	\textbf{Possibly make list of examples here}
 
 \section{Entitiy Relationship Model}
 	\subsection{Database Design}
