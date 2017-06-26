@@ -453,5 +453,50 @@
 		\\\\Due to unique-key-value property, using either $E$ or $E_{id}$ is equivalent since can identify tuple by key attributes
 
 	\subsection{Identifiers}
+		For given Entity, can create new attribute that identifies rest of attributes for given tuple. If can ensure this column is unique then can use it as single attribute key. This kind of associates an attribute with an entity
+
+		\paragraph{unique identifier property} bascally saying that identifiers that identify relationships must be unique
+
+	\subsection{Specialisation, Generalisation, Clusters}
+		\subsubsection{Specialisation}
+			\begin{itemize}
+				\item lets you define multiple types of an entity. Basically subtypes
+				\item Such as Student, Lecturer, Tutor which are all people
+				\item Generally adds various attributes that relate to specialised object type.
+				\item Is treated as a relation
+				\item Can have specialisations of specialisations (relationship of relationship)
+			\end{itemize}
+
+			Subtype U with supertype C:\tab\tab $U = (\{C\}, attr(U),\{C\}$
+
+		\subsubsection{Generalisation}
+			\begin{itemize}
+				\item abstract concepts that model multiple things
+				\item allows you to create a single relationship for connections
+			\end{itemize}
+
+		\subsubsection{Clusters}
+			\begin{itemize}
+				\item model disjoint union (or)
+				\item ensure that things are mutually disjoint
+				\item attach those cluster groups to a single point $\oplus$
+				\item cluster still labelled as an object
+			\end{itemize}
+
+	\subsection{Transforming the ER diagram}
+		\begin{itemize}
+			\item these diagrams can be transformed to database schemata for things such as importing into SQl for example.
+			\item Entities become tables
+			\item Relationships become tables with foreign key connections to other tables
+		\end{itemize}
+
+	\subsection{Handling Clusters}
+		\begin{itemize}
+			\item clusters in conceptual design to model alternatives
+			\item to handle them, must remove them from ER diagram to see individual interactions.
+			\item cluster provide convenient way to model objects to Db
+			\item if you avoid clusters then ER schemata becomes large
+		\end{itemize}
+
 
 \end{document}
