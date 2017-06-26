@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.24)  27 JUN 2017 00:41
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.24)  27 JUN 2017 00:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -278,7 +278,7 @@ s rep-re-sent val-ues in do-main
  []
 
 [6]
-Overfull \hbox (4.42615pt too wide) in paragraph at lines 324--325
+Overfull \hbox (4.42615pt too wide) in paragraph at lines 328--329
 []\OT1/cmr/bx/n/10 Successive Ex-es-ten-tial Quan-tifi-ca-tion $\OMS/cmsy/m/n/1
 0 9\OML/cmm/m/it/10 x[]\OT1/cmr/m/n/10 (\OMS/cmsy/m/n/10 9\OML/cmm/m/it/10 x[]\
 OT1/cmr/m/n/10 (\OML/cmm/m/it/10 A\OT1/cmr/m/n/10 ))$ same as $\OMS/cmsy/m/n/10
@@ -287,13 +287,13 @@ $
  []
 
 
-Overfull \hbox (4.47902pt too wide) in paragraph at lines 364--365
+Overfull \hbox (4.47902pt too wide) in paragraph at lines 368--369
 []\OT1/cmr/m/n/10 only put nega-tion in front of atom or quan-ti-fier, and not 
 over brack-eted
  []
 
 [7]
-Overfull \hbox (38.04208pt too wide) in paragraph at lines 427--429
+Overfull \hbox (38.04208pt too wide) in paragraph at lines 431--433
 | | \OT1/cmr/bx/n/10 Ex-am-ples: $\OMS/cmsy/m/n/10 ff\OML/cmm/m/it/10 Student \
 OT1/cmr/m/n/10 : \OML/cmm/m/it/10 PERSON\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10 ; \O
 MS/cmsy/m/n/10 f\OML/cmm/m/it/10 Year; Course\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10
@@ -302,7 +302,7 @@ MS/cmsy/m/n/10 f\OML/cmm/m/it/10 Year; Course\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10
  []
 
 [8]
-Overfull \hbox (33.96703pt too wide) in paragraph at lines 445--446
+Overfull \hbox (33.96703pt too wide) in paragraph at lines 449--450
 | \OT1/cmr/bx/n/10 Ex-am-ple: $\OMS/cmsy/m/n/10 ff\OML/cmm/m/it/10 Student \OT1
 /cmr/m/n/10 : \OML/cmm/m/it/10 PERSON; Lecturer \OT1/cmr/m/n/10 : \OML/cmm/m/it
 /10 PERSON\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 ;\OML/cmm/m/it/
@@ -310,18 +310,18 @@ Overfull \hbox (33.96703pt too wide) in paragraph at lines 445--446
  []
 
 
-Overfull \hbox (22.73512pt too wide) in paragraph at lines 447--448
+Overfull \hbox (22.73512pt too wide) in paragraph at lines 451--452
  \OT1/cmr/bx/n/10 unique-key-value prop-erty[] \OT1/cmr/m/n/10 ex-ists due to a
 t-tributes in ob-ject uniquely iden-ti-fy-ing
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 450--454
+Underfull \hbox (badness 10000) in paragraph at lines 454--458
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 450--454
+Underfull \hbox (badness 10000) in paragraph at lines 454--458
 
  []
 
@@ -347,7 +347,7 @@ fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
 blic/amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
 sfonts/cm/cmsy7.pfb>
-Output written on 351_notes.pdf (10 pages, 177220 bytes).
+Output written on 351_notes.pdf (10 pages, 178865 bytes).
 PDF statistics:
  89 PDF objects out of 1000 (max. 8388607)
  63 compressed objects within 1 object stream
