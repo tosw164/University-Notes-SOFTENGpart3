@@ -326,12 +326,49 @@
 		\end{itemize}
 
 	\subsection{Free variables}
+		\begin{itemize}
+			\item placeholders used to describe structure
+			\item basically doesn't have to hold a specific set of values
+			\item not bound to any quantifier
+			\item negation does nothing to free variables
+			\item obeys conjunction
+		\end{itemize}
+
+	\subsection{Formulae interpretation}
+		\tab Whole thing either evaluates to T or F
 
 	\subsection{Domain Relational Calculus}
+		\begin{itemize}
+			\item Truth value of formula based on its values on free variables
+			\item \textbf{Example:} $\{ (m) | \exists d, t(SCREENING ('Event', m, d, t)) \}$
+			\item if looking for empty set, then just returns if value exists for that or not
+		\end{itemize}
 
 	\subsection{Tuple Relational Calculus}
+		\begin{itemize}
+			\item named on global perspective
+			\item sort logic based on domain and relation schemata
+			\item formula built fromatms on DRC. Free variables defined analogously
+		\end{itemize}
 
 	\subsection{Safe Range Normal Form}
+		\begin{itemize}
+			\item check if query is safe or not
+			\item basically don't want potentially infinite number of values
+
+			\item Must contain these properties:
+				\begin{enumerate}
+					\item \textbf{eliminate shortcuts} (Universal Quantification $\forall$, Implication $\Rightarrow$ and Equivalence $\Leftrightarrow$)
+					\item \textbf{bounded renaming}: ensure no free and bound variables.\\ \tab Not allowed: $\neg (A \vee B)$
+					\item remove any double negations $\neg \neg A$ to $A$
+					\item only put negation in front of atom or quantifier, and not over bracketed area
+					\item omit unecessary brackets
+					\item ensure there is no disjunction in final formula
+				\end{enumerate}
+
+			\item if all free variables range restricted then formula safe
+			\item if in SRNF then everything should either be an atom or quantified formula
+		\end{itemize}
 
 
 
