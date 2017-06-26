@@ -370,12 +370,88 @@
 			\item if in SRNF then everything should either be an atom or quantified formula
 		\end{itemize}
 
+		% $\neq \Leftrightarrow \Leftarrow \Rightarrow \forall \exists \neg x \vee \wedge$
 
 
+\section{SQL as language}
 
+\section{Entitiy Relationship Model}
+	\subsection{Database Design}
+		\subsubsection{General Information}
+			\begin{itemize}
+				\item Organisations now have access to lots of data
+				\item Data is recorded in databases
+					\begin{itemize}
+						\item What to keep in Db?
+						\item How to access it?
+					\end{itemize}
+				\item Database design aims to create and manage complex databases for huge information systems
+				\item Broken down into four phases
+					\begin{enumerate}
+						\item Requirement Analysis
+						\item Conceptual Design
+						\item Logical Design
+						\item Physical Design
+					\end{enumerate}
+			\end{itemize}
 
+		\subsubsection{Conceptual Design}
+			\paragraph{target of database} meet organisation that is going to use database needs
+			\paragraph{conceptual design} provides abstract description of database in terms of high level concepts. Shows expected structure
+			\paragraph{Inputs} are information requirements of users
+			\paragraph{Output} is database schema, with consideration of user requirements but no layout, implementatation and phyiscal details yet
+			\paragraph{Conceptual data model} to describe language
 
-	$\neq \Leftrightarrow \Leftarrow \Rightarrow \forall \exists \neg x \vee \wedge$
-		
+	\subsection{Entity Relationship}
+		\subsubsection{Entities}
+			\begin{itemize}
+				\item basic objects
+				\item described by attributes
+				\item these attributes should allow differentiation between objects
+				\item \textbf{key} created from these attributes to uniquely identify objects
+			\end{itemize}
+
+			Look
+			\begin{itemize}
+				\item Visualised by rectangles
+				\item Attributes point to rectangle
+				\item Attriutes that create key are underlined
+			\end{itemize}
+
+		\subsubsection{Relationships}
+			\begin{itemize}
+				\item create connection between various entities
+				\item are also technicalle objects that connect other objects together
+			\end{itemize}
+
+			\tab \textbf{Format:} {COMPONENTS, ATTRIBUTES, KEYS}
+			\\ \tab \tab \textbf{Examples:} $\{\{Student:PERSON\},\{Year, Course\}, \{Student, Year, Course\}\}$
+
+			\textbf{Look}
+			\begin{itemize}
+				\item Visulaised by diamonds
+				\item Contains attributes as well, but doesn't have to.
+				\item Same as Entities, key attributes are underlined
+				\item Edged linked to it are objects it associates with
+				\item Components that are part of key have a dot in the line connecting it to relationship diamond
+				\item key may span all attributes
+			\end{itemize}
+
+			\textbf{Roles}
+			\begin{itemize}
+				\item used to tie together relationship containing at least 2 of hte same object type. Both will have a line connecting diamond and rectangle, each named respectively.
+				\item effectively make use of foreign keys
+			\end{itemize}
+			\tab \textbf{Example:} $\{\{Student:PERSON, Lecturer:PERSON\},\emptyset, \{Student, Lecturer\}\}$
+
+		\paragraph{unique-key-value property} exists due to attributes in object uniquely identifying tuples. In a given set of tuples no duplicates in attribute subset that makes up key will exist.
+
+	\subsection{Set vs Foreign Key Semantics}
+		\textbf{Set semantics} uses entire attribute set\\
+		\textbf{Foreign key semantics} uses only key attributes
+		\\\\If using foreign key semantics then definitions of [Relationships, Relationship Sets, Database Instances] are slightly different. But also lets you use $E_{id}$ instead of having to use entire $E$ to reference things.
+		\\\\Due to unique-key-value property, using either $E$ or $E_{id}$ is equivalent since can identify tuple by key attributes
+
+	\subsection{Identifiers}
 
 \end{document}

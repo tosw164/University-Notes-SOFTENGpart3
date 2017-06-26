@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.24)  26 JUN 2017 17:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.24)  26 JUN 2017 22:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -286,7 +286,40 @@ Overfull \hbox (4.47902pt too wide) in paragraph at lines 364--365
 over brack-eted
  []
 
-[7] (./351_notes.aux) ) 
+[7]
+Overfull \hbox (38.04208pt too wide) in paragraph at lines 427--429
+| | \OT1/cmr/bx/n/10 Ex-am-ples: $\OMS/cmsy/m/n/10 ff\OML/cmm/m/it/10 Student \
+OT1/cmr/m/n/10 : \OML/cmm/m/it/10 PERSON\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10 ; \O
+MS/cmsy/m/n/10 f\OML/cmm/m/it/10 Year; Course\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10
+ ; \OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 Student; Year; Course\OMS/cmsy/m/n/10 gg$
+ 
+ []
+
+[8]
+Overfull \hbox (33.96703pt too wide) in paragraph at lines 445--446
+| \OT1/cmr/bx/n/10 Ex-am-ple: $\OMS/cmsy/m/n/10 ff\OML/cmm/m/it/10 Student \OT1
+/cmr/m/n/10 : \OML/cmm/m/it/10 PERSON; Lecturer \OT1/cmr/m/n/10 : \OML/cmm/m/it
+/10 PERSON\OMS/cmsy/m/n/10 g\OML/cmm/m/it/10 ; \OMS/cmsy/m/n/10 ;\OML/cmm/m/it/
+10 ; \OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 Student; Lecturer\OMS/cmsy/m/n/10 gg$ 
+ []
+
+
+Overfull \hbox (22.73512pt too wide) in paragraph at lines 447--448
+ \OT1/cmr/bx/n/10 unique-key-value prop-erty[] \OT1/cmr/m/n/10 ex-ists due to a
+t-tributes in ob-ject uniquely iden-ti-fy-ing
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 450--454
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 450--454
+
+ []
+
+[9] (./351_notes.aux) ) 
 Here is how much of TeX's memory you used:
  1092 strings out of 494953
  15809 string characters out of 6180977
@@ -294,7 +327,7 @@ Here is how much of TeX's memory you used:
  4421 multiletter control sequences out of 15000+600000
  7895 words of font info for 28 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 23i,6n,19p,220b,308s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 23i,6n,19p,235b,308s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfon
 ts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10
@@ -308,10 +341,10 @@ t/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts
 ublic/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/
 amsfonts/cm/cmsy5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmsy7.pfb>
-Output written on 351_notes.pdf (7 pages, 169587 bytes).
+Output written on 351_notes.pdf (9 pages, 174609 bytes).
 PDF statistics:
- 80 PDF objects out of 1000 (max. 8388607)
- 57 compressed objects within 1 object stream
+ 86 PDF objects out of 1000 (max. 8388607)
+ 61 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
