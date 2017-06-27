@@ -584,5 +584,65 @@
 			\item if you avoid clusters then ER schemata becomes large
 		\end{itemize}
 
+\section{Database Design Quality: Relation Normalisation}
+	\subsection{General}
+		\begin{itemize}
+			\item \textbf{Normalisation}'s goal is to efficiently process updates
+				\begin{itemize}
+					\item this aims to have no data redundancy
+					\item redundancy means you have to do many updates
+					\item also means you have to keep checking that data integrity exists and all redundant values updated as needed.
+				\end{itemize}
+			\item \textbf{Denormalisation}'s goal is to efficiently process queries
+				\begin{itemize}
+					\item because joins are expensive to do
+				\end{itemize}
+			\item cannot always do this as they trade off each other
+			\item therefore try to design datbase well 
+		\end{itemize}
+
+	\subsection{Functional Dependencies}
+		\begin{itemize}
+			\item if $X \rightarrow Y$ then for a given value of X, the Y value will be same.
+			\item therefore if $Student \rightarrow Teacher$ then that student will always have that teacher
+			\item if $\emptyset \rightarrow X$ then X can only have one value
+			\item attributes occuring in a key is a \textbf{prime attribute}
+
+		\end{itemize}
+
+	\subsection{Derivation Rules}
+		General formula \tab $\frac{IF}{THEN}$
+		\\\\Transitivity\tab$\frac{X \rightarrow Y, Y \rightarrow Z}{X \rightarrow Z}$
+		\\\\Extension\tab$\frac{X \rightarrow Y}{X \rightarrow XY}$
+		\\\\Reflexivity\tab$\frac{}{XY \rightarrow Y}$
+		\\\\Also something about derivation trees but I don't understand
+
+	\subsection{Soundness \& Completeness}
+		\paragraph{Sound} R is sound if every derivable dependency is implied
+		\paragraph{Complete} R is complete if every implied dependency is derivable
+
+	\subsection{Canonical Cover}
+		Get all functional dependencies and create a minimal list that still preserves its properties
+		\\\\\tab Contains:
+		\begin{enumerate}
+			\item Get all Functional Dependencies
+			\item \textbf{Decompose}: break $A \rightarrow BC$ to $A \rightarrow B,  \rightarrow C$
+			\item \textbf{L-reduced cover} which is when you do $AB \rightarrow C$ to $A \rightarrow C$
+			\item Then you are left with canonical cover when you delete duplicates and redundant dependencies.
+		\end{enumerate}
+
+	\subsection{Boyce-Codd Normal Form}
+		\begin{itemize}
+			\item can always get lossless BCNF decomposition
+			\item guarantee no redundancy in terms of FD
+			\item might exist some FD that can't be enfored
+		\end{itemize}
+
+	\subsection{Third Normal Form}
+		\begin{itemize}
+			\item Lossless 3NF can always be achieved
+			\item guarantees that all FDs can be enforced on elements in 3NF decomposition
+			\item ensures least level of data redundancy among all lossless, faithful decompositions
+		\end{itemize}
 
 \end{document}
