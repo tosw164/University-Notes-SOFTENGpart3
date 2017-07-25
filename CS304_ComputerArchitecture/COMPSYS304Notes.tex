@@ -1,0 +1,148 @@
+\documentclass{article} 
+\newcommand\tab[1][0.5cm]{\hspace*{#1}}
+
+\title{COMPSYS304 Notes 2017} 
+\author{Theodore Oswandi} 
+
+\usepackage[
+	lmargin=2.5cm,
+	rmargin=7cm,
+	tmargin=1cm,
+	bmargin=3cm,
+	]{geometry}
+\usepackage{enumitem}
+\setlist{noitemsep}
+\usepackage[none]{hyphenat}
+
+\begin{document} \maketitle{} 
+
+\section{Lecture 1}
+	\subsection{Improvements}
+		\begin{itemize}
+			\item Semiconductor technology and computer architecture has increased lots in last 50 years
+			\item Performance, which has also increased can be measured from standardised benchmarks
+			\item Clock rate/frequency has also increased considerably in this time.
+		\end{itemize}
+
+		\paragraph{DBMS}(Database Management System): 
+		\\ software package to store and manage databases
+
+		\paragraph{Database System}: DBMS with database
+
+		\paragraph{DBMS and uses}
+		\begin{itemize}
+			\item store large amounts of information
+			\item code for queries
+			\item protect from inconsistencies and crashes
+			\item security
+			\item concurrent access
+		\end{itemize}
+
+
+\end{document}
+
+Lecture 1: 
+	Semiconductor technology and computer architecture has increased lots in last 50 years
+	Performance, which has also increased can be measured from standardised benchmarks
+	Clock rate/frequency has also increased considerably in this time.
+
+	Computer architecture
+		ISA: Instruction set architecture. Boundary between hardware and software
+		Organisation: high level computer design.
+		Hardware: Logic, circuit-level design.
+
+		Separate instruction set from implementation
+
+	Memory Organisation
+		See memory as single 1D array
+		Address is index of this array, points to byte of memory.
+		Memory Access Time: time to read data to/from memory
+
+		Memory Speed != Processor speed.
+		Fast memory is very expensive. Heirarchy used to maintain fluid functionality and keep things cheap.
+
+		Register
+			Smallest and fastest memory for CPU
+			about 32-64 of them.
+			Each are 32/64bits in size.
+			Nanosecond access time
+
+		Cache
+			Slower than register
+			8-256k
+			Few nanoseconds access time
+			Levels to this as well. L1, L2, L3 cache used in multiprocessor systems.
+
+		Main Memory
+			Slower than cache
+			Megabytes to gigabytes of size.
+			Tens of nanoseconds lookup time.
+
+	ISA
+		80x86
+			old instruction set (1970s), but still used with extensions for things such as internet, tc...
+			AMD/Intel both have same ISA but different implementation.
+
+			Disadvantage
+				power consumption is higher than things like iPad which use different ISA and consume a lot less power
+				Also prevent some new innovation since it is so widely used in today's world.
+
+
+		ISA Design
+			something operands and opcode
+
+			Stack Base Architecture
+				Top of stack will contain result of operation.
+				If receive ADD then processor knows next 2 inputs contain 2 numbers that need to be added.
+				PUSH add something from stack.
+				POP use value in stack.
+				JVM designed to use Stack based architecture.
+
+			Accumulator Based Archictecture.
+				Using inputs from memory.
+				Not used anymore today. Used in 1970s
+
+			Register Memory Architecture
+				Currently used today as x86
+				Uses register for input as well as access values from memory.
+
+			Register-Register Architecture
+				Operands from register.
+				LOAD and STORE from memory too.
+				Need to specify destination register for output.
+
+		A(1000) + B(2000) = C(3000)
+			Stack Based Architecture
+				PUSH 1000
+				PUSH 2000
+				ADD
+				POP 3000
+
+			Accumulator Based
+				LOAD 1000
+				ADD 2000
+				STORE 3000
+
+			Register Memory
+				LOAD R2, 1000
+				ADD R1, R2, 2000
+				STORE R1, 3000
+
+			Register Register
+				LOAD R2, 1000
+				LOAD R3, 2000
+				ADD R1, R2, R3
+				STORE R1, 3000
+
+
+		ISA CLASSES
+			RISC
+				Reduced
+
+			CISC
+				Complex
+
+			EPIC
+
+
+		
