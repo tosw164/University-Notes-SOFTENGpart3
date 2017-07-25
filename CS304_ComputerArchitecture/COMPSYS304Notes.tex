@@ -6,7 +6,7 @@
 
 \usepackage[
 	lmargin=2.5cm,
-	rmargin=7cm,
+	rmargin=5cm,
 	tmargin=1cm,
 	bmargin=3cm,
 	]{geometry}
@@ -24,92 +24,111 @@
 			\item Clock rate/frequency has also increased considerably in this time.
 		\end{itemize}
 
-		\paragraph{DBMS}(Database Management System): 
-		\\ software package to store and manage databases
+	\subsection{Computer Architecture}
+		\paragraph{\tab ISA} Boundary between hardware and software
+		\paragraph{\tab Oragnisation} high level computer design aspects
+		\paragraph{\tab Hardware} detailed logic and circuit design
 
-		\paragraph{Database System}: DBMS with database
+		\paragraph{\tab Note:} You want to separate your instruction set from implementation
 
-		\paragraph{DBMS and uses}
+	\subsection{Memory Organisation}
 		\begin{itemize}
-			\item store large amounts of information
-			\item code for queries
-			\item protect from inconsistencies and crashes
-			\item security
-			\item concurrent access
+			\item See memory as single 1D array
+			\item Address is index of this array, points to byte of memory.
+			\item Memory Access Time: time to read data to/from memory \\ 
+			\item Memory Speed != Processor speed.
+			\item Fast memory is very expensive. Heirarchy used to maintain fluid functionality and keep things cheap.
 		\end{itemize}
 
+		\paragraph{\tab Processor Registers}
+		\begin{itemize}
+			\item Smallest and fastest memory for CPU
+			\item about 32-64 of them.
+			\item Each are 32/64bits in size.
+			\item Nanosecond access time
+		\end{itemize}
 
-\end{document}
+		\paragraph{\tab Cache Memory}
+		\begin{itemize}
+			\item Slower than register
+			\item 8-256k
+			\item Few nanoseconds access time
+			\item Levels to this as well. L1, L2, L3 cache used in multiprocessor systems.
+		\end{itemize}
 
-Lecture 1: 
-	Semiconductor technology and computer architecture has increased lots in last 50 years
-	Performance, which has also increased can be measured from standardised benchmarks
-	Clock rate/frequency has also increased considerably in this time.
+		\paragraph{\tab Main Memory}
+		\begin{itemize}
+			\item Slower than cache
+			\item Megabytes to gigabytes of size.
+			\item Tens of nanoseconds lookup time.
+		\end{itemize}
 
-	Computer architecture
-		ISA: Instruction set architecture. Boundary between hardware and software
-		Organisation: high level computer design.
-		Hardware: Logic, circuit-level design.
+	\subsection{Instruction Set Architecture (ISA)}
+		\paragraph{\tab ISA} is interface between hardware and low level software.
+		\paragraph{\tab Modern ISA} include 80x86, MIPS, ARM
 
-		Separate instruction set from implementation
+		\subsubsection{Using Fixed ISAs}
+			\paragraph{} Uses old instruction set (1970s), also used with extensions to enable newer technologies such as internet, etc...
 
-	Memory Organisation
-		See memory as single 1D array
-		Address is index of this array, points to byte of memory.
-		Memory Access Time: time to read data to/from memory
+			\paragraph{\tab Advantages}
+			\begin{itemize}
+				\item AMD/Intel both have same ISA but different implementation.
+			\end{itemize}
 
-		Memory Speed != Processor speed.
-		Fast memory is very expensive. Heirarchy used to maintain fluid functionality and keep things cheap.
-
-		Register
-			Smallest and fastest memory for CPU
-			about 32-64 of them.
-			Each are 32/64bits in size.
-			Nanosecond access time
-
-		Cache
-			Slower than register
-			8-256k
-			Few nanoseconds access time
-			Levels to this as well. L1, L2, L3 cache used in multiprocessor systems.
-
-		Main Memory
-			Slower than cache
-			Megabytes to gigabytes of size.
-			Tens of nanoseconds lookup time.
-
-	ISA
-		80x86
-			old instruction set (1970s), but still used with extensions for things such as internet, tc...
-			AMD/Intel both have same ISA but different implementation.
-
-			Disadvantage
-				power consumption is higher than things like iPad which use different ISA and consume a lot less power
-				Also prevent some new innovation since it is so widely used in today's world.
+			\paragraph{\tab Disadvantages}
+				\begin{itemize}
+					\item power consumption is higher than things like iPad which use different ISA and consume a lot less power
+					\item Also prevent some new innovation since it is so widely used in today's world.
+				\end{itemize}
 
 
-		ISA Design
-			something operands and opcode
+		\subsubsection{ISA Design}
+			\paragraph{\tab Need to ask:}
+			\begin{itemize}
+				\item What operations do the CPU need to do?
+				\item How to provide data for given operations?
+				\item How to store results of these calculations?
+			\end{itemize}
 
-			Stack Base Architecture
-				Top of stack will contain result of operation.
-				If receive ADD then processor knows next 2 inputs contain 2 numbers that need to be added.
-				PUSH add something from stack.
-				POP use value in stack.
-				JVM designed to use Stack based architecture.
+			\paragraph{\tab Need to define:}
+			\begin{itemize}
+				\item Instruction Format and Encoding
+				\item Data types and their sizes
+				\item Location of operands and where to store results
+			\end{itemize}
 
-			Accumulator Based Archictecture.
-				Using inputs from memory.
-				Not used anymore today. Used in 1970s
+		\paragraph{\tab Operands and Opcodes} To carry out these calculations, an \textbf{opcode} must be defined to define these calculations. Upon these opcodes, zero to three \textbf{operands} are used for data inputs and result outputs.
 
-			Register Memory Architecture
-				Currently used today as x86
-				Uses register for input as well as access values from memory.
+	\subsection{Architecture Types}
+		\subsubsection{Stack Base Architecture}
+			\begin{itemize}
+				\item Top of stack will contain result of operation.
+				\item If receive ADD then processor knows next 2 inputs contain 2 numbers that need to be added.
+				\item PUSH add something to top of stack.
+				\item POP use value in top of stack.
+				\item JVM designed to use Stack based architecture.
+				\item ADD function has no operators. Operates on last 2 loaded values.
+			\end{itemize}
 
-			Register-Register Architecture
-				Operands from register.
-				LOAD and STORE from memory too.
-				Need to specify destination register for output.
+		\subsubsection{Accumulator Based Archictecture.}
+			\begin{itemize}
+				\item Using inputs from memory.
+				\item Not used anymore today. Used in 1970s
+				\item ADD function takes one operator, $mem_address$
+			\end{itemize}
+
+		\subsubsection{Register Memory Architecture}
+			\begin{itemize}
+				\item Currently used today as x86
+				\item Uses register for input as well as access values from memory.
+			\end{itemize}
+
+		\subsubsection{Register-Register Architecture}
+			\begin{itemize}
+				\item Operands from register.
+				\item LOAD and STORE from memory too.
+				\item Need to specify destination register for output.
+			\end{itemize}
 
 		A(1000) + B(2000) = C(3000)
 			Stack Based Architecture
@@ -146,3 +165,5 @@ Lecture 1:
 
 
 		
+
+\end{document}
