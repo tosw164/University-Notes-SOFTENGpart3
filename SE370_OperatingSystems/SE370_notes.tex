@@ -185,4 +185,88 @@
 		\end{itemize}
 		
 
+Lecture 2:
+	History of OS
+		Start at mainframes.
+			Early PDAs were similar to mainframes. Had no memory protection.
+		Then go to Minicomputers
+		And then desktop
+		And how handheld computers
+
+		Go through cycle of:
+			No software
+			Compulers
+			Multiuser
+			Networked
+			Distributed Systems
+			Multiprocessor & Fault tolerant.
+
+	Total Control
+		Computers expensive in 50s
+			Data & Programs saved on magnetic strip, or punch cards.
+		Programmers knew how the computer worked. They were very knowledgable about computers.
+		Computers did 10,000s instructions per second, but were idle a lot
+
+		Old school computing
+			IO polling, since no other programs running in bg, can just poll. CPU doing nothing.
+
+		Progressing
+			Goal is to reduce the time CPU was doing nothing.
+			Operators now just "use" the computer. No need for programmer.
+				If something crashes, then just start the next program.
+				Batch similar jobs together, maximise usage of computer.
+
+		Offlining
+			With Big Expensive Computer BEC, but they are just waiting for IO a lot of time. Therefore want to make IO as fast as possible.
+			Use smaller computers to convert slower paper to faster magnetic tape. Then that magnetic tape is used as IO for the BEC
+			This is the same for output. Have another smaller cheaper computer offload the output magnetic tape from BEC to a printer.
+
+		Resident Monitor
+			Keep some code in memory.
+			It did the work that some operators were doing.
+				Things like clearing memory, and reading start of new program that needs to be loaded.
+				Can also do some of the IO routines.
+
+		Control Programs
+			Standardise the language to communicate with the Resident Monitor.
+
+	After all of this
+		COPY RELEVANT FROM SLIDE
+
+	Changes in hardware
+		Disk drives
+			Faster IO
+		Processors that you can interrupt.
+			No more reliance on polling.
+
+	Change from Offlining to Onlining
+		SPOOLING.	
+			Meaning that when interrupt, contents of cards read to disk.
+			Therefore current program interrupted.
+
+	Multiprogramming
+		Putting multiple programs on at once. Need more memory to do this.
+		Now also need for scheduler to manage multiple users' program needs.
+			Need to figure out how to manage stuff. Priority of jobs, how much time to allocate for these jobs, etc...
+		No memory protection, so programs could overwrite other program's chunk of memory.
+			Java is an example of somehting that doesn't give you direct access to memory in JVM.
+			Memory Protection better done by hardware than having software impose limits. 
+
+	2 Modes for memory protection
+		User/Restricted Mode
+		Kernel Mode (SU)
+
+		Systems works differently in the 2 modes.
+
+		Mode bit can be used to signify which mode its in.
+			If do something in User mode, then go to Kernel mode and show exception before going back to User mode.
+
+	Memory Protection
+		Process gets area of memory that it can use
+		Base and Limit register set for each process and how much memory it can have. 
+
+	Batch systems
+		REREAD SLIDES
+		
+
 \end{document}
