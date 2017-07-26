@@ -114,13 +114,19 @@
 			\begin{itemize}
 				\item Using inputs from memory.
 				\item Not used anymore today. Used in 1970s
-				\item ADD function takes one operator, $mem_address$
+				\item ADD function takes one operator, $mem_address$ which contains the value to add to above loaded value.
 			\end{itemize}
 
 		\subsubsection{Register Memory Architecture}
 			\begin{itemize}
 				\item Currently used today as x86
 				\item Uses register for input as well as access values from memory.
+				\item ADD function contains 3 operator.
+					\begin{enumerate}
+						\item \textbf{Rd} Destination Register
+						\item \textbf{Rs} Source Register
+						\item \textbf{mem\_address} Address of value to add from memory
+					\end{enumerate}
 			\end{itemize}
 
 		\subsubsection{Register-Register Architecture}
@@ -128,29 +134,37 @@
 				\item Operands from register.
 				\item LOAD and STORE from memory too.
 				\item Need to specify destination register for output.
+				\item ADD function has 3 operators.
+					\begin{enumerate}
+						\item \textbf{Rd} Destination Register
+						\item \textbf{Rs} Source Register 
+						\item \textbf{Rt} Register containing other value you want to add
+					\end{enumerate}
 			\end{itemize}
 
-		A(1000) + B(2000) = C(3000)
-			Stack Based Architecture
-				PUSH 1000
-				PUSH 2000
-				ADD
+		\subsubsection{Examples}
+		Example is $A(1000) + B(2000) = C(3000)$ in the 4 types of architectures
+		
+		\paragraph{Stack Based Architecture\\}
+				PUSH 1000 \\ \tab
+				PUSH 2000 \\ \tab
+				ADD \\ \tab
 				POP 3000
 
-			Accumulator Based
-				LOAD 1000
-				ADD 2000
+		\paragraph{Accumulator Based\\}
+				LOAD 1000 \\ \tab
+				ADD 2000 \\ \tab
 				STORE 3000
 
-			Register Memory
-				LOAD R2, 1000
-				ADD R1, R2, 2000
+		\paragraph{Register Memory\\}
+				LOAD R2, 1000 \\ \tab
+				ADD R1, R2, 2000 \\ \tab
 				STORE R1, 3000
 
-			Register Register
-				LOAD R2, 1000
-				LOAD R3, 2000
-				ADD R1, R2, R3
+		\paragraph{Register Register\\}
+				LOAD R2, 1000 \\ \tab
+				LOAD R3, 2000 \\ \tab
+				ADD R1, R2, R3 \\ \tab
 				STORE R1, 3000
 
 
