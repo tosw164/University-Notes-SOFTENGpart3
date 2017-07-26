@@ -185,62 +185,102 @@
 		\end{itemize}
 		
 
-Lecture 2:
-	History of OS
-		Start at mainframes.
-			Early PDAs were similar to mainframes. Had no memory protection.
-		Then go to Minicomputers
-		And then desktop
-		And how handheld computers
+\section{Lecture 2: History of OS}
+	\begin{itemize}
+		\item Started at mainframes.
+		\begin{itemize}
+			\item Early PDAs were similar to mainframes. Had no memory protection.
+		\end{itemize}
+		\item Then go to Minicomputers
+		\item And then desktop
+		\item And how handheld computers
+	\end{itemize}
 
-		Go through cycle of:
-			No software
-			Compulers
-			Multiuser
-			Networked
-			Distributed Systems
-			Multiprocessor & Fault tolerant.
+	\paragraph{\tab Each of these stages go through cycle of:}
+	\begin{enumerate}
+		\item No software
+		\item Compulers
+		\item Multiuser
+		\item Networked
+		\item Clustered
+		\item Distributed Systems
+		\item Multiprocessor \& Fault tolerant.
+	\end{enumerate}
 
-	Total Control
-		Computers expensive in 50s
-			Data & Programs saved on magnetic strip, or punch cards.
-		Programmers knew how the computer worked. They were very knowledgable about computers.
-		Computers did 10,000s instructions per second, but were idle a lot
+	\subsection{Total Control}
+		\begin{itemize}
+			\item Computers expensive in 50s. Data and programs were saved on paper tape.
+			\item Programmers knew how the computer worked. They were very knowledgable about computers.
+			\begin{itemize}
+				\item Prepared program and data cards
+				\item do setup
+				\item control computer
+				\item debug
+			\end{itemize}
+			\item Computers did 10,000s instructions per second, but were idle a lot of the time.
+		\end{itemize}
 
-		Old school computing
-			IO polling, since no other programs running in bg, can just poll. CPU doing nothing.
+	\subsection{Properties of old OS}
+		\begin{itemize}
+			\item \textbf{IO polling}, since no other programs running in background, therefore just waiting on input and able to just poll.
+			\item No file system
+			\item No memory management or security
+			\item OS defined by decisions made by user.
+			\item Single program at a time
+		\end{itemize}
 
-		Progressing
-			Goal is to reduce the time CPU was doing nothing.
-			Operators now just "use" the computer. No need for programmer.
-				If something crashes, then just start the next program.
-				Batch similar jobs together, maximise usage of computer.
+	\subsection{Progression: Operators \& Offlining}
+		\paragraph{\tab Operators}
+		\begin{itemize}
+			\item Goal is to reduce the time CPU was doing nothing.
+			\item Operators now just "use" the computer. No need for programmer.
+			\begin{itemize}
+				\item If something crashes, then just start the next program.
+				\item Batch similar jobs together, maximise usage of computer.
+			\end{itemize}
+		\end{itemize}
 
-		Offlining
-			With Big Expensive Computer BEC, but they are just waiting for IO a lot of time. Therefore want to make IO as fast as possible.
-			Use smaller computers to convert slower paper to faster magnetic tape. Then that magnetic tape is used as IO for the BEC
-			This is the same for output. Have another smaller cheaper computer offload the output magnetic tape from BEC to a printer.
+		\paragraph{\tab Offlining}
+		\begin{itemize}
+			\item Form of parallelism in early computing.
+			\item With Big Expensive Computer BEC, but they are just waiting for IO a lot of time. Therefore want to make IO as fast as possible.
+			\item Use smaller computers to convert slower paper to faster magnetic tape. Then that magnetic tape is used as IO for the BEC
+			\item This is the same for output. Have another smaller cheaper computer offload the output magnetic tape from BEC to a printer.
+		\end{itemize}
 
-		Resident Monitor
-			Keep some code in memory.
-			It did the work that some operators were doing.
-				Things like clearing memory, and reading start of new program that needs to be loaded.
-				Can also do some of the IO routines.
+		\paragraph{\tab Resident Monitor}
+		\begin{itemize}
+			\item Keep some code in memory.
+			\item It did the work that some operators were doing.
+			\begin{itemize}
+				\item clearing memory
+				\item reading start of new program that needs to be loaded.
+				\item Can also do some of the IO routines.
+			\end{itemize}
+		\end{itemize}
 
-		Control Programs
-			Standardise the language to communicate with the Resident Monitor.
+		\paragraph{\tab Control Programs}
+		Standardise the language to communicate with the Resident Monitor.
+		\\ Had tags for things such as \$JOB (for signifying jobs), \$FTN (When fortran compiler needed), and \$END (signifying end of program)
 
-	After all of this
-		COPY RELEVANT FROM SLIDE
+		\paragraph{Conclusions from this}
+		\begin{itemize}
+			\item Memory management and file system still not present. Therefore still need to reset if anything bad happens.
+			\item Security patchy at best
+			\item Still need IO polling
+			\item Standard IO routines for programmers
+			\item 2 programs in memory, but one executed
+			\item User interface was JCL (Job Control Language)
+			\item Output of program can be input of another.
+		\end{itemize}
 
-	Changes in hardware
-		Disk drives
-			Faster IO
-		Processors that you can interrupt.
-			No more reliance on polling.
+	\subsection{Changes in Hardware}
+		\begin{itemize}
+			\item\textbf{Disk drives} provide faster IO.
+			\item Processors that you can \textbf{interrupt} also means that there is no more reliance on polling.
+			\item IO devices and CPU concurrent execution, and use local buffer.
 
-	Change from Offlining to Onlining
-		SPOOLING.	
+		\paragraph{\tab SPOOLING (Simultaneous Peripheral Operation On-Line)}
 			Meaning that when interrupt, contents of cards read to disk.
 			Therefore current program interrupted.
 
@@ -267,6 +307,6 @@ Lecture 2:
 
 	Batch systems
 		REREAD SLIDES
-		
+
 
 \end{document}
