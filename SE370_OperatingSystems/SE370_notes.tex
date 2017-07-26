@@ -21,23 +21,168 @@
 		\paragraph{\tab Operating System} The software that makes the computer usable. Using modern computers without an OS is "impossible"
 			\\ \tab \textbf{Examples: }Windows, OSX, Linux, Unix, iOS, Android, etc...
 
-		\paragraph{\tab Things that are part of an OS}
-		\begin{enumerate}
-			\item File System
-			\item Communication System
-			\item Process Manager
-			\item Security Manager
-			\item Memory Manager
-			\item Graphical User Interface
-			\item Backup System
-			\item Web Browser
-			\item Media Player
-			\item Compiler
-			\item Java/.Net environment.
-		\end{enumerate}
+		% \paragraph{\tab Things that are part of an OS?}
+		% \begin{enumerate}
+		% 	\item File System
+		% 	\item Communication System
+		% 	\item Process Manager
+		% 	\item Security Manager
+		% 	\item Memory Manager
+		% 	\item Graphical User Interface
+		% 	\item Backup System
+		% 	\item Web Browser
+		% 	\item Media Player
+		% 	\item Compiler
+		% 	\item Java/.Net environment.
+		% \end{enumerate}
 
 	\subsection{Approaches to Understanding}
-		\subsubsection{Minimalist}
-			
+		\paragraph{\tab Minimalist}
+		\begin{itemize}
+			\item mostly going to be using this one
+			\item OS contains minimum amount of software to function
+			\item archlike
+		\end{itemize}
+
+		\paragraph{\tab Maximalist}
+		\begin{itemize}
+			\item All software comes with standard OS release.
+			\item Contains many utilities and programs.
+			\item ubuntuish
+		\end{itemize}
+
+	\subsection{Usable vs Efficient}
+		\begin{itemize}
+			\item make sure you make OS suited for needs
+			\item either specialised or more general purpose
+			\item Think of who you expect to use the system
+			\item If creating a realtime system with potentially thousands of operations in a short amount of time, have to consider efficiency
+			\item Same with battery life if you expect the system to be used in a mobile setting.
+		\end{itemize}
+
+	\subsection{OS themes}
+		\paragraph{\tab Manager Model}
+			\begin{itemize}
+				\item OS is colleciton of managers, ensuring proper use of devices.
+				\item Managers are independent.
+				\item look out for everything associated with computer 
+				\item tie in with hardware. Current state of HW lets OS do more/less things
+			\end{itemize}
+
+
+		\paragraph{\tab Onion Model}
+			\begin{itemize}
+				\item Onions have layers (Abstractions)
+				\item resources contained in lower layers. 
+				\item Lower layers can't access higher level layers but other way around possible
+				\item Very difficult to get these layers 'right'
+				\item can use in terms of security. Very good idea
+			\end{itemize}
+
+		\paragraph{\tab Resource Allocator Model}
+			\begin{itemize}
+				\item similar to manager model
+				\item emphasis on fairness and providing services
+			\end{itemize}
+
+		\paragraph{\tab Dustbin Model}
+			\begin{itemize}
+				\item contains middleware that not considered part of OS
+				\item Sees OS as bits no-one wants to do
+			\end{itemize}
+
+		\paragraph{\tab Getting Work Done Model}
+			\begin{itemize}
+				\item Idea of it is we use computers to do something else.
+				\item Goal for OS is to help be able to get it all done.
+			\end{itemize}
+
+	% Things we should know
+	% 	Interrupt
+	% 	Security&Protection
+	% 	FileSystem
+	% 	VirtualMemory
+	% 	Processes&Threads
+
+	\subsection{OS design}
+		\subsubsection{Themes}
+			\paragraph{\tab All in one}
+			\begin{itemize}
+				\item All OS components freely interact with each other
+				\item MS-DOR and Early Linux
+			\end{itemize}
+
+			\paragraph{\tab Separate Layers (Onion Model)}
+			\begin{itemize}
+				\item Simplify verificiation and debugging
+				\item Correct design difficult to get
+			\end{itemize}
+
+			\paragraph{\tab Modules}
+			\begin{itemize}
+				\item All in one with modules for some features
+				\item Linux and Windows.
+			\end{itemize}
+
+			\paragraph{\tab Microkernels}
+			\begin{itemize}
+				\item Client/Server model
+				\item make OS as small as possible
+
+				\item \textbf{Exokernel} puts kernel outside. OS's job only need to authenticate people to use hardware.
+			\end{itemize}
+
+			\paragraph{\tab VMs}
+			\begin{itemize}
+				\item Java is an example of this
+			\end{itemize}
+
+	\subsubsection{MS-DOS}
+		\begin{itemize}
+			\item Written to provide the most functionality in the least amount of space
+			\item not divided into modules
+			\item Something exokernels trying to do. Make application program access hardware directly.
+		\end{itemize}
+
+	\subsubsection{Early Unix}
+		\begin{itemize}
+			\item UNIX OS in 2 parts. \textbf{Kernel} and \textbf{System Programs}
+			\item Provides:
+				\begin{itemize}
+					\item File System
+					\item CPU sheduling
+					\item Memory management
+					\item Other OS functions
+				\end{itemize}
+			\item Ken Thompson and Dennis Ritchie
+			\item Make OS as simple as possible.
+			\item Simple 2 letter commands.
+			\item Ideas of pipelining and process communication
+		\end{itemize}
+
+	\subsubsection{THE Multiprogramming System}
+		\begin{itemize}
+			\item THE was the first to use the layered system
+			\item Contains 6 layers:
+				\begin{enumerate}
+					\item[5] User programs
+					\item[4] Input/Output buffering
+					\item[3] Operator-Console device driver
+					\item[2] Memory Management
+					\item[1] CPU scheduling
+					\item[0] Hardware
+				\end{enumerate}
+		\end{itemize}
+
+	\subsubsection{WinNT and Client/Server}
+		\begin{itemize}
+			\item WinNT still being still run
+				\begin{itemize}
+					\item Win10 now has Windows Subsystem for Linux
+				\end{itemize}
+			\item NT provide env subsystem to run code written for differnt OS
+			\item NT and successors are hybrid systems. Parts are layered but some merged to improve performance.
+		\end{itemize}
+		
 
 \end{document}
