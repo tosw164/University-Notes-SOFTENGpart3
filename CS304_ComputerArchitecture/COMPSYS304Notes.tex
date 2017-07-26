@@ -143,39 +143,76 @@
 			\end{itemize}
 
 		\subsubsection{Examples}
-		Example is $A(1000) + B(2000) = C(3000)$ in the 4 types of architectures
-		
-		\paragraph{Stack Based Architecture\\}
-				PUSH 1000 \\ \tab
-				PUSH 2000 \\ \tab
-				ADD \\ \tab
-				POP 3000
+			Example is $A(1000) + B(2000) = C(3000)$ in the 4 types of architectures
+			
+			\paragraph{\tab Stack Based Architecture\\}
+					PUSH 1000 \\ \tab
+					PUSH 2000 \\ \tab
+					ADD \\ \tab
+					POP 3000
 
-		\paragraph{Accumulator Based\\}
-				LOAD 1000 \\ \tab
-				ADD 2000 \\ \tab
-				STORE 3000
+			\paragraph{\tab Accumulator Based\\}
+					LOAD 1000 \\ \tab
+					ADD 2000 \\ \tab
+					STORE 3000
 
-		\paragraph{Register Memory\\}
-				LOAD R2, 1000 \\ \tab
-				ADD R1, R2, 2000 \\ \tab
-				STORE R1, 3000
+			\paragraph{\tab Register Memory\\}
+					LOAD R2, 1000 \\ \tab
+					ADD R1, R2, 2000 \\ \tab
+					STORE R1, 3000
 
-		\paragraph{Register Register\\}
-				LOAD R2, 1000 \\ \tab
-				LOAD R3, 2000 \\ \tab
-				ADD R1, R2, R3 \\ \tab
-				STORE R1, 3000
+			\paragraph{\tab Register Register\\}
+					LOAD R2, 1000 \\ \tab
+					LOAD R3, 2000 \\ \tab
+					ADD R1, R2, R3 \\ \tab
+					STORE R1, 3000
 
 
-		ISA CLASSES
-			RISC
-				Reduced
+	\subsection{ISA Classes}
+		\paragraph{Classification} generally based on: Instruction word size, number of different instructions, and number of clock cycles to complete a given instruction.
 
-			CISC
-				Complex
+		\subsubsection{Classes}
+			\paragraph{RISC} (Reduced Instruction Set Computers) is where size of all instruction words are the same. May lead to simpler decoding hardware. 
+			\\ \tab \textbf{MIPS} is an example processor that uses this type of ISA.
 
-			EPIC
+			\paragraph{CISC} (Complex Instruction Set Computers) are when the size of instruction words may vary. This is more complex than RISC but code footprint may become smaller due to condensing multiple RISC instructions into one CISC instruction. 
+			\\ \tab \textbf{Intel x86} is an example of processors based off this.
+
+			\paragraph{EPIC} (Explicitly Parallel Instruction Computers) include parallel operations in their instruction set. The compiler is very important in EPIC architectures.
+			\\ \tab \textbf{Intel Itanium} uses this kind of ISA.
+
+		\subsubsection{Abstractions}
+			\paragraph{Abstractions} remove unnecessary details and hide complexity so that it is easier to understand. 
+
+			\paragraph{\tab Instruction Processing in CPU}
+			\begin{enumerate}
+				\item \textbf{Fetching} accesses memory to get to next instruction. Gets the correct memory address on the bus, and reads its contents.
+				\item \textbf{Decoding} Interprets the bits of the instruction word. Identifies which operation to do and data requied (from memory/registers)
+				\item \textbf{Execution} Performs the operation. Uses processor and writes result to register/memory.
+			\end{enumerate}
+
+		\subsubsection{Questions to ask when designing ISA}
+			\begin{enumerate}
+				\item What type of ISA should be used?
+				\item What operations are needed?
+				\item How data (operands) are provided in instructions?
+				\item Instruction and Data word sizes?
+			\end{enumerate}
+
+	\subsection{Extras}
+		\paragraph{\tab Types of operations}
+		\begin{itemize}
+			\item \textbf{Arithmetic} Addition, Subtraction, Multiplication, Division
+			\item \textbf{Logical} AND, OR, Lshift, Rshift
+			\item \textbf{Memory Access} LOAD, STORE
+			\item \textbf{Control Transfer} Conditional/Unconditional Branches
+			\item \textbf{Special Purpose} will talk later
+		\end{itemize}	
+
+		\paragraph{Notes: Shifting} You have to be careful when shifting as if you're dealing with signed integers then you may be messing with the sign bit when trying to multiply/divide	
+
+		\paragraph{\tab ALU operations}
+
 
 
 		
