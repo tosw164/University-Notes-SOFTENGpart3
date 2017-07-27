@@ -340,4 +340,96 @@
 		Not much has changed from programmer's point of view.
 
 
+LECTURE 3:
+	MISSED UP TO POEWR TO THE PEOPLE
+
+	Power to the people
+		Used to use teletypewriters, but used CRT TVs after a certain point.
+		At early 1970s, can code in similar style then you do now.
+
+	Time Sharing System
+		People don't like waiting.
+			200ms+ noticable
+			5000ms+ unacceptible
+		Difficult for scheduler to figure out how to allocate resources. People use different computer differently with differing IO demands.
+		Users expect command to run as soon as you press Enter.
+
+		Don't want to have everything run at 100\%, otherwise it feels too slow.
+		Security an issue for all of these people writing on terminal. Have to increase this and have authentication.
+
+		BATCH SYSTEM REMNANTS COPY
+
+	1980s computers
+		Cycle starts again, started with Resident Monitor Systems.
+		Simple single layer file systems
+		No security, everything stored on disks
+			Didn't bother as it was aimed at individuals.
+		Did spooling later as well for printer output.
+		Putting more than one program in memory, using similar system to resident monitor.
+
+		Xerox created GUI elements for Office use.
+		Then Apple engineers used ideas to create a personal computer
+
+		Higher definition screens, pixel addressing for graphics.
+		Cycle continues, things like time-sharing features and implementation of UNIX.
+
+		Features
+			Virtual memory
+			Multiprogramming
+			Complex file system
+			Networking
+			Multi-user
+
+	1980s Networking
+		Security, Transparency and Protocols/Standardisation create new problems.
+
+		Network OS
+			File sharing, communication scheme, running independent to other machines on network.
+
+		Distributed OS
+			[NOT SURE] using lots of computers to make it look like only one OS controlling system.
+
+	Multiprocessor Systems
+		Heat creating an issue, kind of a soft cap on processor frequency.
+		Therefore just add more cores instead of trying to make it go faster.
+
+		TIGHTLY COUPLED SYSTEM
+
+		Parallel Systems
+			Increased throughput and cheaper way to increase performance.
+			Increased reliability and rate of degradation.
+
+			Symmetric Multiprocessing
+				every core running same OS
+				Most modern systems run this way
+
+
+			Asymmetric Multiprocess
+				Different cores allocated to different jobs/section.
+				Used in very large system
+
+
+	Realtime System
+		Timing constraints very important.
+		HARD	- must run within time, or failure happens
+				- Has to be specifically designed to be hard realtime
+		SOFT	- Doesn't matter too much, more lax.
+				- Most OS handle soft realtime
+
+	Pocket Computer & Smartphones
+		Started as PDA/Pocket computers.
+		Went through cycle again. Started as resident monitors.
+			Due to hardware limitations, so have to start cycle again.
+		Battery life and power consumption very important factors.
+
+		PalmOS
+			Small memory with slow processor. Efficiency very important factor (to just get passable performance)
+
+		Android
+			Linux based, application programming in Java.
+
+		iOS
+			OSX based, with virtual memory and paging for code but not data. Writing to flash degrades it.
+
+
 \end{document}
