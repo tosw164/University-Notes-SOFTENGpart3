@@ -279,34 +279,65 @@
 			\item\textbf{Disk drives} provide faster IO.
 			\item Processors that you can \textbf{interrupt} also means that there is no more reliance on polling.
 			\item IO devices and CPU concurrent execution, and use local buffer.
+		\end{itemize}
 
 		\paragraph{\tab SPOOLING (Simultaneous Peripheral Operation On-Line)}
 			Meaning that when interrupt, contents of cards read to disk.
 			Therefore current program interrupted.
 
-	Multiprogramming
-		Putting multiple programs on at once. Need more memory to do this.
-		Now also need for scheduler to manage multiple users' program needs.
-			Need to figure out how to manage stuff. Priority of jobs, how much time to allocate for these jobs, etc...
-		No memory protection, so programs could overwrite other program's chunk of memory.
-			Java is an example of somehting that doesn't give you direct access to memory in JVM.
-			Memory Protection better done by hardware than having software impose limits. 
+	\subsection{Multiprogramming}
+		\begin{itemize}
+			\item Putting multiple programs on at once. Need more memory to do this.
+			\item Now also need for scheduler to manage multiple users' program needs.
+			\begin{itemize}
+				\item Need to figure out how to manage stuff. Priority of jobs, how much time to allocate for these jobs, etc...
+			\end{itemize}
+			\item No memory protection, so programs could overwrite other program's chunk of memory.
+			\begin{itemize}
+				\item Java is an example of somehting that doesn't give you direct access to memory in JVM.
+				\item Memory Protection better done by hardware than having software impose limits. 
+			\end{itemize}
+			\item \textbf{Requirements} Limited address range and Operating modes.
+		\end{itemize}
 
-	2 Modes for memory protection
-		User/Restricted Mode
-		Kernel Mode (SU)
+		\paragraph{\tab Memory Protection Modes}
+		\begin{enumerate}
+			\item User/Restricted Mode
+			\begin{itemize}
+				\item Execution is done on behalf of the user.
+				\item User should not have access to privileged instructions
+			\end{itemize}
+			\item Kernel Mode (SU)
+			\begin{itemize}
+				\item Execution done on behalf of the operating system
+				\item Full access to all instructions.
+			\end{itemize}
+		\end{enumerate}
+		A \textbf{mode bit} can be used to signify what mode a certain program is running in. If something in user mode tries to access memory it is not allocated to, it will go to Kernel mode and throw exception before going back to User mode.
 
-		Systems works differently in the 2 modes.
+		\paragraph{Why we need both} We need both because:
+		\\\tab If modes existed with relevent instructions, but full memory access; there will still be a lack of memory protection, but also no privilege instruction protection. You can put whatever code you want anywhere.
+		\\\tab If memory access limited but no modes or privilege access; then the user will be able to modify amount of memory available for programs.
 
-		Mode bit can be used to signify which mode its in.
-			If do something in User mode, then go to Kernel mode and show exception before going back to User mode.
+		\paragraph{\tab Memory Protection}
+		\begin{itemize}
+			\item Process gets fixed area of memory that it can use
+			\item If tries to access address out of that range then exception will be thrown.
+			\item Base and Limit register set for each process and how much memory it can have. 
+		\end{itemize}
 
-	Memory Protection
-		Process gets area of memory that it can use
-		Base and Limit register set for each process and how much memory it can have. 
+	\subsection{Batch Systems}
+		\paragraph{}Memory protection and Processor modes allow you to safely put multiple programs in memory.
 
-	Batch systems
-		REREAD SLIDES
+		\paragraph{\tab Features}
+		\begin{itemize}
+			\item Jobs have their own protected memory
+			\item Disks have file systems. Files linked to owners
+			\item Automated Scheduling. Utilise hardware as much as possible, as operators are slow. Also allows fine tuning of how scheduler works.
+			\item Computer consoles
+		\end{itemize}
+
+		Not much has changed from programmer's point of view.
 
 
 \end{document}
