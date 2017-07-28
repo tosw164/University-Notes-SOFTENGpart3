@@ -340,83 +340,99 @@
 		Not much has changed from programmer's point of view.
 
 
-LECTURE 3:
-	MISSED UP TO POEWR TO THE PEOPLE
+\section{Lecture 3: History Continued}
+	\subsection{Scheduling}
+		\begin{itemize}
+			\item Ams to maximise use of computing machinery OS knows
+			\item Need to know details about device and file processes. What how much resources to allocate.
+			\item Also has to take into account timing and output size.
+		\end{itemize}
 
-	Power to the people
-		Used to use teletypewriters, but used CRT TVs after a certain point.
-		At early 1970s, can code in similar style then you do now.
+		SOMETHING ABOUT UNIVERSITY OF AUCKLAND SYSTEM
 
-	Time Sharing System
-		People don't like waiting.
-			200ms+ noticable
-			5000ms+ unacceptible
-		Difficult for scheduler to figure out how to allocate resources. People use different computer differently with differing IO demands.
-		Users expect command to run as soon as you press Enter.
+	\subsection{Power to the people}
+		\begin{itemize}
+			\item Due to hardware becoming cheaper, can have general public own personal computers
+			\item Used to use teletypewriters, but used CRT TVs after a certain point. Editing text was difficult.
+			\item At early 1970s, can code in similar style then you do now.
+		\end{itemize}
 
-		Don't want to have everything run at 100\%, otherwise it feels too slow.
-		Security an issue for all of these people writing on terminal. Have to increase this and have authentication.
+	\subsection{Time Sharing System}
+		\begin{itemize}
+			\item People don't like waiting.
+			\begin{itemize}
+				\item 200ms+ noticable
+				\item 5000ms+ unacceptible
+			\end{itemize}
+			\item Difficult for scheduler to figure out how to allocate resources. People use different computer differently with differing IO demands.
+			\item Users expect command to run as soon as you press Enter.
+			\item Don't want to have everything run at 100\%, otherwise it feels too slow.
+			\item Security an issue for all of these people writing on terminal. Have to increase this and have authentication.
+		\end{itemize}
+		
+		\paragraph{\tab Remnants of Batch Programming}
+		\begin{itemize}
+			\item Has way to run process at given time
+			\item Terminal looked like cards until better graphics came
+		\end{itemize}
 
-		BATCH SYSTEM REMNANTS COPY
+	\subsection{1980s computers}
+		\begin{itemize}
+			\item Cycle starts again, started with Resident Monitor Systems.
+			\item Simple single layer file systems
+			\item No security, everything stored on disks. Didn't bother as it was aimed at individual users.
+			\item Did spooling later, for printer output.
+			\item Putting more than one program in memory, using similar system to resident monitor.
+			\item Higher definition screens, pixel addressing for graphics.
+			\item Cycle continues, things like time-sharing features and implementation of UNIX.
+		\end{itemize}
 
-	1980s computers
-		Cycle starts again, started with Resident Monitor Systems.
-		Simple single layer file systems
-		No security, everything stored on disks
-			Didn't bother as it was aimed at individuals.
-		Did spooling later as well for printer output.
-		Putting more than one program in memory, using similar system to resident monitor.
+		Xerox created GUI elements for Office use. Then Apple engineers used ideas to create their Mac.
 
-		Xerox created GUI elements for Office use.
-		Then Apple engineers used ideas to create a personal computer
+		\paragraph{\tab Features}
+		\begin{enumerate}
+			\item Virtual memory
+			\item Multiprogramming
+			\item Complex file system
+			\item Networking
+			\item Multi-user
+		\end{enumerate}
 
-		Higher definition screens, pixel addressing for graphics.
-		Cycle continues, things like time-sharing features and implementation of UNIX.
+	\subsection{1980s Networking}
+		\textbf{Security}, Transparency and Protocols/Standardisation create new problems.\\
+		\textbf{Network OS:} File sharing, communication scheme, running independent to other machines on network.\\
+		\textbf{Distributed OS:} Sharing processing power and resources of lots of computers to make it look like only single system.
 
-		Features
-			Virtual memory
-			Multiprogramming
-			Complex file system
-			Networking
-			Multi-user
+	\subsection{Multiprocessor Systems}
+		Heat is an issue, kind of a soft cap on processor frequency.
+		Therefore can add more cores instead of trying to make each core faster.
 
-	1980s Networking
-		Security, Transparency and Protocols/Standardisation create new problems.
+		\paragraph{Tightly Coupled System} Processors sharing memory and clock. Communication through this shared memory. Most computers are now this.
 
-		Network OS
-			File sharing, communication scheme, running independent to other machines on network.
+		\paragraph{Parallel Systems} Mean increased throughput and cheaper way to increase performance. WIth increased reliability and rate of degradation.
 
-		Distributed OS
-			[NOT SURE] using lots of computers to make it look like only one OS controlling system.
-
-	Multiprocessor Systems
-		Heat creating an issue, kind of a soft cap on processor frequency.
-		Therefore just add more cores instead of trying to make it go faster.
-
-		TIGHTLY COUPLED SYSTEM
-
-		Parallel Systems
-			Increased throughput and cheaper way to increase performance.
-			Increased reliability and rate of degradation.
-
-			Symmetric Multiprocessing
-				every core running same OS
-				Most modern systems run this way
+		\paragraph{Symmetric Multiprocessing: }All core running same OS, most modern systems run this way
+		
+		\paragraph{Asymmetric Multiprocess}	Different cores allocated to different jobs/section. Used in very large systems.
 
 
-			Asymmetric Multiprocess
-				Different cores allocated to different jobs/section.
-				Used in very large system
-
-
-	Realtime System
+	\subsection{Realtime System}
 		Timing constraints very important.
-		HARD	- must run within time, or failure happens
-				- Has to be specifically designed to be hard realtime
-		SOFT	- Doesn't matter too much, more lax.
-				- Most OS handle soft realtime
+		\paragraph{\tab Hard real-time}
+		\begin{itemize}
+			\item must run within time, or failure happens
+			\item Has to be specifically designed to be hard realtime
+			\item Nuclear plants, air traffic control
+		\end{itemize}
 
-	Pocket Computer & Smartphones
+		\paragraph{\tab Soft real-time}
+		\begin{itemize}
+			\item Doesn't matter too much, more lax.
+			\item Most OS handle soft realtime
+			\item Phone system, multimedia
+		\end{itemize}
+
+	\subsection{Pocket Computer \& Smartphones}
 		Started as PDA/Pocket computers.
 		Went through cycle again. Started as resident monitors.
 			Due to hardware limitations, so have to start cycle again.

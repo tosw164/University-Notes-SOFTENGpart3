@@ -25,11 +25,11 @@
 		\end{itemize}
 
 	\subsection{Computer Architecture}
-		\paragraph{\tab ISA} Boundary between hardware and software
-		\paragraph{\tab Oragnisation} high level computer design aspects
-		\paragraph{\tab Hardware} detailed logic and circuit design
-
-		\paragraph{\tab Note:} You want to separate your instruction set from implementation
+		\textbf{\tab ISA:} Boundary between hardware and software\\
+		\textbf{\tab Oragnisation:} high level computer design aspects\\
+		\textbf{\tab Hardware:} detailed logic and circuit design
+		\\ \\
+		\textbf{\tab Note:} You want to separate your instruction set from implementation
 
 	\subsection{Memory Organisation}
 		\begin{itemize}
@@ -132,7 +132,7 @@
 		\subsubsection{Register-Register Architecture}
 			\begin{itemize}
 				\item Operands from register.
-				\item LOAD and STORE from memory too.
+				\item LOAD and STORE only way to access memory.
 				\item Need to specify destination register for output.
 				\item ADD function has 3 operators.
 					\begin{enumerate}
@@ -214,7 +214,113 @@
 		\paragraph{\tab ALU operations}
 
 
+Lecture 3 \& 4
+	Addimmediate uses value, not pointer to register
+	No Subimmediate as if Addimmediate allows negative numbers then we good.
 
-		
+	Destination register always before source register/s
+
+	Register 0 is static containing all 0s, and cannot be written to
+
+	Sizes of things
+		4 bytes		word
+		2 bytes		halfword
+		1 byte		
+
+	Endianness (Byte order)
+		Little Endian	Least significant bit at top of memory
+		Big Endian		Most significant bit at top of memory
+
+	Course will use MIPS simlulator on PC called SPIM
+
+	Memory address in MIPS machine is C(r$_x$)
+		Where C is contstant which may be used to reserve part of memory. Offset or displacement or something, NOT 100\%
+		And Rx is the contents of a given register
+
+	lw, sw = Load/Store word
+	lh, sh = Load/Store half-word
+	lb, sb = Load/Store byte
+
+	lbu = Load byte unsigned. No need to sbu as it will only store the relevant least significant byte in register
+
+	Example
+		lb \$5, 0(\$25)
+		Load byte at memory address 0 + value at register 25?
+
+	Class exercise
+		addi \$10, \$0, 0x3000
+		ori \$12, \$0, 0x8015
+		sw \$12, 512(\$10)
+
+		\$10 = 00003000
+		\$12 = 00008015
+		sw register to put \$10 is 512$_{10}$ + 8015$_{16}$ = 0x00003200
+
+		Therefore Big 00 00 80 15
+		Little 15 80 00 00
+
+	INSTRUCTION ENCODING
+		if 32 register then need 5bits to encode which register used.
+		Opcode needs 6bits to represent this. Can encode 64 opcodes.
+
+		RTYPE
+		[Opcode][Register][Register][Register][Shift][FunctionCode]
+		[6bits ][5bits   ][5bits   ][5bits   ][5bits][6bits       ]
+		Therefore 27 bits used out of 32. So shift related 5 bits added to signify amount of shift needed.
+
+		ITYPE
+		[Opcode][Register][Register][ImmediateValue]
+		[6bits ][5bits   ][5bits   ][16bits        ]
+		16 bits can be used for the immediate value for given operation.
+
+	Program Counter PC is used to 
+
+	Conditional/Unconditional control transfer used to change order of execution in case of if/else and loops.
+	MIPS uses branch=conditional, and jump=unconditional
+
+	Jump [OpCode][Something else]
+		 [6bits ][26bits] 
+		 THis 26 bits shifted left 2 times to create 00 on the end. Then use 4 MSB of PC (appended to left of 28 bits) to get the 32 bit target memory address.
+
+
+2ND HALF
+	beq = branch equal, taking 2 inputs
+	bne = branch not equal, taking 2 inputs.
+
+slide20
+	Else and Exit are kind of like GOTO (symbolic name) Need dollar sign if doing assembly.
+
+	bne and beq only have 16 extra bits.  Therefore need to get to 32bits again somehow for target address. Need to use PC again. Use 14 bits after shifting the 16bits in bne/beq to left by 2.
+
+	Another example
+	target address =
+		0100 0400 + 4 (from PC+4) + 400 (from 0x100 * 4 [left shift 2])
+		= 0100 0804
+	Have to also consider is little/big Endian by looking at the machine code of original instruction. The 16bit offset at the end will let you know.
+
+	Yay another example, so excited
+		ATTEMPT
+			Start: if pc bne \$10 + 32*100 + 32 Exit
+				shift right 3 pc
+
+			Start
+
+			Exit: hi there
+
+		ANSWER
+			Need to make a counter, use addi for increment/decrement
+
+			addi \$11, \$0, 100	\tab //Initialise counter as 100
+			lw \$8, 0(\$10)	\tab // Load word from R10 into R8
+			sra	\$9, \$8, 3	\tab // Shift right arithmetic on that and save in R9
+			sw 	\tab //Store contents of R9 back into R10
+			addu \$10, \$10, 4
+			addi \$11, \$11, -1
+			bne \$11, \$0, L1
+
+			OP DES SRC
+
+			OP SRC DEST
+
 
 \end{document}
