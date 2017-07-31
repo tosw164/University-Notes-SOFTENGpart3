@@ -16,7 +16,7 @@
 
 \begin{document} \maketitle{} 
 
-\section{Lecture 1}
+\section{Lecture 1 \& 2}
 	\subsection{Improvements}
 		\begin{itemize}
 			\item Semiconductor technology and computer architecture has increased lots in last 50 years
@@ -211,76 +211,96 @@
 
 		\paragraph{Notes: Shifting} You have to be careful when shifting as if you're dealing with signed integers then you may be messing with the sign bit when trying to multiply/divide	
 
-		\paragraph{\tab ALU operations}
+
+\section{Lecture 3 \& 4}
+	\subsection{ALU Operations}
+		\begin{itemize}
+			\item Addimmediate uses value, not pointer to register
+			\item No Subimmediate as if Addimmediate allows negative numbers then we good.
+			\item Destination register always before source register/s
+			\item Register 0 is static containing all 0s, and cannot be written to
+		\end{itemize}
+
+		\paragraph{Endian-ness}
+		\begin{enumerate}
+			\item \textbf{Little Endian} Least significant bit at top of memory addresses
+			\item \textbf{Big Endian} Most significant bit at the top of memory addresses
+		\end{enumerate}
+
+		\paragraph{Sizes of things} in relation to memory size \\ \tab Word=4bytes \\ 
+		\tab halfword=2bytes \\ 
+		\tab 1byte=byte\\ \\
+		This course will use MIPS simlulator on PC called SPIM
+
+		\paragraph{Memory addressing in MIPS} machine is C(r$_x$)
+			\\ \tab Where C is contstant which may be used to reserve part of memory. 
+			\\ \tab And Rx is the contents of a given register
+
+		\begin{itemize}
+			\item lw, sw = Load/Store word
+			\item lh, sh = Load/Store half-word
+			\item lb, sb = Load/Store byte
+			\item \textbf{NOTE: } 	lbu = Load byte unsigned. No need to sbu as it will only store the relevant least significant byte in register
+		\end{itemize}
 
 
-Lecture 3 \& 4
-	Addimmediate uses value, not pointer to register
-	No Subimmediate as if Addimmediate allows negative numbers then we good.
+	\subsection{Class exercise}
+		addi \$10, \$0, 0x3000 \\
+		ori \$12, \$0, 0x8015 \\
+		sw \$12, 512(\$10) \\ \\
+		\$10 = 0000 3000 \\
+		\$12 = 0000 8015 \\
+		sw register to put \$10 is 512$_{10}$ + 8015$_{16}$ = 0x00003200 \\\\
+		Therefore Big Endian: \tab 00 00 80 15 \\
+		And Little Endian: \tab \tab 15 80 00 00
 
-	Destination register always before source register/s
+	\subsection{Instruction Encoding Cont.}
+		\begin{itemize}
+			\item \textbf{Note: } For efficient instruction encoding, we classify different instructions and formats for faster decode.
+			\item If 32 registers then need 5bits to encode pointer to relevant register.
+			\item Opcode needs 6bits to be represented. Can encode 64 opcodes.
+			\item Also need some bits to represent immediate values and offsets.
+			\item Program Counter (PC) used to signify where execution has got up to and therefore next instruction to execute.
+			
+		\end{itemize}
 
-	Register 0 is static containing all 0s, and cannot be written to
+		\subsubsection{R-Type Format}
+			\begin{itemize}
+				\item 6bit OpCode \tab \tab \tab Operation Instruction
+				\item 5bit Register \tab \tab \tab First register operand
+				\item 5bit Register \tab \tab \tab Second register operand
+				\item 5bit Register \tab \tab \tab Third register operand
+				\item 5bit Shift \tab \tab \tab \tab Amount for shift instructions
+				\item 6bit Function Code \tab Operation variant.
+			\end{itemize}
 
-	Sizes of things
-		4 bytes		word
-		2 bytes		halfword
-		1 byte		
 
-	Endianness (Byte order)
-		Little Endian	Least significant bit at top of memory
-		Big Endian		Most significant bit at top of memory
+		\subsubsection{I-Type Format}
+			\begin{itemize}
+				\item 6bit OpCode
+				\item 5bit Destination Register
+				\item 5bit Source Register
+				\item 16bit Offset/Immediate Value (Depending on instruction)
+			\end{itemize}
 
-	Course will use MIPS simlulator on PC called SPIM
+		\subsubsection{Jumping Memory Addresses.}
+			\paragraph{Changing sequence of execution: } is done through use of \textbf{branch} and \textbf{jump} instructions. This is done to let you have if/else and loops.
+			\begin{enumerate}
+				\item[\textbf{Jump}] Jumps to location in memory (unconditionally) to get next instruction. Like a GOTO. Uses J-Type Format
+				\item[\textbf{Branch}] lets you conditionally go to another point in memory, only if the condition is met. Uses I-Type Format
+			\end{enumerate}
 
-	Memory address in MIPS machine is C(r$_x$)
-		Where C is contstant which may be used to reserve part of memory. Offset or displacement or something, NOT 100\%
-		And Rx is the contents of a given register
+			\paragraph{\tab Jumping} [6bit OpCode][26bit TargetAddress]\\ Target address must be 32 bit, so to get this 26 bit value to 32 bit you shift the 26 bit number left 2 times, then add the 4 MSB of PC to front of value. This results in final expected 32bit address needed for the jump.
 
-	lw, sw = Load/Store word
-	lh, sh = Load/Store half-word
-	lb, sb = Load/Store byte
+			\paragraph{\tab Branching} [6bit OpCode][5bit Reg1][5bit Reg2][16bit Label]
+			\begin{itemize}
+				\item Once again, the target address must be 32bit, so have to calculate it using enocded information in instruction.
+				\item Conditional Branching is \textbf{PC-relative} meaning that the PC provides current address and the Label provides an offset.
+			\end{itemize}
 
-	lbu = Load byte unsigned. No need to sbu as it will only store the relevant least significant byte in register
 
-	Example
-		lb \$5, 0(\$25)
-		Load byte at memory address 0 + value at register 25?
 
-	Class exercise
-		addi \$10, \$0, 0x3000
-		ori \$12, \$0, 0x8015
-		sw \$12, 512(\$10)
 
-		\$10 = 00003000
-		\$12 = 00008015
-		sw register to put \$10 is 512$_{10}$ + 8015$_{16}$ = 0x00003200
-
-		Therefore Big 00 00 80 15
-		Little 15 80 00 00
-
-	INSTRUCTION ENCODING
-		if 32 register then need 5bits to encode which register used.
-		Opcode needs 6bits to represent this. Can encode 64 opcodes.
-
-		RTYPE
-		[Opcode][Register][Register][Register][Shift][FunctionCode]
-		[6bits ][5bits   ][5bits   ][5bits   ][5bits][6bits       ]
-		Therefore 27 bits used out of 32. So shift related 5 bits added to signify amount of shift needed.
-
-		ITYPE
-		[Opcode][Register][Register][ImmediateValue]
-		[6bits ][5bits   ][5bits   ][16bits        ]
-		16 bits can be used for the immediate value for given operation.
-
-	Program Counter PC is used to 
-
-	Conditional/Unconditional control transfer used to change order of execution in case of if/else and loops.
-	MIPS uses branch=conditional, and jump=unconditional
-
-	Jump [OpCode][Something else]
-		 [6bits ][26bits] 
-		 THis 26 bits shifted left 2 times to create 00 on the end. Then use 4 MSB of PC (appended to left of 28 bits) to get the 32 bit target memory address.
 
 
 2ND HALF
