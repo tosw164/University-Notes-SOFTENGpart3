@@ -343,4 +343,40 @@ slide20
 			OP SRC DEST
 
 
+Lecture 5 \& 6
+	Example: Translate the below code to MIPS
+		while(w[i] == x)
+			i = i + j
+
+		Given that i = \$3, j = \$4, x = \$5, w(int array) = ]\$6
+
+
+		ANSWER
+		<<SOMETHING MISSING>>
+		loop: \#perform loop test
+			sll \$10, \$3, 2 \tab \#Shift left 2 == x4
+			add \$10, \$6, \$10 \tab \#Get address of w[i]
+			lw \$11, 0(\$10) \tab \#\$11 = w[i]
+			\#perform w[i] == x
+			bne \$11, \$5, exit \tab \#Exit when w[i] != x
+			\# i = i + j
+			add \$3, \$3, \$4
+			j loop
+
+		exit:
+
+	Comparison Instructions
+		Used for things like (x < y)
+		Will set destination register different value depending on result of comparison
+		Will then use bne/beq to check if lessthan or greater than.
+
+		slt Rd, Rs, Rt = signed less than
+		sltu Rd, Rs, Rt = unsigned less than
+		slti Rd, Rs, Immed  = signed immediate less than
+		sltiu Rd, Rs, Immed  = unsigned immediate less than
+
+		No implicit instruction to copy from one register to another. But can use contents of \$0 with the ADD or OR $_{(haha)}$ function to achieve the same effect
+
+		Can create sudo instructions if use same set of instructions a lot (kind of like creating a function/script)
+
 \end{document}
