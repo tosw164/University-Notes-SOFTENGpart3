@@ -454,5 +454,76 @@
 		Based on OSX (Their desktop OS)\\
 		virtual memory and paging for code but not data as writing to flash degrades it.
 
+\section{Lecture 4: Virtual Machines}
+	./ used to signify that it isn't an internal command
+
+\section{Assignment Notes}
+	\begin{itemize}
+		\item Use standard UNIX symbols to control the threads
+
+		\item setupstacktransfer()
+		\begin{itemize} 
+			\item \textbf{siguser1}	represents the user's signal. Let you send stuff to yourself
+			\\ \tab similar to interrupt, but done in software and not hardware
+
+			\item \textbf{sigaction} is a struct that holds information. Kind of like an object
+			\\ \tab is global due to process having to be able to get to it at any time
+
+			\item Has a separate, special stack for that singal handler to use.
+			\item \textbf{man pages} are really important for this assignment. 
+			\item If want to get all man pages relevant to signal then use $man -k signal$
+		\end{itemize}
+
+		\item Threads need their own stack
+			\\ \tab Running independedntly of each other and calling their own functions so to guarantee proper functionng it is best for them to have their own stack
+
+		\item \textbf{\&setupaction}
+			address of instructions for the signal handler
+
+		\item \textbf{thread1()}
+		contains code that will be executed in the thread
+
+		\item threadfuncts is array of names of functions that should be called for all threads
+		If add more then you need to add to the array
+
+		\item In task 2; 3 threads but 2 of them running the same logic from thread2()
+
+		\item Information about thread structure found in littleThread.h
+
+		\item static variables aren't allocated on the stack. And preserve value throughout multiple function calls
+
+		\item MISSED UP TO LIKE 35min in
+
+		\item \textbf{sigaltstack} lets you use that special alternate stack for different threads
+		\\ \tab have malloc some memory and will use it
+		\\ \tab When you call associateStack() when making new process you make a new alternate stack
+
+		\item \textbf{kill(getpid(), SIGUSR1);}
+		\\ \tab KILL is system call to get signals. Set it up but haven't associated it with anything it yet
+		\\ \tab KILL sending pid of process you want to send it to. Send signal to yourself (try to kill yourself).
+		% \\ \tab 
+
+		\item make local copy of thread in fuction and set it to READY.
+
+		\item C doesn't have exception handling. Therefore if error happens in a stack then need the ability to jump to part of memory to give error.
+		\begin{itemize}
+			\item \textbf{setjmp}: Take snapshot of where you are. Registers of processor (PC will contain this). Can also be used to "freeze" state of a given thread if need to be suspended.
+			\item \textbf{longjmp}: Jump back to state where setjmp called. Can be used to "unfreeze" an already suspended thread to resume it. [Line34 in OSA.c]
+			\item Copy stack information/register information and when jump back then recopy it back to "jump back to where you were"
+			\item variable states preserved if stored on the stack
+			\item if setjmp return 0 then returned directly, or nonzero if from longjmp. Will be used later for forking to create new processes, to check if from parent or child
+		\end{itemize}
+
+		\item \textbf{Switches} Pass it your current thread and the thread you want to go to.
+
+		\item Only one thread running at a time, other ones will be READY due to only using a single processor.
+
+
+
+		\item can get this assignment to work without understanding it
+
+
+
+	\end{itemize}
 
 \end{document}
