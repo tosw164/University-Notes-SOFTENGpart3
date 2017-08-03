@@ -454,8 +454,7 @@
 		Based on OSX (Their desktop OS)\\
 		virtual memory and paging for code but not data as writing to flash degrades it.
 
-\section{Lecture 4: Virtual Machines}
-	./ used to signify that it isn't an internal command
+
 
 \section{Assignment Notes}
 	\begin{itemize}
@@ -522,6 +521,170 @@
 
 		\item can get this assignment to work without understanding it
 
+
+\section{Lecture 4: Virtual Machines}
+	./ used to signify that it isn't an internal command
+
+	MISSED TO VIRTUALISATION
+
+	Virtualisation
+		if running on hardware then want to be as close to 90\% performance as possible. Preferably 95-98 but not always possible
+
+	Design of IBM vm
+		make each user feel like they have own cpu
+		minidisk = lets user feel like they have access to whole drive
+		problem is you don't want actual kernel mode to be accessable to all guests
+			solution is each user has their own virtual kernel mode, but this kernel mode actually runs on the user level.
+			Priviledged instructions actually needed to be passed down as not all things kernel does need that mode
+
+	Hypervisor Types
+		Allocating resources to VM 
+			- like actual CPU cores
+			- or chunks of memory allocated for it
+		Can have "nested" vms
+
+		Type 1
+			Special purpose OS
+			have support for bunch of tools to make using it easier
+
+		Type 2
+			Ones that you install yourself. (virtualbox, parallels)
+			Run applications on host
+
+	Problems
+		trap and emulate couldn't be run on x86 up to a point.
+
+
+	Hardware virtualisation x86
+		Most OS only use level 0 (kernel mode) and level 3 (user mode)
+		Problem with VM in real machine, then you need to keep track about process and registers. Have to keep track of this for all processes.
+			Hardware system lets you change processor for one VM to another
+
+		each VM page tables for their own processors
+			used to have nested page table system. VMs create their own virtual page tables and some will exist in real memory
+
+	Solutions
+		Binary translation
+			Look at instructions before execution, problem instructions get translated to be safer to be run in kernel mode
+
+			These translations are similar
+			Only translated code is run
+
+	OS level virutalisation
+		If lots of machines running same OS, then can use containers that make it seem like they are all separate. 
+		Useful for servers
+		Simpler than VMs as they are sharing same copy of OS
+
+	More Styles
+		paravirtualisation - XEN
+			modify source code of OS you want to run
+			increase efficiency to allow calls to be made straight to VMM instead of process
+
+		Application Virtualisation
+			WINE
+			Want to run something made for an OS on another OS
+			Makes the application think like its running on intended OS
+
+		Windows Subsystem for Linux
+			Not really virtual machines
+			If app makes linux kernel call, kernel figures it out and sends it to subsystem
+			Tied into kernel level, applicaiton doesn't really know about it. It just functions as normal and kernel does all of the work.
+
+	C and OS implementations
+
+Week 2 friday
+	MISSED 10 MINUTES OF LECTURE
+
+	Direct access to memory: address.c
+		Whenever you run the program, the stack address space is different
+		This is for security
+			ASLR address space layout randomisation.
+				Stack, heap and libraries put in different addresses.
+				Helps add level of security
+
+	Accessing Registers
+		Can choose to store something in a register
+		Use keyword 'register' prefacing variable type on initalise
+		Can't get address of register, so if set to register OS may put it out of register into memory if you try get address of variable
+
+	Volatile
+		Another keyword prefacing variable type
+		Don't do any clever tricks
+			When you don't know if variable value will have changed due to non-local reason due to things like interrupt.
+
+		Whenever you use this variable, you have to go back to memory and check its value again as it may have changed.
+
+	Memory Management
+		No memory management
+		Static memory allocated at runtime, no malloc. But hard to get rid of them
+
+	Dynamic memory
+		Garbage collection doesn't inherently exist. As it is unpredictable
+
+		Allocating stack space can be done by calling 'free'
+		Free knows how much memory to free up since malloc uses a little bit more space just above for length of bit of stuff stored
+
+	Inline assembly
+		Example code is 32bit OS dependant
+		Can put assembly language directly in C code
+
+	Running commands from C program
+		system() lets you put string of command you want to use
+
+	Alternatives (languages for OS)
+		C++
+			similar to C but with object stuff too
+			Windows has C kernel with some C++ and C#
+		Objective C
+			MacOS written with ObjC, but trying to move to Swift
+		Java
+			Can't exclusively use java, need stuff with other stuff as well
+		Assembly
+			old school if you need even more fine tuning
+
+More assignment stuff
+	Part 1
+		create a lot of threads, link them together (linked list)
+		circular linked list (doubly) 
+		keep going around cycle of threads until all finished executing.
+		Only 2 threads given, but should be able to do with n threads
+	Part 2
+		Add thread.yield()
+		This will call transition system like in part 1.
+		Stop current thread (not finished) and pausing itself to allow another thread to run.
+	Part 3
+		Interrupt the thread with external source
+		use set.itimer, send signal to processor to signify event happening. (timer has run out, every 20ms)
+		Tells current thread to pause externally and start next thread.
+
+Processes
+	Instance of program execution
+	Thing OS uses as construct to control work
+
+Two parts
+	Resources/Task/Job
+		files open and using
+		windows on screen
+		restrictions on process
+	Code that's running
+		what process is actually doing
+		these days have threads for multiple streams of instructions
+
+Thread
+	sequence of instructions executing without interruption
+		this does happen, but not from thread's point of view. Thread can't tell if it has been paused or not
+	Can run multiple threads but share resources
+
+Typical uses
+	split work accroess processors/cores
+		thread for user response, another for some computation task
+		GUI threads and process threads
+	Server applications, have threads for clients.
+		Server preallocates set of threads for handling requests
+
+Thread implementations
+	user level	
+		OS sees one thread per process
 
 
 	\end{itemize}
