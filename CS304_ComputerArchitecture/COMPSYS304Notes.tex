@@ -379,4 +379,67 @@ Lecture 5 \& 6
 
 		Can create sudo instructions if use same set of instructions a lot (kind of like creating a function/script)
 
+
+	SECOND HALF OF LECTURES GO HERE, RAN OUT OF LAPTOP BATTERY
+
+LEctures 7 \& 8
+	Knowledge for assignent should be taught by next tuesday
+
+	Stackframes
+		in MIPS have predetermined allocated area
+		areas of stackframe
+			Local and Temp variables
+			Saved Register (+ return reg)
+			argument build
+		It will try to use registers if possible, but if memory requirements too high then will use stack frame
+		Size of stack frame should be multiple of 16
+
+	Memory layout
+		kernel bit
+			top up to 0x7ffffffffffffffffffffffffffffffff
+		text segment
+			program instruction program
+			lower bit reserved for OS special task
+		data segment
+			objects with known size
+			above text segment growing up
+
+		stack segment
+			stack starting from 0x7ffffffffff growing down
+
+		Problem 
+			If have nested functions then \$31 contents will be overwritten. Therefore you save the value of \$31 when you call more functions in the stack frame
+			Use offset of 16 to store these values in the stackframe
+
+	Example
+		Translate below to MIPS
+
+		main(){
+			int a, b, c, d, e, f, z;
+			a = 10; b = -12; c = 120; d = 18; e = -2; f = 23;
+			z = func1(a,b,c,d,e,f);
+		}
+
+		int func1(int x1, x2, x3, x4, x5, x6){
+			int result;
+			result = x1 + x2 - x3 + x4 + x5 + x6;
+			return result;
+		}
+
+	Summary of stack frame usage
+		SUMMARY HERE
+
+Lecture 8
+	MIPS assembly programming
+		main CPU with ALU and special registers for mult/div
+		Coprocessor for floating point stuff
+		Coprocessor for traps and memory
+
+		Assembly directives
+			identifiers are used to provide commands to assembler.
+			prefaced with a dot (.)
+
+
+
+
 \end{document}
