@@ -686,6 +686,88 @@ Thread implementations
 	user level	
 		OS sees one thread per process
 
+		advantages
+			work if os doesn't support threads
+			easier to make, no system calls
+			application specific control
+			switching is easier (some have register files for threads)
+
+	System level
+		operating system knows about it
+		controlled by system calls
+		System knows about state of thread as well. Therefore will schedule based on their state
+
+		advantages
+			Threads treated separately
+			If multiprocessor, then can schedule different threads on differnt processors
+			thread blocking in kernel doesn't stop all thread on same process
+				for example if doing read on file, usually code will wait for result and therefore block
+				can allocate cpu to do something in the meantime in this case
+
+	Jacketing
+		Check "will I block" before doing something that may block
+			check to see if data already exist in memory. If already there cna just get it without having to block. if have to get it, then let processor do something else while it tries to get data
+
+	Best of Both worlds
+		Solaris had both system and user level threads before ver9
+			Uses one to one mapping of user level to kernel level threads.
+			Mapping of single lightweight process to kernel threads. 
+				lightweight processes
+			If something on user level thread makes blocking call, other threads on that lightweight process gets to do its thing
+				system makes its own kernel thread and new lightweight process to allow this to happen
+		Windows 7 threads
+			Since Win7 then have user mode scheduling. This also tries to get the best of both world
+		Linux threads
+			Used to not have threads, everything put on one thread
+			Clone call
+				makes a new process. Shares memory, open files and signal handlers
+			Saw them as processes and not threads, so scheduled them
+			Can't signal whole thread, therefore since cloned you aren't sending it to all of them and only the one you specify
+			Killing threads dangerous, due to them sharing memory, then if killed then blocking may cause memory to be in inconsistent state as lock has not been released yet
+			In POSIX, don't actually kill threads. You tell it to cancel itself instead, telling it to die at some point
+				Threads are written in such as way that before it makes a blocking system call, it does some tidying so cancellations can happen
+			Cloned threads can't block if other clone made blocking system call
+
+
+
+
+
+
+Week 3 Wednesday
+	More on threads and processes
+	Part 3 assignment
+		numthreads constant will be correct
+			can initialise arrays with that size if you want
+
+Lecture 6
+	Process Control Blocks
+		Things os should know about process
+			BIG LIST GOES HERE
+				process state turns out to be thread state
+				priority used by scheduler
+				owner - security considerations
+				process generally on one processor (306 core moving cost)
+				process group - proceessors working together
+				memory and resource considerations
+				see if process result can be piped to another process, or that it is waiting for result of this process
+
+	UNIX process parts
+		can be scattered as parts somewhere else
+		process structure
+			some of information of process held here
+
+		user structure
+			not instant access to this
+			in user space
+			some of information of process held here
+
+		In UNIX, text = code
+
+	WIndows NT
+		split it up into lots of things in ANOTHER BIG LIST TO COPY YAY
+
+
+
 
 	\end{itemize}
 
