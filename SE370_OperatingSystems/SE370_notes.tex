@@ -634,7 +634,7 @@ Week 2 friday
 	Alternatives (languages for OS)
 		C++
 			similar to C but with object stuff too
-			Windows has C kernel with some C++ and C#
+			Windows has C kernel with some C++ and C\#
 		Objective C
 			MacOS written with ObjC, but trying to move to Swift
 		Java
@@ -765,6 +765,40 @@ Lecture 6
 
 	WIndows NT
 		split it up into lots of things in ANOTHER BIG LIST TO COPY YAY
+
+		MISSED SLIDE 3 TO END OF LECTURE
+			EMPHASIS ON FORKS
+
+Lecture 7
+	Runnable
+		On one core, only one thread/process at the same time. (Exception SMT)
+		Other processes/threads may be ready to run, or already running
+
+	Pre-emptive Multitasking
+		OS using some kind of criteria to determine how large of a time slice that task
+		The more you call yield and switch processes, the more time is wasted and less actual work is done by CPU
+
+		Cognitive multitasking
+			threads know that may have thread.yield() called on it and therefore [SOMETHING]
+
+	Cooperative Multitasking
+		Approaches
+			Process yields right to run
+			System stop process when system call made
+
+		Doesn't mean task won't run and complete in one go.
+
+	UNIX and preemptive
+		preemptive at user level always
+		hasn't always been preempntive at system level
+		Actually used to be cooperative in the past
+		Unix was written simpler in the past, expected it to be simple with blocking calls made.
+
+	Context Switch
+		Change from one process running to another on same processor
+		context changes as process executes
+
+
 
 
 

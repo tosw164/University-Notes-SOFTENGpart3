@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.24)  9 AUG 2017 11:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.6.24)  10 AUG 2017 09:44
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -161,15 +161,6 @@ e ex-e-cu-tion, prob-lem in-struc-tions
  []
 
 [9]
-! You can't use `macro parameter character #' in horizontal mode.
-l.637 			Windows has C kernel with some C++ and C#
-                                                  
-Sorry, but I'm not programmed to handle this case;
-I'll just pretend that you didn't ask for it.
-If you're in the wrong mode, you might be able to
-return to the right one by typing `I}' or `I$' or `I\par'.
-
-
 Overfull \hbox (1.04582pt too wide) in paragraph at lines 689--694
 []\OT1/cmr/m/n/10 advantages work if os doesn't sup-port threads eas-ier to mak
 e, no sys-tem calls ap-pli-ca-tion
@@ -183,7 +174,7 @@ Here is how much of TeX's memory you used:
  4420 multiletter control sequences out of 15000+600000
  7895 words of font info for 28 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 23i,6n,19p,536b,254s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 23i,6n,19p,268b,254s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
 onts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
@@ -191,7 +182,7 @@ m/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 0.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><
 /usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on SE370_notes.pdf (11 pages, 125535 bytes).
+Output written on SE370_notes.pdf (11 pages, 126090 bytes).
 PDF statistics:
  68 PDF objects out of 1000 (max. 8388607)
  47 compressed objects within 1 object stream
