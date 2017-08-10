@@ -798,6 +798,84 @@ Lecture 7
 		Change from one process running to another on same processor
 		context changes as process executes
 
+	RETURNING TO RUNNING
+
+	Waiting
+		To stop unnecessary resource consumption
+		Status changed from runnng to waiting
+
+	Suspended
+		Different form of waiting
+
+	Java
+		Always had Threads from the start
+		Threads have generally been user level
+		Although Thread.suspend existed that froze thread on system level
+			Thread.resume() to restore it
+			Issue was some resources are tied to one process, and therefore gets a lock
+			Therefore if frozen then other threads can't access it
+		Threads.stop() kill thread and force it to release locks that it may have
+			But may cause data to be left in inconsistent state
+
+	Waiting in UNIX
+		WCHAN can contain numbers, represents address in kernel
+		Uses a queue to create a queue for processing
+		Queue associated with hash value or kernel addresss
+
+		HERE GOES SOME PROCESS OF HOW IT ALL WORKS
+
+	Finishing
+		Resouces used by process need to be accounted for
+		Shared resources usage lowers due to process finishing
+		Make sure tidying up is done, if not done already
+			Don't rely on this, should do this yourself
+
+		"When you log out, you want all your processes to finish too"
+			Create a cascading effect, one process shutting down causes other ones associated with it to shut down too
+
+	Reasons to Stop
+		Normal Stop
+			must call exit routine
+			does all required tidyup
+
+		Forced Stop
+			Only want some processes to be able to kill specific processes.
+				Parents can kill children
+				Children can "generally" kill parents since same owner
+
+	UNIX stopping
+		Has 'zombie states'
+			Process that is finished, until parent checks exit status
+		This is a return state/value of a process
+		Used so next process/processes can find out how child finishes and continue execution based on this result
+		If parent is around and child finishes, child becomes a zombie
+
+		If parent never calls wait
+			if parent finishes then zombie is freed
+
+	Another FSM
+
+	Info from Linux Process Table
+		NI = nice value
+			can be positive a negative
+			used to change priorities
+				the lower the number, the higher the priority
+				negative numbers are super priority
+			Only SU can change nice values
+			Normal users can only change nice values to positive values
+		RSS = resident set size
+			memory allocated to it
+		TT = teletype
+		TIME = how long process has been running for
+		CMD = actual command that was executed
+
+Lecture 8
+	Scheduling Processes/Threads
+		CPU burst time = time CPU takes to wait
+
+
+
+
 
 
 
