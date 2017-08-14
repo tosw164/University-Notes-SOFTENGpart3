@@ -565,6 +565,114 @@ Lecture 11 \& 12
 		beq	01
 		
 Lecture 13
+	Single Cycle Datapath Impelementation cont.
+		(11) not correct as inputs for read/write registers for src/dest of some operatiions not guaranteed. Some have OP rs rd and some have OP rd rs
+
+		(12) Sequential circuits need to have clock inputs, not shown in the diagram.
+
+		(14) have another section used for generating and allocating the various control signals
+		- easiest way to set these control signals is to just generate a table to map 1/0 values to the various outputs needed for each opcode
+
+		Control Unit
+			Input = 6bit Opcode
+			Output = various control signals for sections of datapath
+
+			Outputs:
+				RegDst
+				ALUsrc
+				MemtoReg
+				RegWrite
+				MemRead
+				MemWrite
+				branch
+				ALUop1
+				ALUop0
+
+			This control section is combinational since it just takes the opcode and assert values on the output control signals without need of clock
+
+		Implementing Jump Instruction
+			Jump insturctions doesn't use registers
+			Since it changes PC unconditionally, only datapath section that relates to PC needs to be extended. 
+			Need to create new control signal to gate either jump or branch instruction
+
+		(20) can't execute archive instructions on given datapath 
+
+		Implement BNE Instruction
+			Can still use the sub with ALU and zero bit
+			Also can use the register loading from BEQ
+			Need to create new control signal to distinguish BNE and BEQ
+				Same as BEQ, but you negate the zero value
+			Then OR the result  of both the BEQ and BNE AND gates
+
+		Implementing addi
+			Can modify ALU control
+			Or can also choose not to modify ALU at all and change how the registers are loaded, however this is harder to do
+
+
+		Example, list values of control signals for:   
+			ori \$10, \$11, 0x101A
+
+			RegDst		0	Not reading from third register
+			Jump		0	Not jump
+			Branch_ne	0	Not Branch
+			Branch_eq	0	Not Branch
+			Memread		0	Don't read memory
+			MemtoReg	0	Using value of address
+			ALUop		11	Use value for immediate value (no table given)
+			Memwrite	0
+			ALUsrc		1
+			Regwrite	1
+
+	Improving Performance
+		In reality these components have delays associated with them
+		Memory Unit = 2ns
+		ALU \& Adder = 2ns
+		Register File (R/W) = 1ns
+		Others = assumed to be negligible
+
+		6ns for archive instruction (R-type)
+			2ns for getting from memory
+			1ns for reading from register
+			2ns for ALU adding
+			1ns for writing to register
+
+		LW instruction
+			DIDN"T GET IT
+
+		Example 2
+			Timing
+				SInce single cycle implementation then get the highest delay as the total delay per cycle. No need to add all delays
+
+		Performance Single Cycle Implementation
+			Comparing:
+			\begin{enumerate}
+				\item single-cycle impelmentation with pessimistic clock timing due to longest instruction
+				\item Single cycle implementation where each clock cycle only runs for as long as it needs to. Not possible in real life, but just for conceptual purposes
+			\end{enumerate}
+
+			IC = Instruction Count
+
+		Multicycle implementation
+		\begin{itemize}
+			\item Uses multiple clock cycles of clock that runs faster than doing everything on one long clock cycle
+			\item Different clock cycles used for each of the different phases of execution of an instruction
+			\item control units have to become more complex
+			\item however datapath may become more simpler
+		\end{itemize}
+
+		\begin{itemize}
+			\item has shared memory unit and ALU
+			\item don't need to separate instruction and memory fetch since can be done in multiple cycles like in single cycle
+			\item Single memory interface enough for this implementation
+		\end{itemize}
+
+			Goal: to separate it to allow for multiple cycles for a single instruction
+
+
+
+
+
+
 
 
 
