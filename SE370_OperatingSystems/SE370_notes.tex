@@ -520,6 +520,7 @@
 
 
 		\item can get this assignment to work without understanding it
+	\end{itemize}
 
 
 \section{Lecture 4: Virtual Machines}
@@ -769,36 +770,80 @@ Lecture 6
 		MISSED SLIDE 3 TO END OF LECTURE
 			EMPHASIS ON FORKS
 
-Lecture 7
-	Runnable
-		On one core, only one thread/process at the same time. (Exception SMT)
-		Other processes/threads may be ready to run, or already running
+\section{Lecture 7}
+	\subsection{Runnable}
+		\begin{itemize}
+			\item On one core, only one thread/process at the same time. (Exception SMT)
+			\item Other processes/threads may be ready to run, or already running
+		\end{itemize}
+	\subsection{Multitasking}
+		Pre-emptive Multitasking
+		\begin{itemize}
+			\item OS uses some kind of criteria to determine how large of a time slice that task
+			\item The more you call yield and switch processes, the more time is wasted and less actual work is done by CPU
+			\item \paragraph{Cognitive multitasking}
+				
+			Threads know that may have thread.yield() called on it and therefore are coded in a way such that when yield() is called, issues are less likely to occur
+			
+			Advantages
+				\begin{itemize}
+					\item Control
+					\item Predictability
+				\end{itemize}
+			
+			Disadvantages
+				\begin{itemize}
+					\item Critical Sessions
+					\item Efficiency
+				\end{itemize}
+		\end{itemize}
+		Co-operative Multitasking
+		\begin{itemize}
+			\item Two main ways to approach
+			\begin{enumerate}
+				\item Process yields right to run
+				\item System stop process when system call made
+			\end{enumerate}
 
-	Pre-emptive Multitasking
-		OS using some kind of criteria to determine how large of a time slice that task
-		The more you call yield and switch processes, the more time is wasted and less actual work is done by CPU
+			\item Doesn't mean task won't run and complete in one go.
+			\item Old UNIX (before 2.6) didn't allow pre-emptive calls when making system calls
+			\begin{itemize}
+				\item pre-emptive multitasking always at user level
+				\item hasn't always been preempntive at system level
+				\item Actually used to be cooperative in the past
+				\item Unix was written simpler in the past, expected it to be simple with blocking calls made.
+			\end{itemize}
+		\end{itemize}
+		
 
-		Cognitive multitasking
-			threads know that may have thread.yield() called on it and therefore [SOMETHING]
+	\subsection{Context Switch}
+		\begin{itemize}
+			\item Change from one process running to another on same processor, or to handle an interrupt
+		\item Has to save the process state before this can occur
+		\item Context changes as process executes
+		\item Context contains:
+		\begin{enumerate}
+			\item Registers
+			\item Memory (dynamic elements like call stack)
+			\item Files \& Resources
+			\item Caches
+		\end{enumerate}
 
-	Cooperative Multitasking
-		Approaches
-			Process yields right to run
-			System stop process when system call made
+		\end{itemize}
 
-		Doesn't mean task won't run and complete in one go.
+	\subsection{Returning to Running}
+		State Transition
+		\begin{itemize}
+			\item Store process properties so it can begin again where it left off
+			\item Page table to be updated if changing processes
+			\item Environment must be restored
+			\item If changing threads on same process then may can just restore registers
+			\item If system has multiple register sets then could thread change with 1 instruction
+		\end{itemize}
 
-	UNIX and preemptive
-		preemptive at user level always
-		hasn't always been preempntive at system level
-		Actually used to be cooperative in the past
-		Unix was written simpler in the past, expected it to be simple with blocking calls made.
-
-	Context Switch
-		Change from one process running to another on same processor
-		context changes as process executes
-
-	RETURNING TO RUNNING
+	\subsection{OTHER STATES}
+		\subsubsection{Waiting}
+		
 
 	Waiting
 		To stop unnecessary resource consumption
@@ -878,13 +923,5 @@ Lecture 8
 
 
 
-
-
-
-
-
-
-
-	\end{itemize}
 
 \end{document}
