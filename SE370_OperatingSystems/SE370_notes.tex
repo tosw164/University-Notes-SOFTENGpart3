@@ -1018,36 +1018,154 @@ Lecture 6
 		Explicit Priorities
 		\begin{itemize}
 			\item If have very low priority, then there is chance that some priorities will never actually run \textbf{Starvation}
-			\item
+			\item SOMETHING GOES HERE
 		\end{itemize}
 
 		Variable Priorities
 		\begin{itemize}
 			\item Processes get higher priorities the longer they've existsed (aging)
-			\item Solves the starvatin problem
+			\item Solves the starvation problem
 		\end{itemize}
 
-	Multiple Queues
-		Multiple queues exist for things that require different time slices and CPU cycles
-		Kind of a heirarchy of these processors
-		Still assumes single processor
+	\subsection{Multiple Queues}
+		\begin{itemize}
+			\item Multiple queues exist for things that require different time slices and CPU cycles
+			\item Kind of a heirarchy of these processors
+			\item Still assumes single processor
+		\end{itemize}
+		
 
-	UNIX processor Schedulin		Every process has priority associated with it
-		Larger number = worse
-		Can nice a process, adds priority for process (nicer to everybody else)
-		Aging exists, priorities get worse the longer they run
-			Worst level exists, so this doesn't continue forever
-			For every process at worst level, are scheduled in round robin
-		The longer a process spends waiting, the lower its priority level becomes and therefore higher chance of being executed
+	\subsection{UNIX processor Scheduling}
+		\begin{itemize}
+			\item Every process has priority associated with it
+			\item Priorities are recalculated every second
+			\item Larger number means worse priority. Lower numbers go first
+			\item Can \textbf{Nice} a process, adds priority for process (nicer to everybody else)
+			\begin{itemize}
+				\item Ordinary users can only nice their own processes, thereby delaying their processing
+			\end{itemize}
+			\item Aging exists, priorities get worse the longer they run
+			\begin{itemize}
+				\item Worst level exists, so this doesn't continue forever
+				\item For every process at worst level, are scheduled in round robin
+			\end{itemize}
+			\item The longer a process spends waiting, the lower its priority level becomes and therefore higher chance of being executed
+		\end{itemize}
+		
 
-	Old Linux Process Scheduling
-		WILL NEED TO GO OVER AGAIN
+	\subsection{Old Linux Process Scheduling}
+		\begin{itemize}
+			\item Used two process scheduling algorithms
+			\begin{enumerate}
+				\item Time sharing algorithm for most processes
+				\item Realtime algorithm for absolute priorities hold over fairness
+			\end{enumerate}
+			\item Processes have different scheduling classes that determine which algorithm to apply
+			\item Uses \textbf{prioritised credit based algorithm} for time sharing
+			\begin{itemize}
+				\item Process with most credits go first
+				\item If process running on clock tick, it loses a credit
+				\item If process hits 0 credits then another process chosen
+				\item Therefore the more you wait the more credits you get
+			\end{itemize}
+		\end{itemize}
 
-	Realtime Scheduling
-		FIFO processes, highest priority, go in and finish executing
-		Nothin prermpt FIFO process
+	\subsection{Linux Real-time Scheduling}
+		\begin{itemize}
+			\item Linux uses both \textbf{FIFO})First in first out) and \textbf{Round-Robin} scheduling.
+			\item In both situations, processes have priority + scheduling class
+			\item Scheduler does process with most priority
+			\begin{itemize}
+				\item If equal priority then choose one that has been waiting the longest
+				\item FIFO processes run until exit or blocked, no pre-empting
+
+			\end{itemize}
+			\item In Round-robin, processes pre-empted after a while and moved to end of queue.
+			\begin{itemize}
+				\item Allows
+			\end{itemize}
+		\end{itemize}
+
 
 	New Linux Processing
+
+
+\section{Lecture 9}
+	MISSED SLIDE 1 \& 2
+
+	Periodic process
+	\begin{itemize}
+		\item common that period and deadline are the same
+		\item Deadlines and period may change depending on the workload of the system
+	\end{itemize}
+
+	Sporadic Processes
+	aperiodic process
+		things can happen at the same
+		if $\infty$ evens can occur at the same time then need to figure out how to allocate it
+
+	Cycling Executives
+	Handle periodic processes
+	Prescheduled - know information before power machine, so can schedule
+	Can't pre-empt because schedule already generated
+	Hard to maintain
+
+	CE Schedule
+	MAJOR SCHEDULE
+	MINOR CYCLE
+
+	\subsection{Scheduling with Priorities}
+	Lets you do important tasks first
+	CATCH UP
+
+	\subsection{Priority Allocation}
+		Fixed
+		\begin{itemize}
+			\item \textbf{Rate monotomics RM,} shorter period means higher priority
+			\item Least compute time LCT, similar to Shortest Job First
+		\end{itemize}
+
+		Dynamic
+		\begin{itemize}
+			\item CPU burst times used/useful
+			\item \textbf{Shortest completion time}
+			\begin{itemize}
+				\item Simnilar to SJF
+				\item Uses pre-emption, but requires good information about execution time requirement.
+				\item Schedule, and compare the time required to finish computation of process at every cycle
+			\end{itemize}
+			\item \textbf{Earliest Deadline}, process with closest deadline goes first
+			\begin{itemize}
+				\item Does this every cycle, and compares all processes that want to be sceduled and their respective deadlines
+				\item Add don't cares/idle times for when process is complete before deadline. Counts as $\infty$, allowing another process to run
+			\end{itemize}
+			\item \textbf{Least Slack Time} (deadline - compute time) gets highest priority
+			\begin{itemize}
+				\item If no slack time left, then must schedule now.
+				\item Slack time doesn't change if it gets process. Due to fact that its deadline gets closer, but its computation has gone for another cycle, cancelling each other out.
+			\end{itemize}
+		\end{itemize}
+
+	\subsection{Theory} 
+		\begin{itemize}
+			\item Static priorities, RM is optimal policy
+			\item Dynamic priorities, EDF(Earliest Deadline) and LST(Least Slack) are optimal
+			\item Only really works for single processors.
+			\begin{itemize}
+				\item Required more sophisticated processes, to allocate multiple processors
+			\end{itemize}
+		\end{itemize}
+
+\section{Lecture 10}
+	
+
+
+
+
+
+
+
+
 
 				
 				
