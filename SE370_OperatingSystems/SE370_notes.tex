@@ -843,7 +843,6 @@ Lecture 6
 
 	\subsection{OTHER STATES}
 		\subsubsection{Waiting}
-		
 
 	Waiting
 		To stop unnecessary resource consumption
@@ -914,11 +913,145 @@ Lecture 6
 		TIME = how long process has been running for
 		CMD = actual command that was executed
 
-Lecture 8
-	Scheduling Processes/Threads
-		CPU burst time = time takes for thread running to have to wait for some reason
-		Basically, the majority of threads stop after processing for not very long time
-			therefore if we stop them frequently it doesn't make too much of a difference as they are probably waiting anyway
+\section{Lecture 8}
+	\subsection{Scheduling Processes/Threads}
+		\begin{itemize}
+			\item \textbf{CPU burst time}: time takes for thread running to have to wait for some reason
+			\item Basically, the majority of threads stop after processing for not very long time
+			\item Therefore if we stop them frequently it doesn't make too much of a difference as they are probably waiting anyway
+
+		\end{itemize}
+	
+	\subsection{Levels of Scheduling}
+		Batch Systems
+		\begin{enumerate}
+			\item Very long term scheduler
+			\begin{itemize}
+				\item outside OS, more admin level
+				\item STUFF
+			\end{itemize}
+
+			\item Long term scheduler
+			\begin{itemize}
+				\item Have multiple queues
+				\item STUFF
+			\end{itemize}
+
+			\item medium term scheduler
+			\begin{itemize}
+				\item Still programmer dependent how its done
+				\item STUFF
+			\end{itemize}
+
+			\item short term scheduler
+			\begin{itemize}
+				\item Will mainly look at this one
+			\end{itemize}
+
+			\item Dispatcher
+			\begin{itemize}
+				\item Does the switching from thread/process to another
+			\end{itemize}
+		\end{enumerate}
+			
+
+	\subsection{Scheduling Algorithms}
+		\subsubsection{FCFS - First Come First Served}
+		\begin{itemize}
+			\item No wasting time by determining how to allocate
+			\item Use average waiting time and the CPU burst times for processes
+			\item Produces Gantt chart looking thing
+			\item Weight times are when the processes start
+		\end{itemize}
+
+		\subsubsection{Round Robin}
+		\begin{itemize}
+			\item Pre-emptive version of FCFS
+			\begin{itemize}
+				\item Still don't let them run to completetion
+				\item Use of pre-empting them and time slices
+			\end{itemize}
+			\item Hard to determine what size time slices to allocate
+			\item Some processes are CPU intensive and require longer time slice
+			\begin{itemize}
+				\item But if let these processes do its thing, user may feel slowdown. 
+				\item Interactive processes affected by this
+			\end{itemize}
+			\item If short time slice then good in terms of interaction as its jumps around to lots of processes.
+			\begin{itemize}
+				\item However, CPU intensive tasks take longer to complete
+			\end{itemize}
+			\item Still doesn't have concept of priority
+
+			\item If task takes shorter time than time slice, instantly schedule another task as to not waste CPU cycles.
+			\item Average wait time reduced due to forced time slices
+			\item Making time slices smaller reduces the average wait time
+		\end{itemize}
+
+		\subsubsection{Minimising Average Wait Time}
+			\begin{itemize}
+				\item Need to know how long CPU bursts are
+			\end{itemize}
+
+			\paragraph{Shortest Job First}
+			\begin{itemize}
+				\item Gets minimum average waiting time
+				\item But don't always know all CPU burst times
+				\item Therefore use an estimation algorithm. Basing it off previous CPU bursts to estimate how long subsequent bursts will approximately be.
+			\end{itemize}
+
+			Pre-emnptive SJF
+			\begin{itemize}
+				\item Uses arrival time and burst time
+				\item Short it not because of CLK interrupt, but because another processor came in with a shorter CPU burst time.
+				\item Use remaining CPU burst time remaining if trying to determine if you are going to stop and schedule another process
+				\begin{itemize}
+					\item If a process has CPUburst = 7 
+					\item Something with CPUburst=4 comes at time=2
+					\item Compare 5 (7-2) with incoming CPUburst=4
+					\item Therefore will stop original processor and run new one since 5 $>$ 4q
+				\end{itemize}
+				\item If has 2 options with same weight, then up to programmer to choose. Theoretically similar, but in reality will have some weighting choosing one over the other
+			\end{itemize}
+
+	\subsection{Handling Priorities}
+		Explicit Priorities
+		\begin{itemize}
+			\item If have very low priority, then there is chance that some priorities will never actually run \textbf{Starvation}
+			\item
+		\end{itemize}
+
+		Variable Priorities
+		\begin{itemize}
+			\item Processes get higher priorities the longer they've existsed (aging)
+			\item Solves the starvatin problem
+		\end{itemize}
+
+	Multiple Queues
+		Multiple queues exist for things that require different time slices and CPU cycles
+		Kind of a heirarchy of these processors
+		Still assumes single processor
+
+	UNIX processor Schedulin		Every process has priority associated with it
+		Larger number = worse
+		Can nice a process, adds priority for process (nicer to everybody else)
+		Aging exists, priorities get worse the longer they run
+			Worst level exists, so this doesn't continue forever
+			For every process at worst level, are scheduled in round robin
+		The longer a process spends waiting, the lower its priority level becomes and therefore higher chance of being executed
+
+	Old Linux Process Scheduling
+		WILL NEED TO GO OVER AGAIN
+
+	Realtime Scheduling
+		FIFO processes, highest priority, go in and finish executing
+		Nothin prermpt FIFO process
+
+	New Linux Processing
+
+				
+				
+
 		
 
 
