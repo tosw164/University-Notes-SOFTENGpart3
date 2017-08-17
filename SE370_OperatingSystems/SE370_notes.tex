@@ -1157,7 +1157,23 @@ Lecture 6
 		\end{itemize}
 
 \section{Lecture 10}
-	
+	Example of contention
+	\begin{itemize}
+		\item Don't have control over thread execution once threads have started executing
+		\item have to \texttt{-lpthread} on linux when compiling C programs to use thread library
+		\item \texttt{counter++} seems innocent, but actually has a window for error.
+		\begin{itemize}
+			\item Due to concurrency, there is contention if multiple threads are the one that calls the function that causes a reaturn
+			\item Did not count to 10 a lot of the time due to contention happening a lot of times
+		\end{itemize}
+	\end{itemize}
+
+	Critical Sections
+		Area of code that it expects only 1 thread active at given time
+		mutual exclusion
+		Need to lock thread when critical session going on
+		Need to have a way to make sure threads aren't waiting forever
+
 
 
 
