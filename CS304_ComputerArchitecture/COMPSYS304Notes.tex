@@ -614,8 +614,8 @@ Lecture 13
 
 			RegDst		0	Not reading from third register
 			Jump		0	Not jump
-			Branch_ne	0	Not Branch
-			Branch_eq	0	Not Branch
+			Branch\_ne	0	Not Branch
+			Branch\_eq	0	Not Branch
 			Memread		0	Don't read memory
 			MemtoReg	0	Using value of address
 			ALUop		11	Use value for immediate value (no table given)
@@ -668,14 +668,103 @@ Lecture 13
 
 			Goal: to separate it to allow for multiple cycles for a single instruction
 
+Lecture 15 \& 16
+	Multicycle implementation of MIPS ISA
+		\begin{itemize}
+			\item Mutltiple clock cycle for single full instruction
+			\item Some functional units not used in some clock cycles, can share between instructions
+			\item Need to store state between these cycles. So will need some temporary registers
+			\item Simpler data path, but more complex control unit as a result
+		\end{itemize}
 
+	High elvel view
+		ALUout are temporary register to keep value of ALU computed in a clock cycle
+		IR write, Memory Data, RegisterReadA, RegisterReadB, and ALUout are temporary registers
+		
+		Problem - to figure out how many clock cycles to allocate to each of the different types of instructions.
 
+		3 different sections 
+		\begin{enumerate}
+			\item Get from memory section
+			\item Register Section
+			\item ALU section
+		\end{enumerate}
 
+		Some 4 clock cycle instructions
+		\begin{enumerate}
+			\item Get from memory
+			\item Load registers
+			\item Calculate result
+			\item Store result back to memory
+		\end{enumerate}
 
+		R type
+		\begin{itemize}
+			\item Instruction Fetch
+			\item Decode/Register Fetch
+			\item Execution
+			\item Memory Access, finish R-type, write ALUout to register values
+		\end{itemize}
 
+		Memory Reference
+		\begin{itemize}
+			\item Instruction Fetch
+			\item Decode/Register Fetch
+			\item Execution
+			\item Memory Access, either LOAD or STORE
+			\begin{itemize}
+				\item If load, then need to finish memory read
+			\end{itemize}
+		\end{itemize}
 
+		Branch Instructions
+		\begin{itemize}
+			\item Instruction Fetch
+			\item Decode/Register Fetch
+			\item Execution, and update PC to ALUout
+		\end{itemize}
 
+		Jump Instructions
+		\begin{itemize}
+			\item Instruction Fetch
+			\item Decode/Register Fetch
+			\item Execution, and update PC to register values
+		\end{itemize}
 
+		IorD = used to signify when you want to use PC as location of memory address when set to 0
+
+		For a given set of signals that need to be asserted, make sure that other signals won't affect the intended result of the asserted signals
+
+		TODO
+		Explanation of Control Unit Signals
+		\begin{itemize}
+			\item Outputs Control
+			\begin{enumerate}
+				\item PCWriteCond
+				\item PCWrite
+				\item IorD
+				\item MemRead
+				\item MemWrite
+				\item MemtoReg
+				\item IRWrite
+				\item PCSource
+				\item ALUOp
+				\item ALUSrcB
+				\item ALUSrcA
+				\item RegWrite
+				\item RegDst
+			\end{enumerate}
+		\end{itemize}
+		
+	Also need to calculate average cycles per instruction
+
+	Loading takes highest number of cycles, therefore reducing this should make overall performance faster if doing multiple cycle datapath
+
+	Exaple with machines with different characteristics
+		Look at overall FSM and combine states that are in description of machines, as they are performed on the same clock cycle
+		Then look at critical path of number of cycles and determine the machine with best overall performance 
+
+	Performance depends on both clock period and average instructions per instruction so need to find best balance between the two.
 
 
 
