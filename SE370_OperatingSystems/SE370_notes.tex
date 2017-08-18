@@ -16,6 +16,9 @@
 
 \begin{document} \maketitle{} 
 
+\tableofcontents
+\newpage
+
 \section{Lecture 1}
 	\subsection{Generics}
 		\paragraph{\tab Operating System} The software that makes the computer usable. Using modern computers without an OS is "impossible"
@@ -1173,6 +1176,103 @@ Lecture 6
 		mutual exclusion
 		Need to lock thread when critical session going on
 		Need to have a way to make sure threads aren't waiting forever
+		RACE CONDITION
+		STARVATION
+
+	Software Solutions
+		Both can get lock at same time if multithreaded
+		Thing dying prematurely
+			OS needs to keep track
+			Always an issue
+		Polling	puts unnecessary strain on system
+		Spin lock - something waitng just doing nothing. 
+		Busy wait - Waiting when processor doing something, which is something you don't want to happen
+		Suspended thread after seeing that thread is unlocked may lock it at another time, in which another process has already got a lock
+
+		Main problem is multiple threads that sees that \texttt{locked = false}, and trying to set it to \texttt{true}. Due to small vulnerable time gap
+
+	\subsection{Peterson's Solution}
+		\begin{itemize}
+			\item \texttt{flag = [false, false]} is a shared variable
+			\item Getting lock
+			\begin{itemize}
+				\item Set your own flag[self] to true, and set turn to another thread, and wait until they either they let you or finish doing process on object
+				\item Setting flag = true means that you want to access it. 
+			\end{itemize}
+
+			\item Wait when its other thread's turn and they wanna use the file.
+			\item Not feasable in real life due to instruction re-ordering
+
+			\item Instruction Re-ordering
+			\begin{itemize}
+				\item Both compilers and processors do some optimisation at runtime/compile time. 
+				\item Users don't have control over this
+			\end{itemize}
+		\end{itemize}
+
+	Bakery Algorithm
+		GIVEN NUMBER TO SAY WHEN YOU CAN REQUEST LOCK
+
+	Interrupt Priority Level
+		Before you do a check on a lock, turn interrupt off so you can't be pre-empted.
+		Only turn off interrupt level off so that pre-empting will not be possible
+		DISADVANTAGES
+
+	Using Hardware - Test and Set
+		Atomic, create instruction that cannot be divided and must run to completion
+		So the locks that it obtains are guaranteed to not be interrupted.
+		Testing the value, and setting it in one indivisible instruction.
+
+		\texttt{while test\_and\_set(locked)}
+		\begin{itemize}
+			\item This removes the gap that is prone to be pre-empted.
+
+		\end{itemize}
+
+		This doesn't solve the issue of a busy wait, nor does it make it fair.
+
+	Getting out of spin
+		DIDN"T LISTEN YAY
+
+	Priority Inversion
+		If low priority process has lock, as long as it can complete and pass the resource on
+		Just need to make sure that the lower priority process can do its task. But sometimes can't due to interrupts and waiting and stuff
+		Don't want lower priority to be stuck in ready state, while it still hasn't been scheduled.
+
+		Possible solution
+		temporarily increase priority of something with low priority to higher priority only while it uses the resource.
+		MORE THINGS
+
+	Placing in a queue
+		Once new process realises that resource is in use, it suspends, and reschedules itself.
+
+		Putting process to sleep then the lock may be set to false so process waiting forever
+
+		Put another lock around the code to make sure that locking and unlocking can be done without interrupts
+
+		Busy waits solves this issue. OS puts busy waits on lots of little bits of code, but problem with busy waits is it may be waiting for a while.
+
+	Semaphores
+		Solution to concurrency problem
+		Basically counter with atomic operations
+		2 functions, V(S), and P(S).
+		Original value, set to let n number of things NOT SURE AE
+
+		P() is kind of a lock
+			If process sees S 0 or less then will wait
+		V() is called when finish
+			May set S > 0 which may let another process use the resource
+
+	Implementing Semaphores
+
+	UP TO PRODUCER CONSUMER PROBLEM
+
+
+
+
+		
+			
+
 
 
 
