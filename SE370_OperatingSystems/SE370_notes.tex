@@ -1160,65 +1160,94 @@ Lecture 6
 		\end{itemize}
 
 \section{Lecture 10}
-	Example of contention
+	\subsection{Prolbem of Concurrency}
 	\begin{itemize}
-		\item Don't have control over thread execution once threads have started executing
-		\item have to \texttt{-lpthread} on linux when compiling C programs to use thread library
-		\item \texttt{counter++} seems innocent, but actually has a window for error.
+		\item Sharing resources is a problem
+		\item Multiple threads/processes trying to access it at the same time
+		\item Some resouces can only be safely accessed by a single thread at a time
 		\begin{itemize}
-			\item Due to concurrency, there is contention if multiple threads are the one that calls the function that causes a reaturn
-			\item Did not count to 10 a lot of the time due to contention happening a lot of times
+			\item Reading from resources that are being written to.
+			\item Writing to a file simultaneously
 		\end{itemize}
+		\item \textbf{Race Condition}: Where order of thread execution produces different results
 	\end{itemize}
 
-	Critical Sections
-		Area of code that it expects only 1 thread active at given time
-		mutual exclusion
-		Need to lock thread when critical session going on
-		Need to have a way to make sure threads aren't waiting forever
-		RACE CONDITION
-		STARVATION
-
-	Software Solutions
-		Both can get lock at same time if multithreaded
-		Thing dying prematurely
-			OS needs to keep track
-			Always an issue
-		Polling	puts unnecessary strain on system
-		Spin lock - something waitng just doing nothing. 
-		Busy wait - Waiting when processor doing something, which is something you don't want to happen
-		Suspended thread after seeing that thread is unlocked may lock it at another time, in which another process has already got a lock
-
-		Main problem is multiple threads that sees that \texttt{locked = false}, and trying to set it to \texttt{true}. Due to small vulnerable time gap
-
-	\subsection{Peterson's Solution}
+		\subsubsection{Example of contention}
 		\begin{itemize}
-			\item \texttt{flag = [false, false]} is a shared variable
-			\item Getting lock
+			\item Don't have control over thread execution once threads have started executing
+			\item have to \texttt{-lpthread} on linux when compiling C programs to use thread library
+			\item \texttt{counter++} seems innocent, but actually has a window for error.
 			\begin{itemize}
-				\item Set your own flag[self] to true, and set turn to another thread, and wait until they either they let you or finish doing process on object
-				\item Setting flag = true means that you want to access it. 
-			\end{itemize}
-
-			\item Wait when its other thread's turn and they wanna use the file.
-			\item Not feasable in real life due to instruction re-ordering
-
-			\item Instruction Re-ordering
-			\begin{itemize}
-				\item Both compilers and processors do some optimisation at runtime/compile time. 
-				\item Users don't have control over this
+				\item Due to concurrency, there is contention if multiple threads are the one that calls the function that causes a reaturn
+				\item Did not count to 10 a lot of the time due to contention happening a lot of times
 			\end{itemize}
 		\end{itemize}
 
-	Bakery Algorithm
-		GIVEN NUMBER TO SAY WHEN YOU CAN REQUEST LOCK
+	\subsection{Critical Sections}
+		\begin{itemize}
+			\item \textbf{Mutual Exclusion:} Area of code that it expects only 1 thread active at given time
+			\item Need to lock thread when critical session going on
+			\item Need to have a way to make sure threads aren't waiting forever (Starvation)
+			\item Starvation can be caused by deadlocks of indefinite postponement
+		\end{itemize}
+		
+	\subsection{Software Solutions}
+		\begin{itemize}
+			\item Both can get lock at same time if multithreaded
+			\item Thing dying prematurely
+			\begin{itemize}
+				\item OS needs to keep track of when things are alive/dead
+				\item Always an issue and should have something in place to deal with it, if it were to happen		
+			\end{itemize}
+			\item Polling	puts unnecessary strain on system
+			\item \textbf{Spin lock} - something waitng just doing nothing. 
+			\item \textbf{Busy wait} - Waiting when processor doing something, which is something you don't want to happen
+			\item Suspended thread after seeing that thread is unlocked may lock it at another time, in which another process has already got a lock \\	
+			\item Main problem is multiple threads that sees that \texttt{locked = false}, and trying to set it to \texttt{true}. Due to small vulnerable time gap
+		\end{itemize}
+		
 
-	Interrupt Priority Level
-		Before you do a check on a lock, turn interrupt off so you can't be pre-empted.
-		Only turn off interrupt level off so that pre-empting will not be possible
-		DISADVANTAGES
+		\subsubsection{Peterson's Solution}
+			\begin{itemize}
+				\item \texttt{flag = [false, false]} is a shared variable
+				\item Getting lock
+				\begin{itemize}
+					\item Set your own flag[self] to true, and set turn to another thread, and wait until they either they let you or finish doing process on object
+					\item Setting flag = true means that you want to access it. 
+				\end{itemize}
 
-	Using Hardware - Test and Set
+				\item Wait when its other thread's turn and they wanna use the file.
+				\item Not feasable in real life due to instruction re-ordering
+
+				\item Instruction Re-ordering
+				\begin{itemize}
+					\item Both compilers and processors do some optimisation at runtime/compile time. 
+					\item Users don't have control over this
+				\end{itemize}
+			\end{itemize}
+
+	\subsubsection{Bakery Algorithm}
+		\begin{itemize}
+			\item Each thread given number indicating when it can request a lock.
+			\item Numbers aren't unique so need to use another form of identifier to distinguish different processors with the same allocated number
+		\end{itemize}
+			
+	\subsubsection{Interrupt Priority Level}
+		\begin{itemize}
+			\item Can be done by increasing interrupt priority level so other processes can't pre-empt
+			\item Before you do a check on a lock, turn interrupt off so you can't be pre-empted.
+			\item Only turn off interrupt for certain sections of code so that pre-empting will not be possible for that part only and not block other processes.\\
+
+			\item Disadvantages:
+			\begin{itemize}
+				\item Doesn't work efficiently with multiple processors present
+				\item A message must be sent to all other processors to let them know of the level change. May cause processors to wait
+				\item Not all processors at priority level need to be stopped so waste of resources
+			\end{itemize}
+		\end{itemize}
+			
+
+	\subsection{Using Hardware - Test and Set}
 		Atomic, create instruction that cannot be divided and must run to completion
 		So the locks that it obtains are guaranteed to not be interrupted.
 		Testing the value, and setting it in one indivisible instruction.
