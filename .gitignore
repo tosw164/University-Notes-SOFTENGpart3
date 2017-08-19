@@ -1,0 +1,5 @@
+##Base gitignore for auto-generated LaTeX files
+*.aux
+*.log
+*.synctex.gz
+*.toc
