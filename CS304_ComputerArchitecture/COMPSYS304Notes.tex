@@ -766,6 +766,143 @@ Lecture 15 \& 16
 
 	Performance depends on both clock period and average instructions per instruction so need to find best balance between the two.
 
+Lecture 17 \& 18
+	Went over question on slide 4.
+
+	Exceptions and Interrupts
+		MIPS uses interrupt for expected event, and exception for unexpected event
+		When happens, control transferred to Exception Handler/Interrupt Service Routine that processes event that occured.
+		Then return back to program to resume.
+
+		Causes
+			External Event
+				Timer, Keyboard/Mouse input - All asynchronous things that we can't predict all the time.
+
+			Internal Events
+				Traps, happens inside the code for a situation like divide by 0, or overfllow
+				Software Interrupts, some instructions that create an interrupt.
+				These things are synchronous, happen at a certain point in the code.
+
+				Fixed by handler
+				Simulated if do not have necessary hardware to do something (Something old did not have float\_coprocessor, so would emulate it)
+				Set result to null
+
+	MIPS convention for exceptions
+		SOMETABLE
+
+
+	Identifying what caused an exception
+		EPC
+		CAUSE
+		BADVADDR
+		STATUS
+
+		MIPS uses single address to store the exception handling code due to memory constraints.
+		Is at 0x8000 0180, and in kernel somewhere.
+
+		If using spim, use eret
+
+		Classic user mode and kernel mode (3 levels of privilege for kernel mode)
+
+	Status Register
+		register 12, coprocessor 0
+		bit0	Interrupt enable (1 = enabled)
+		bit1	Exception level (1 = exception has occured)
+		bits8-15	Interrupt mask (6 hardware interrupt, 2 software interrupt)
+
+		Register 13, co0
+		bit 2-6	Encoding cause for interrupt/excp
+		bit 8-15	Pending interrupt mask
+
+	Some more examples
+		Overflow
+			ADD, ADDI, SUB will cause exception if overflow
+			ADDU will not, will just get wrong result if that is the case
+
+		Address Error
+
+		System Call
+
+		MIPS EXAMPLE
+
+	Adding Exception Handling to multicycle datapath
+		Only consider
+			undefined instruction
+			arithmetic overflow
+
+		Special registers EPC and Cause used
+			The value of cause will determine which kind of exception was thrown
+
+\section{Lecture 17 \& 18}
+	Pipelining
+		Basically doing stuff concurrently if not dependent on each other
+		If washing machine done, put in drier so next person can use washing machine
+
+		Execution Latency; DEFNITION
+		Throughput, total work done in given time
+
+	Multi-cycle to Pipeline
+		Switching them is difficult as some resources are required in every clock cycles for some kinds of instructions
+		All instructions should have same execution latency to make pipelining chunks of work easier.
+
+		If have $M$ pipelined stages and $N$ instructions, then need $M + N - 1$
+
+		Therefore cycles per instruction approaches 1
+		$CPI = \frac{M + N - 1}{N}$
+		Assume ideal case when doing calculation ($CPI = 1$)
+
+	Pipeline Datapath
+		Need to have pipeline registers to keep information between the clock cycles for the specific instructions
+
+		Register if read, RHS is shaded
+		If written then LHS is shaded
+
+		In single cycle, use clock cycles to assert control signals
+		In multi-cycle then use the FSM to assert clock signals
+
+		Control signals also pipelined for the following stage, so registers also contain state for next stage signals
+		Put it between Instruction Fetch and Instruction decode, to allocate for Execution and Mem/WB
+
+	Pipelining Hazards
+		Not everything in the world is ideal
+		Due to nature of pipelining, if doing operations that depend on each other. If not correctly spaced apart, may read old values and operate on them instead of new value
+
+		These are caled hazards
+		They reduce performance if not handled correctly
+		May need to stall pipeline to guarantee the values are read and written correctly and as expected.
+
+
+		Structural Hazards
+			Resource conflict
+			Simultaneous access of same resource
+
+		Data Hazards
+			Instruction dependent on result of another, need to wait for that one to be done first
+
+		Control Hazards
+			Instructions exist in pipeline that need PC to be changed.
+
+		Detect and Resolution
+			\textbf{Forwarding Mechanism}- Pipe data straight from result of ALU into register input.
+
+			Forwarding
+				Check if rt/rs of given instruction is same as rd of previous instruction.
+				Also need to check if not same as 2 previous destination. To prevent the value being piped 2 instructions ahead when 3 consecutive instrustions depend on value of single register.
+
+			Stalling
+				If next instruction dependent on value of previous instruction that hasn't been generated yet. 
+				Need to stall for $n$ clock cycles to let it generate the value expected. 
+				Done by adding delay cycles to stall overall execution of instructions.
+				Check if memread (loading word), and then if previous pipeline register is expecting same value, then need to delay for a cycle.
+
+				If need to do this, make sure that PC isn't changed as it may skip the executing of the instruction you want to delay
+				Therefore make operation have no effect by setting all control signals to 0 in EX, MEM, and WB stages
+
+				
+
+
+			
+
 
 
 \end{document}
