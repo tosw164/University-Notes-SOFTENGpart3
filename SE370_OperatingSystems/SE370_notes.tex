@@ -1295,28 +1295,323 @@ Lecture 6
 	Implementing Semaphores
 
 	UP TO PRODUCER CONSUMER PROBLEM
+	(14)
+		Want consumer to block so that the buffer will have a value stored in it
 
 
 
+\section{Lecture 11}
+	Reader/Writer problem
+		Readers aren't a problem, as they don't change values
+		As you add writers, then it makes it potentially inconsistent
 
-		
+		Only 1 writer at at time in critical section, once it is gone then you can let readers go do their own thing.
+		If we have multiple readers, we want them all in there at once with no writers
+
+		Writer prefered
+			writer before reader
+			prioritises reading of updated values
+			read most recent data
+
+			Priority problem again, if writers keep coming then readers will wait forever
+
+		Reader Prefered
+			Opposite problem to other one, writers may wait forever
+
+		both of these may end up indefinite postponemenet
+
+		No preference
+			Use queue, neithe writer or reader has no priority
+
+	Getting program correct
+		(2) had exclusive access semaphore, set to 1 so that only one thing can access it.
+
+		If producer goes twice then overwrites the value in the buffer of original, so no 1:1 mapping of producers to consumers
+
+		If consumers gets there before producer then the \texttt{number\_deposited} is set to 0, producer sees this too and then waits forver and enters a deadlock
+
+	Bad Programmers
+
+		Have to make sure that if you have a lock in a section of your code, to put something in to unlock it too.
 			
+		Can use things in OS to help programmers
+
+		Can possibly just call unlock if you see another process has a lock on an object and then be allowed to access it. Throws away any safety created if programmer has malicious intents
+
+	Monitors
+		Object that allows at most one thread executing inside of it.
+		Similar to old school kernel allowing one process to run in it
+
+		As long as you're running in the monitor then you don't have to worry about concurrency issues as the monitor only allows one thing to run at a time.
+
+		Slower due to monitor only doing one thing at a time, and therefore potentially getting a big backlog of tasks to do
+
+	Conditiion variables
+		Queue you put thread on when it gets to front
+		Uses the \texttt{wait} and \texttt{signal} again to only wake threads when needed
+
+		If you call wait, you always to go sleep.
+			If consumer sees nothing in buffer then will call wait and sleep itself and wait for producer to be done
+
+		If you call signal and thing has changed keep going
+		Otherwise then you do nothing. Used for situation where producers go after another to make sure buffer values are not overwritten.
+
+	Which thread runs?
+		If you allow thread to call signal, to wake up another thread then be careful to make sure thta you don't interfere with its operation.
+
+	Java monitors
+		Every object has a lock. This is to allow \texttt{synchronized} methods to work
+		If you call a \texttt{synchronized} method then you're asking monitor associated with object if you can go in and do somehting.
+		Has inherent \texttt{wait()} and \texttt{signal()} for each object.
+
+		What happens when there is a recursive call to \texttt{lock()}
+			Throw error if encounters lock by \texttt{self}
+			If continue then need to count how many times locked and unlocked. Make sure that you unlock it as many times as you locked it.
+
+		\texttt{pthreads} Can specify if you want a recursive lock or traditional lock. Tranditional lock will not allow same process to lock something twice.
+
+		They are different
+			One condition variable for \texttt{signal \& wiat}
+			Not real monitors
+
+\section{Lecture 12}
+	Dining Philosophers
+		DESCRIPTION
+
+	First solution
+		Does wait() on both left and right
+		Eat
+		Put them back
+
+		They all grab fork on the right and then can't get one on the left. Then die.
+		REST OF THIS
+
+	Second Solution
+		Basically the people either have both forks, or no forks
+		Uses simultaneous wait and signal for getting and returning forks
+		No deadlock but doesn't solve starvation problem
+
+		REST OF THIS
+
+		Simultaneous wait
+			Uses a \texttt{try-lock}
+			Pick up one and see if can grab other too, if can't then put one you have picked up back.
 
 
+		Problem with this is it is really slow. The constant contention makes it run a lot slower than first solution, even though that one ran into deadlock
+		It is possible that one single person never eats. 
+		A given person can only eat if both its neighbours aren't eating.
+
+	Just to be safe
+		1
+			THIS
+
+		2
+			THIS
 
 
+	Equivalence
+		If have semaphore then can impelement monitor, and vice versa
 
+		Implementing semaphore with monitor is easy
+		Other way around is harder due to lack of conditional.
+			Associate semaphore with condition variables.
 
+	Lock free algorithms
+		Locks aren't the only way to protect resource/datastructure
+		Libraries exist for this for most languages
 
-
-
-
-
-				
-				
-
+	Lock free modification
+		uses \texttt{cas()} Compare and swap
+		Basically check if value checked has changed. If not then replace with new value.
+		Keep checking until the value
 		
+	Deadlock
+		When 2 processes want something that the other has and vice versa. (Classic deadlock)
+		Anything waiting for a resource that the 2 processes fighting for also indirectly joins the deadlock.
 
+		Conditions
+		\begin{enumerate}
+			\item 	Circular linked list
+			\item Resources can't be shared
+			\item Only owner can release resource
+			\item Process holding resource while requesting another. \textbf{Often forgotten}
+		\end{enumerate}
+			
+		Detection
+			Use graph and find cycles
+			Allocation are node, request are edge
+
+		Results
+			Deadlock has to be resolved somehow
+				Killing process. Bad since you don't know current state of process.
+				Can use priority or age to select process to delete.
+			May enter back into deadlock instantly.
+				Can remove all processes. Overkill but solves problem.
+			Can rollback or restart. But make sure that same process not deleted/rolledback constantly
+
+
+			Killng stuff not generally good idea due to potentially inconsistent state.
+
+		Prevention
+			Ordering of resources
+				Make circular list of processes, so you can only get resources in a predetermined order. Prevents the basic deadlock situation.
+
+				If A->B->C.
+				If have A can get B
+				If have B, have to release, get A then get B
+
+			Resources not sharable.
+
+			Only owner can release resource
+
+			Process can hold resource while requesting another
+				One resource at a time
+				Return before requesting
+				Allocate all resources at same time.
+
+		Avoidance
+			More of a runtime thing. Very conservative stratergy
+			Check requests' safety, before allowing it to go ahead.
+			Might end up have resource free while something waits for it due it it possibly making deadlock later.
+
+			Occur when both processes have resources and both require one more from depleted resource pool.
+
+		Banker Algorithm
+			If given request, then assume permisison granted.
+			Go through processes, and see what processes it wants not and in the future, compare with the list of available resources.
+			Then actually grant it access if it meets this. Otherwise do nothing.
+
+			Check if the processes can finish with given resources left if trying to allocate to another. 
+			Need to ensure that all processes can definitely finish.
+			"Deadlock may occur" not allowed. Only "deadlock can't occur" allowed
+
+\section{Lecture 13}
+	Distributed Deadlock
+		Instead of worrying about order that you get resources, instead order processes that are executed by their priorities. 
+		Lower levels are rolled back and higher ones go earlier
+
+		Detection
+			A -> B	means that A is waiting on something B holds
+			Sometimes that you can only see deadlock when you combine multiple graphs.
+			Can have something ask all sites for their waitFor graphs (to try find global deadlocks)
+
+			Centralised deadlock detection
+				Timing is an issue and may lead to false positives.
+				Graph only approximation of real resource allocation.
+				Can use timestamps to avoid false deadlock
+
+			Distributed approach
+				Extra node ($P_{ex}$) in each local waitfor graph
+				Local processes waiting on external stuff goes to this $P_{ex}$
+				If cycle with $P_{ex}$ in it exist, \textbf{could} have a deadlock. Each local site can check this.
+					Then goes and ask other sites
+					Deadlock handled if found
+					Otherwise continue as normal
+
+	Time stamp prevention
+		wait-die
+			If resource held by older process, younger process can't wait, and dies. Since it hasn't done as much work, and tries again.
+
+			If resource held by younger process, older process allowed to wait.
+
+			Keep age for when you first try get a resource
+
+		wound-wait
+			Younger process allowed to wait for older process.
+			Other away around. Older process doesn't wait for younger process. Kills it and takes resource.
+
+	Messages
+		Can be used to control concurrency
+		Sending information to another process can be done by
+		\begin{enumerate}
+			\item Shared resource
+			\item Message passing
+			\begin{itemize}
+				\item Address message
+				\item Transport message
+				\item Notify receipeint
+				ANOTHER ONE
+				\item \texttt{send(destination, message)}
+				\item \texttt{receive(source, message)}
+				\item \texttt{write(message)}
+				\item \texttt{read(message)}
+			\end{itemize}
+		\end{enumerate}
+
+		Design decisions
+			Either have sender block or not
+			If writing to a file, want to send information as soon as possible.
+
+			Receiver should be blocking, you don't want any interruptions.
+			Receiver can choose a bunch of message types to stick around for and receive if any come.
+
+			If sender doesn't block then need somewhere to store the messages until the receiver retrieves the message.
+
+		Storaging messages
+			\begin{enumerate}
+				\item Have sender send message striahg to other process
+				\item Or have the page saved, and pointer sent so receiver knows where it is
+				\begin{itemize}
+					\item Need to not overwrite information until it hsa been read
+					\item Should also make this address read only for recepient so it can't be tampered with
+				\end{itemize}
+			\end{enumerate}
+
+			COMMUNICATION PROCESS TO PROCESS (12)
+
+			Indirect Communication
+				Mailbox and ports
+					Mailbox ownership
+					\begin{enumerate}
+						\item Owned by system
+						\begin{itemize}
+							\item Persist without process (if finish)
+						\end{itemize}
+						\item Owned by process
+						\begin{itemize}
+							\item Creator pass ability to receive
+							\item mailbox gone if process finish
+						\end{itemize}
+					\end{enumerate}
+
+	UNIX pipes
+		General
+			Something that contains data
+			Buffering mechanism
+			Pipe fills designated array with file descriptors (address on open file table) which basically makes it look like it is variable that contains the file/s
+			Can use typical \texttt{read} and \texttt{write} calls
+			\texttt{ls -al | grep Doc | wc -l} \tab Vertical bar is pipe
+
+			\begin{enumerate}
+				\item Create new process using fork
+				Call exec on ls
+				Forks to grep
+				\begin{itemize}
+					\item ls end is writing, grep end is reading
+				\end{itemize}
+			\end{enumerate}
+
+			UNIX does this piping by redirecting \texttt{stdin} and \texttt{stdout}
+
+		Full Pipes
+			If full (due to specified pipe size), and tries to send more information through the pipe. Will block when buffer fills up to not lose any information
+
+		Broken Pipe
+			If trying to read from pipe with no sender, get EOF. Otherwise it may wait forever.
+			If reader has died, sender has no point to keep send information; send signal to the process letting it know that nobody is listening to it.
+
+			Pipes aren't simply single sender and single reader.
+			Chunk sizes at least 512bytes. Then if message is equal or smaller than it, it will keep it as a whole.
+
+		Mach ports
+			Underneath OSX
+			Ports that write/read to/from.
+			Only one reader per port
+			Process allocated a certain number of ports for communication
+
+		UNIX process communication
+			SIGUSR1		user level signal you were sending
 
 
 
