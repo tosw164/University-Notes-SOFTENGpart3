@@ -13,6 +13,7 @@
 \usepackage{enumitem}
 \setlist{noitemsep}
 \usepackage[none]{hyphenat}
+\usepackage{listings}
 
 \begin{document} \maketitle{} 
 
@@ -203,16 +204,18 @@
 \section{Lecture 3 \& 4}
 	\subsection{ALU Operations}
 		\begin{itemize}
-			\item Addimmediate uses value, not pointer to register
-			\item No Subimmediate as if Addimmediate allows negative numbers then we good.
-			\item Destination register always before source register/s
-			\item Register 0 is static containing all 0s, and cannot be written to
+			\item Add immediate uses value, not pointer to register
+			\item No Subimmediate as if Addimmediate allows negatives.
+			\item Destination register generally before source register/s
+			\item Register 0 is \texttt{static final} containing all 0s, and cannot be written to
 		\end{itemize}
 
 		\paragraph{Endian-ness}
 		\begin{enumerate}
-			\item \textbf{Little Endian} Least significant bit at top of memory addresses
-			\item \textbf{Big Endian} Most significant bit at the top of memory addresses
+			\item \textbf{Little Endian} Least significant bit at top of memory addresses \\
+			LSB at addr, MSB at addr+3
+			\item \textbf{Big Endian} Most significant bit at the top of memory addresses \\
+			LSB at addr+3, MSB at addr
 		\end{enumerate}
 
 		\paragraph{Sizes of things} in relation to memory size \\ \tab Word=4bytes \\ 
@@ -286,52 +289,30 @@
 				\item Conditional Branching is \textbf{PC-relative} meaning that the PC provides current address and the Label provides an offset.
 			\end{itemize}
 
+			\begin{itemize}
+				\item \textbf{BEQ} branch equal, taking 2 inputs and a label if true
+				\item \textbf{BNE} branch not equal, taking 2 inputs and a label if true
+			\end{itemize}
 
+	bne and beq only have 16 extra bits. Therefore need to get to 32bit target address. Need to use PC again. Use 14 bits after shifting the 16bits in bne/beq to left by 2.
 
+	\paragraph{Another example}
+	target address = 0100 0400 + 4  + 400 = 0100 0804 \\
+	+ 4 from PC+4 \\
+	+400 from 0x100 * 4 [left shift 2] \\
+	\textbf{NOTE} Have to also consider is little/big Endian by looking at the machine code of original instruction. The 16bit offset at the end will let you know.
 
+	\begin{lstlisting}
+addi 	$11, $0, 100	 //Initialise counter as 100
+lw 	$8, 0($10)	// Load word from R10 into R8
+sra	$9, $8, 3	// Shift right arithmetic on that and save in R9
+sw 	$9, 0($10)	//Store contents of R9 back into R10
+addu 	$10, $10, 4	//find the address of next element
+addi 	$11, $11, -1	//Decrement loop counter
+bne 	$11, $0, L1
+	\end{lstlisting}
 
-
-2ND HALF
-	beq = branch equal, taking 2 inputs
-	bne = branch not equal, taking 2 inputs.
-
-slide20
-	Else and Exit are kind of like GOTO (symbolic name) Need dollar sign if doing assembly.
-
-	bne and beq only have 16 extra bits.  Therefore need to get to 32bits again somehow for target address. Need to use PC again. Use 14 bits after shifting the 16bits in bne/beq to left by 2.
-
-	Another example
-	target address =
-		0100 0400 + 4 (from PC+4) + 400 (from 0x100 * 4 [left shift 2])
-		= 0100 0804
-	Have to also consider is little/big Endian by looking at the machine code of original instruction. The 16bit offset at the end will let you know.
-
-	Yay another example, so excited
-		ATTEMPT
-			Start: if pc bne \$10 + 32*100 + 32 Exit
-				shift right 3 pc
-
-			Start
-
-			Exit: hi there
-
-		ANSWER
-			Need to make a counter, use addi for increment/decrement
-
-			addi \$11, \$0, 100	\tab //Initialise counter as 100
-			lw \$8, 0(\$10)	\tab // Load word from R10 into R8
-			sra	\$9, \$8, 3	\tab // Shift right arithmetic on that and save in R9
-			sw 	\tab //Store contents of R9 back into R10
-			addu \$10, \$10, 4
-			addi \$11, \$11, -1
-			bne \$11, \$0, L1
-
-			OP DES SRC
-
-			OP SRC DEST
-
-
-Lecture 5 \& 6
+\section{Lecture 5 \& 6}
 	Example: Translate the below code to MIPS
 		while(w[i] == x)
 			i = i + j
