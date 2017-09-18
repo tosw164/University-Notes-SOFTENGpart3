@@ -380,7 +380,7 @@ exit:	#out of the for loop
 		\begin{itemize}
 			\item \textbf{j address} Jump to the 26bit address doing the shifting and 4MSB of PC attached.
 			\item \textbf{jal address} (Jump and link) lets you jump to subroutine. Also uses \$31 used to store return address (PC+4 saved to the register)
-			\item \textbf{jr register} Uses the value of register number as target address
+			\item \textbf{jr register} Uses the value of register number as target address. Return instruction.
 		\end{itemize}
 
 		\subsubsection*{Conditional Branches:}
@@ -392,13 +392,30 @@ exit:	#out of the for loop
 
 		\subsubsection*{Relevant Registers:}
 		\begin{itemize}
-			\item 
+			\item \textbf{\$a0, \$a1, \$a2, \$a3} used for integer arguments
+			\item \textbf{\$v0} used as return register
+			\item \$sp is stack pointer register
+			\item \$fp is frame pointer register
 		\end{itemize}
+
+		Stack frames size should be multiple of 16.
+
+		\subsubsection*{Memory Layout:}
+		\begin{itemize}
+			\item Stack Segment (goes down) \tab 0x7fffffff
+			\item Data Segment (goes up)
+			\item Text Segment \tab[2.5cm] 0x40000000
+			\item Reserved Memory
+			\begin{itemize}
+				\item Used for special OS tasks
+			\end{itemize}
+		\end{itemize}
+
+		If have nested functions then need to save and restore value of \$31. Save this in the current stack so the value can be extracted and restored.
 		
 
 
 \section*{Lectures 7 \& 8}
-	Knowledge for assignent should be taught by next tuesday
 
 	Stackframes
 		in MIPS have predetermined allocated area
