@@ -19,8 +19,8 @@
 \section{Lecture 1 \& 2}
 	\subsection{Improvements}
 		\begin{itemize}
-			\item Semiconductor technology and computer architecture has increased lots in last 50 years
-			\item Performance, which has also increased can be measured from standardised benchmarks
+			\item Semiconductor technology and computer architecture improved lots
+			\item Performance measured using standardised benchmarks
 			\item Clock rate/frequency has also increased considerably in this time.
 		\end{itemize}
 
@@ -33,8 +33,7 @@
 
 	\subsection{Memory Organisation}
 		\begin{itemize}
-			\item See memory as single 1D array
-			\item Address is index of this array, points to byte of memory.
+			\item See memory as indexed 1D array
 			\item Memory Access Time: time to read data to/from memory \\ 
 			\item Memory Speed != Processor speed.
 			\item Fast memory is very expensive. Heirarchy used to maintain fluid functionality and keep things cheap.
@@ -43,35 +42,32 @@
 		\paragraph{\tab Processor Registers}
 		\begin{itemize}
 			\item Smallest and fastest memory for CPU
-			\item about 32-64 of them.
-			\item Each are 32/64bits in size.
+			\item about 32-64 of them. Each 32/64bits in size.
 			\item Nanosecond access time
 		\end{itemize}
 
 		\paragraph{\tab Cache Memory}
 		\begin{itemize}
-			\item Slower than register
-			\item 8-256k
+			\item Slower than register, but larger (8-256k)
 			\item Few nanoseconds access time
-			\item Levels to this as well. L1, L2, L3 cache used in multiprocessor systems.
+			\item Levels (L1, L2, L3) used in multiprocessor systems.
 		\end{itemize}
 
 		\paragraph{\tab Main Memory}
 		\begin{itemize}
-			\item Slower than cache
-			\item Megabytes to gigabytes of size.
+			\item Slower than cache. But really big.
 			\item Tens of nanoseconds lookup time.
 		\end{itemize}
 
 	\subsection{Instruction Set Architecture (ISA)}
-		\paragraph{\tab ISA} is interface between hardware and low level software.
-		\paragraph{\tab Modern ISA} include 80x86, MIPS, ARM
+		\paragraph{\tab ISA} is interface between hardware and low level software. (80x86, MIPS, ARMs)
 
 		\subsubsection{Using Fixed ISAs}
 			\paragraph{} Uses old instruction set (1970s), also used with extensions to enable newer technologies such as internet, etc...
 
 			\paragraph{\tab Advantages}
 			\begin{itemize}
+				\item Can have different implementation of same architecture
 				\item AMD/Intel both have same ISA but different implementation.
 			\end{itemize}
 
@@ -83,13 +79,6 @@
 
 
 		\subsubsection{ISA Design}
-			\paragraph{\tab Need to ask:}
-			\begin{itemize}
-				\item What operations do the CPU need to do?
-				\item How to provide data for given operations?
-				\item How to store results of these calculations?
-			\end{itemize}
-
 			\paragraph{\tab Need to define:}
 			\begin{itemize}
 				\item Instruction Format and Encoding
@@ -172,13 +161,13 @@
 		\paragraph{Classification} generally based on: Instruction word size, number of different instructions, and number of clock cycles to complete a given instruction.
 
 		\subsubsection{Classes}
-			\paragraph{RISC} (Reduced Instruction Set Computers) is where size of all instruction words are the same. May lead to simpler decoding hardware. 
+			\paragraph{RISC} (Reduced Instruction Set Computers) all instruction words same size. Simpler decoding hardware. 
 			\\ \tab \textbf{MIPS} is an example processor that uses this type of ISA.
 
-			\paragraph{CISC} (Complex Instruction Set Computers) are when the size of instruction words may vary. This is more complex than RISC but code footprint may become smaller due to condensing multiple RISC instructions into one CISC instruction. 
+			\paragraph{CISC} (Complex Instruction Set Computers) instruction word sizes may vary.Code footprint may be smaller than RISC due to condensing multiple RISC instructions into one CISC. 
 			\\ \tab \textbf{Intel x86} is an example of processors based off this.
 
-			\paragraph{EPIC} (Explicitly Parallel Instruction Computers) include parallel operations in their instruction set. The compiler is very important in EPIC architectures.
+			\paragraph{EPIC} (Explicitly Parallel Instruction Computers) have parallel operations in their instruction set. The compiler is very important.
 			\\ \tab \textbf{Intel Itanium} uses this kind of ISA.
 
 		\subsubsection{Abstractions}
@@ -186,9 +175,9 @@
 
 			\paragraph{\tab Instruction Processing in CPU}
 			\begin{enumerate}
-				\item \textbf{Fetching} accesses memory to get to next instruction. Gets the correct memory address on the bus, and reads its contents.
-				\item \textbf{Decoding} Interprets the bits of the instruction word. Identifies which operation to do and data requied (from memory/registers)
-				\item \textbf{Execution} Performs the operation. Uses processor and writes result to register/memory.
+				\item \textbf{Fetching} access memory, get next instruction.
+				\item \textbf{Decoding} Interprets the instruction. (Operation and data requried from memory/registers)
+				\item \textbf{Execution} Perform operation. Uses processor and writes result to register/memory.
 			\end{enumerate}
 
 		\subsubsection{Questions to ask when designing ISA}
@@ -210,7 +199,6 @@
 		\end{itemize}	
 
 		\paragraph{Notes: Shifting} You have to be careful when shifting as if you're dealing with signed integers then you may be messing with the sign bit when trying to multiply/divide	
-
 
 \section{Lecture 3 \& 4}
 	\subsection{ALU Operations}
