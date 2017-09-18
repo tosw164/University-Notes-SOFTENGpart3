@@ -17,22 +17,22 @@
 
 \begin{document} \maketitle{} 
 
-\section{Lecture 1 \& 2}
-	\subsection{Improvements}
+\section*{Lecture 1 \& 2}
+	\subsection*{Improvements}
 		\begin{itemize}
 			\item Semiconductor technology and computer architecture improved lots
 			\item Performance measured using standardised benchmarks
 			\item Clock rate/frequency has also increased considerably in this time.
 		\end{itemize}
 
-	\subsection{Computer Architecture}
+	\subsection*{Computer Architecture}
 		\textbf{\tab ISA:} Boundary between hardware and software\\
 		\textbf{\tab Oragnisation:} high level computer design aspects\\
 		\textbf{\tab Hardware:} detailed logic and circuit design
 		\\ \\
 		\textbf{\tab Note:} You want to separate your instruction set from implementation
 
-	\subsection{Memory Organisation}
+	\subsection*{Memory Organisation}
 		\begin{itemize}
 			\item See memory as indexed 1D array
 			\item Memory Access Time: time to read data to/from memory \\ 
@@ -60,10 +60,10 @@
 			\item Tens of nanoseconds lookup time.
 		\end{itemize}
 
-	\subsection{Instruction Set Architecture (ISA)}
+	\subsection*{Instruction Set Architecture (ISA)}
 		\paragraph{\tab ISA} is interface between hardware and low level software. (80x86, MIPS, ARMs)
 
-		\subsubsection{Using Fixed ISAs}
+		\subsubsection*{Using Fixed ISAs}
 			\paragraph{} Uses old instruction set (1970s), also used with extensions to enable newer technologies such as internet, etc...
 
 			\paragraph{\tab Advantages}
@@ -79,7 +79,7 @@
 				\end{itemize}
 
 
-		\subsubsection{ISA Design}
+		\subsubsection*{ISA Design}
 			\paragraph{\tab Need to define:}
 			\begin{itemize}
 				\item Instruction Format and Encoding
@@ -89,8 +89,8 @@
 
 		\paragraph{\tab Operands and Opcodes} To carry out these calculations, an \textbf{opcode} must be defined to define these calculations. Upon these opcodes, zero to three \textbf{operands} are used for data inputs and result outputs.
 
-	\subsection{Architecture Types}
-		\subsubsection{Stack Base Architecture}
+	\subsection*{Architecture Types}
+		\subsubsection*{Stack Base Architecture}
 			\begin{itemize}
 				\item Top of stack will contain result of operation.
 				\item If receive ADD then processor knows next 2 inputs contain 2 numbers that need to be added.
@@ -100,14 +100,14 @@
 				\item ADD function has no operators. Operates on last 2 loaded values.
 			\end{itemize}
 
-		\subsubsection{Accumulator Based Archictecture.}
+		\subsubsection*{Accumulator Based Archictecture.}
 			\begin{itemize}
 				\item Using inputs from memory.
 				\item Not used anymore today. Used in 1970s
 				\item ADD function takes one operator, $mem_address$ which contains the value to add to above loaded value.
 			\end{itemize}
 
-		\subsubsection{Register Memory Architecture}
+		\subsubsection*{Register Memory Architecture}
 			\begin{itemize}
 				\item Currently used today as x86
 				\item Uses register for input as well as access values from memory.
@@ -119,7 +119,7 @@
 					\end{enumerate}
 			\end{itemize}
 
-		\subsubsection{Register-Register Architecture}
+		\subsubsection*{Register-Register Architecture}
 			\begin{itemize}
 				\item Operands from register.
 				\item LOAD and STORE only way to access memory.
@@ -132,7 +132,7 @@
 					\end{enumerate}
 			\end{itemize}
 
-		\subsubsection{Examples}
+		\subsubsection*{Examples}
 			Example is $A(1000) + B(2000) = C(3000)$ in the 4 types of architectures
 			
 			\paragraph{\tab Stack Based Architecture\\}
@@ -158,10 +158,10 @@
 					STORE R1, 3000
 
 
-	\subsection{ISA Classes}
+	\subsection*{ISA Classes}
 		\paragraph{Classification} generally based on: Instruction word size, number of different instructions, and number of clock cycles to complete a given instruction.
 
-		\subsubsection{Classes}
+		\subsubsection*{Classes}
 			\paragraph{RISC} (Reduced Instruction Set Computers) all instruction words same size. Simpler decoding hardware. 
 			\\ \tab \textbf{MIPS} is an example processor that uses this type of ISA.
 
@@ -171,7 +171,7 @@
 			\paragraph{EPIC} (Explicitly Parallel Instruction Computers) have parallel operations in their instruction set. The compiler is very important.
 			\\ \tab \textbf{Intel Itanium} uses this kind of ISA.
 
-		\subsubsection{Abstractions}
+		\subsubsection*{Abstractions}
 			\paragraph{Abstractions} remove unnecessary details and hide complexity so that it is easier to understand. 
 
 			\paragraph{\tab Instruction Processing in CPU}
@@ -181,7 +181,7 @@
 				\item \textbf{Execution} Perform operation. Uses processor and writes result to register/memory.
 			\end{enumerate}
 
-		\subsubsection{Questions to ask when designing ISA}
+		\subsubsection*{Questions to ask when designing ISA}
 			\begin{enumerate}
 				\item What type of ISA should be used?
 				\item What operations are needed?
@@ -189,7 +189,7 @@
 				\item Instruction and Data word sizes?
 			\end{enumerate}
 
-	\subsection{Extras}
+	\subsection*{Extras}
 		\paragraph{\tab Types of operations}
 		\begin{itemize}
 			\item \textbf{Arithmetic} Addition, Subtraction, Multiplication, Division
@@ -201,8 +201,8 @@
 
 		\paragraph{Notes: Shifting} You have to be careful when shifting as if you're dealing with signed integers then you may be messing with the sign bit when trying to multiply/divide	
 
-\section{Lecture 3 \& 4}
-	\subsection{ALU Operations}
+\section*{Lecture 3 \& 4}
+	\subsection*{ALU Operations}
 		\begin{itemize}
 			\item Add immediate uses value, not pointer to register
 			\item No Subimmediate as if Addimmediate allows negatives.
@@ -235,7 +235,7 @@
 		\end{itemize}
 
 
-	\subsection{Class exercise}
+	\subsection*{Class exercise}
 		addi \$10, \$0, 0x3000 \\
 		ori \$12, \$0, 0x8015 \\
 		sw \$12, 512(\$10) \\ \\
@@ -245,7 +245,7 @@
 		Therefore Big Endian: \tab 00 00 80 15 \\
 		And Little Endian: \tab \tab 15 80 00 00
 
-	\subsection{Instruction Encoding Cont.}
+	\subsection*{Instruction Encoding Cont.}
 		\begin{itemize}
 			\item \textbf{Note: } For efficient instruction encoding, we classify different instructions and formats for faster decode.
 			\item If 32 registers then need 5bits to encode pointer to relevant register.
@@ -255,7 +255,7 @@
 			
 		\end{itemize}
 
-		\subsubsection{R-Type Format}
+		\subsubsection*{R-Type Format}
 			\begin{itemize}
 				\item 6bit OpCode \tab \tab \tab Operation Instruction
 				\item 5bit Register \tab \tab \tab First register operand
@@ -266,7 +266,7 @@
 			\end{itemize}
 
 
-		\subsubsection{I-Type Format}
+		\subsubsection*{I-Type Format}
 			\begin{itemize}
 				\item 6bit OpCode
 				\item 5bit Destination Register
@@ -274,7 +274,7 @@
 				\item 16bit Offset/Immediate Value (Depending on instruction)
 			\end{itemize}
 
-		\subsubsection{Jumping Memory Addresses.}
+		\subsubsection*{Jumping Memory Addresses.}
 			\paragraph{Changing sequence of execution: } is done through use of \textbf{branch} and \textbf{jump} instructions. This is done to let you have if/else and loops.
 			\begin{enumerate}
 				\item[\textbf{Jump}] Jumps to location in memory (unconditionally) to get next instruction. Like a GOTO. Uses J-Type Format
@@ -312,46 +312,92 @@ addi 	$11, $11, -1	//Decrement loop counter
 bne 	$11, $0, L1
 	\end{lstlisting}
 
-\section{Lecture 5 \& 6}
-	Example: Translate the below code to MIPS
-		while(w[i] == x)
-			i = i + j
+\section*{Lecture 5 \& 6}
+	\subsection*{Example of while loop}
+	\begin{lstlisting}
+  Example: Translate the below code to MIPS
+	while(w[i] == x)
+		i = i + j
+	\end{lstlisting}
 
-		Given that i = \$3, j = \$4, x = \$5, w(int array) = ]\$6
+	Given that i = \$3, j = \$4, x = \$5, w(int array) = ]\$6
+
+	Answer:
+	\begin{lstlisting}
+loop: #perform loop test
+	sll	$10, $3, 2	#Shift left 2 == x4
+	add $10, $6, $10	#Get address of w[i]
+	lw	$11, 0($10)	#$11 = w[i]
+	#perform w[i] == x
+	bne $11, $5, exit	#Exit when w[i] != x
+	# i = i + j
+	add $3, $3, $4
+	j loop
+
+exit:	#out of the for loop
+	\end{lstlisting}
+
+	\subsection*{Comparison Instructions}
+	\begin{itemize}
+		\item Used for things like (x $<$ y)
+		\item Will set destination register different value depending on result of comparison
+		\item Will then use bne/beq to check if lessthan or greater than.
+	\end{itemize}
+
+	Examples:
+	\begin{itemize}
+		\item \textbf{slt} Rd, Rs, Rt = signed less than
+		\item \textbf{sltu} Rd, Rs, Rt = unsigned less than
+		\item \textbf{slti} Rd, Rs, Immed  = signed immediate less than
+		\item \textbf{sltiu} Rd, Rs, Immed  = unsigned immediate less than
+	\end{itemize}
+
+	\subsection*{Load Upper Immediate}
+		No implicit instruction to copy from one register to another. But can use contents of \$0 with the ADD or OR function to achieve the same effect. Use a pseudo instruction (scriptlike) called \textbf{Load Upper Immediate (lui)}
+
+		Used when loading values to upper section of a register. Operations like \texttt{ori} and \texttt{andi} do this for the bottom half of a register
+
+	\subsection*{Integer Multiplication and Division}
+		Since multiplying two 32bit numbers generates a 64bit number, need to store it somewhere.
+
+		\texttt{LO} and \texttt{HI} registers are special registers that hold the result of the multiplication or division.
+
+		\begin{itemize}
+			\item \textbf{mflo \$REG} move from \texttt{LO}
+			\item \textbf{mfhi \$REG} move from \texttt{HI}
+		\end{itemize}
+
+	\subsection*{Subroutines}
+		Procedure that gets called multiple times. Used to create modular program.
+		\subsubsection*{Issues:}
+		\begin{itemize}
+			\item Need to call it.
+			\item Need to give it arguments sometimes.
+			\item Need it to return values sometimes.
+		\end{itemize}
+
+		\subsubsection*{Unconditional Jumps:}
+		\begin{itemize}
+			\item \textbf{j address} Jump to the 26bit address doing the shifting and 4MSB of PC attached.
+			\item \textbf{jal address} (Jump and link) lets you jump to subroutine. Also uses \$31 used to store return address (PC+4 saved to the register)
+			\item \textbf{jr register} Uses the value of register number as target address
+		\end{itemize}
+
+		\subsubsection*{Conditional Branches:}
+		\begin{itemize}
+			\item \textbf{beq r1, r2, offset} 
+			\item \textbf{bne r1, r2, offset} \\
+			offset being 16 bit number (then shifted 2bits left and added to PC+4)
+		\end{itemize}
+
+		\subsubsection*{Relevant Registers:}
+		\begin{itemize}
+			\item 
+		\end{itemize}
+		
 
 
-		ANSWER
-		<<SOMETHING MISSING>>
-		loop: \#perform loop test
-			sll \$10, \$3, 2 \tab \#Shift left 2 == x4
-			add \$10, \$6, \$10 \tab \#Get address of w[i]
-			lw \$11, 0(\$10) \tab \#\$11 = w[i]
-			\#perform w[i] == x
-			bne \$11, \$5, exit \tab \#Exit when w[i] != x
-			\# i = i + j
-			add \$3, \$3, \$4
-			j loop
-
-		exit:
-
-	Comparison Instructions
-		Used for things like (x < y)
-		Will set destination register different value depending on result of comparison
-		Will then use bne/beq to check if lessthan or greater than.
-
-		slt Rd, Rs, Rt = signed less than
-		sltu Rd, Rs, Rt = unsigned less than
-		slti Rd, Rs, Immed  = signed immediate less than
-		sltiu Rd, Rs, Immed  = unsigned immediate less than
-
-		No implicit instruction to copy from one register to another. But can use contents of \$0 with the ADD or OR $_{(haha)}$ function to achieve the same effect
-
-		Can create sudo instructions if use same set of instructions a lot (kind of like creating a function/script)
-
-
-	SECOND HALF OF LECTURES GO HERE, RAN OUT OF LAPTOP BATTERY
-
-LEctures 7 \& 8
+\section*{Lectures 7 \& 8}
 	Knowledge for assignent should be taught by next tuesday
 
 	Stackframes
@@ -802,7 +848,7 @@ Lecture 17 \& 18
 		Special registers EPC and Cause used
 			The value of cause will determine which kind of exception was thrown
 
-\section{Lecture 17 \& 18}
+\section*{Lecture 17 \& 18}
 	Pipelining
 		Basically doing stuff concurrently if not dependent on each other
 		If washing machine done, put in drier so next person can use washing machine
