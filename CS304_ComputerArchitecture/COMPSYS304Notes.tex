@@ -18,7 +18,7 @@
 
 \begin{document} \maketitle{} 
 
-\section*{Lecture 1 \& 2}
+\section{Lecture 1 \& 2}
 	\subsection*{Improvements}
 		\begin{itemize}
 			\item Semiconductor technology and computer architecture improved lots
@@ -202,7 +202,7 @@
 
 		\paragraph{Notes: Shifting} You have to be careful when shifting as if you're dealing with signed integers then you may be messing with the sign bit when trying to multiply/divide	
 
-\section*{Lecture 3 \& 4}
+\section{Lecture 3 \& 4}
 	\subsection*{ALU Operations}
 		\begin{itemize}
 			\item Add immediate uses value, not pointer to register
@@ -313,7 +313,7 @@ addi 	$11, $11, -1	//Decrement loop counter
 bne 	$11, $0, L1
 	\end{lstlisting}
 
-\section*{Lecture 5 \& 6}
+\section{Lecture 5 \& 6}
 	\subsection*{Example of while loop}
 	\begin{lstlisting}
   Example: Translate the below code to MIPS
@@ -417,7 +417,7 @@ exit:	#out of the for loop
 		Send 5th and onwards function input arguments using the stack space.
 		
 
-\section*{Lectures 7 \& 8}
+\section{Lectures 7 \& 8}
 	\subsection*{Stack Frame Usage Summary}
 		\begin{itemize}
 			\item Procedure that doesn't call another one is a \textbf{leaf}
@@ -439,7 +439,7 @@ exit:	#out of the for loop
 	\textbf{Rest of the lecture about SPIM}
 
 \newpage
-\section*{Lecture 9 \& 10}
+\section{Lecture 9 \& 10}
 	\subsection*{Jump Tables}
 		More efficient way to do switch-case statements than to do a bunch of if-else statements.
 
@@ -536,112 +536,131 @@ exit:
 
 	This function just moves the bits to/from the registers and doesn't do the conversion.
 
-\section*{Lecture 11 \& 12}
-	(2)Digital Circuit are classified as combinational or sequential circuits
-		Combinational	output only dependent on current input value
-		Sequential 	output dependent on current input and state
+\section{Lecture 11 \& 12}
+	Digital Circuit are
+	\begin{itemize}
+		\item \textbf{Combinational}	output only dependent on current input value
+		\item \textbf{Sequential} 	output dependent on current input and state
+	\end{itemize}
 
-	(3) propagation delay exists
-	(4) charge/discharge of load capacitance results in nonzero propagation delay
-	(5) this nonzero prop delay may cause 'glitches' in the expcted output of the circuit
-		Not concerned with details, but can't assume ideal case in the real world. Therefore should take prop delay into account at all times
-	(6) Sequential circuits
-		have some kind of storage element to keep current state of program
-		clock to synch state transition
-	(7,8) With flipflops, remember that it also has delays
-		setuptime = minimum stable time for D input signal before change in CLK
-		hold time = minimum time D has to be stable after CLK edge
+	\subsection*{Propagation Delay}
+		\begin{itemize}
+			\item It exists
+			\item Charging and discharging of load capacitance means nonzero D$_{prop}$
+			\item Need to take this into account or may get glitches
+		\end{itemize}
 
-		FlipFlop = edge triggered. changes only occur when CLK positive or negative edge rise/fall
-		Latch = level sensitive. changes only occur when CLK either 0 or 1
+	\subsection*{Sequential Circuits}
+		\begin{itemize}
+			\item Have storage element to keep state
+			\item Flipflops have delays, and are edge triggered.
+			\item D$_{setup}$ minimum time for input before change in CLK
+			\item D$_{hold}$ time output needs to be stable after CLK edge.
 
-	(9) IMPLEMENTATION AND ORGANISATION
+		\end{itemize}
 
-	(10) CPU implementation
-		Control Unit
-			Generate signals to direct datapath
-		Datapath
-			perform CPU operations
+	\subsection*{Implementing}
+		Area between ISA and Hardware. Organisation of aspects of computer design.
 
-		ALU performs on registers
-			Has special extra outputs to show extra information about result given. Zero and Overflow
-			Overflow for result that overflows 32bit
-			Zero signifies the result being 0 or not
+	\subsection*{CPU implementation}
+		\begin{itemize}
+			\item \textbf{Control Unit} Generate signals to direct datapath
+			\item \textbf{Datapath} perform CPU operations\\
 
-			Needs 3 bits to say what operation to do
-			SLT = Less than, can be performed by using subtract in ALU
+			\item \textbf{Control Signals} from CU to DP
+			\item \textbf{Status Signals} from DP to CU
+		\end{itemize}
 
+	\subsection*{Datapath components}
+		\subsubsection*{Arithmetic Logic Unit - ALU}
+			\begin{itemize}
+				\item Arithmetic + Local operations on register value.
+				\item Has list of operations it can do
+				\item Extra output for \texttt{Zero} or \texttt{Overflow} result
+				\item 3bit code to specify what operation you want to do.
+			\end{itemize}
 
-		Register File
-			R type instruction need to take in 2 register values and return to specified register
-			Uses to represent which registers need to be read and written to
+		\subsubsection*{Register File}
+			\begin{itemize}
+				\item Provide operands for operations
+				\item Has bunch of potential inputs.
+				\item Get values of input registers, used to represent what registers need to be written/read to.
+			\end{itemize}
 
-			Not using register read signal, but keep in mind for real world.
+		\subsubsection*{Program Counter - PC}
+			\begin{itemize}
+				\item Indicate address of next instruction
+				\item Signals for reading/writing
+			\end{itemize}
 
-		Program Counter PC
-			Indicate address of next instruction to be executed
-			Also have signals for reading or writing
+		\subsubsection*{Memory Interfacing}
+			\begin{itemize}
+				\item Used to access memory for instructions
+			\end{itemize}
 
-		Memory Interfacing
-			used to access memory for instruction
-			can add read signal if needed
+		\subsubsection*{Sign Extension}
+			\begin{itemize}
+				\item Change 16bit signed number to 32bit signed number
+			\end{itemize}
 
-		Sign Extension
-			Converts the 16 immediate value to the 32bit value needed needed for instructions. Also keeps the sign bit if needed (NOT SURE)
+	\subsection*{ISA Subset Implementation}
+		\subsubsection*{Single Cycle Implementation}
+			\begin{itemize}
+				\item Assume single clock cycle for each instruction.
+				\item Longer clock cycle to accommodate this.
+				\item \textbf{Duty Cycle} ratio of system being active to being inactive.
+			\end{itemize}
 
-	ISA subsert implementation
-		Single cycle impelementation
-			Assume single clock cycle long enough to accommodate the delays. This is the edges
-			Therefore assume everything can be done in a single clock cycle
+		Fetch $\rightarrow$ Decode $\rightarrow$ Execute (and loop back around)
 
-			Duty cycle
-				percentage of highs compared to lows (NOT SURE)
+			\begin{itemize}
+				\item \textbf{Fetch} Read instruction word from memory, increment PC.
+				\item \textbf{Decode} Use fields from instruction to get values necessary and ignore un-needed registers
+			\end{itemize}
 
-		Fetch --> Decode --> Execute
+	\subsection*{Datapath for Section}
+		\subsubsection*{Fetch}
+			\begin{itemize}
+				\item PC - to get address of next instruction
+				\item Register File - put instruction address
+				\item ALU - for incrementing PC
+			\end{itemize}
 
-		Fetch
-			Need the PC to get the address of instruction needed to carry out
-			Instruction Momory to get instruction word
-			Also need something to increment PC by 4, to be ready for the next instruction to be executed
+		\subsubsection*{R-Type Instruction}
+			\begin{itemize}
+				\item Register File - get value from register
+				\item ALU - Perform operation on value of register
+				\item Register File - specify output register.
+			\end{itemize}
 
-		R-Type Instructions
-			need to get values from registers, so need Register File
-			Need the ALU to perform some kind of operation on vlaues of these registers 
-			Need Register File to specify the output register for opertaion too
+		\subsubsection*{Load/Store}
+			\begin{itemize}
+				\item ALU - result of ALU to Memory Interfacing
+				\item Register File - Desination register.
+			\end{itemize}
 
-		Load/Store
-			If doing Load/Store then result of ALU needs to be fed into a Memory Intefacing which will then output to the Register File for destination register
+	\subsection*{Immediate values and ALU}
+		Can get value straight from register (not through register file). Ensure it goes through Sign Extender first, to convert 16bit input to 32bit input.
 
-		Immediate Values into ALU
-			get this value straight from register (not though Register File) and ensure that it goes through a Sign Extender first
-			This is due to instruction needing the 32bit value to perform operation on, and the 16bit input needing to be converted to 32bit.
+	\subsection*{Implementing BEQ Example}
+		\begin{itemize}
+			\item Use ALU and subtract
+			\item Check if \texttt{zero} bit is set in ALU (will be set if values are the same)
+			\item Need to set new address if \texttt{zero} value is set
+		\end{itemize}
 
-
-	Example
-		Impelementing BEQ
-			Need to use ALU and Subtract, check the output Zero bit to see if values in registers are the smae
-			Also need to generate the target address from the 16 bit value of immediate/offset from original instruction
-				Use PC+4 and ALU. But cannot use ALU again since trying to do this all in the same clock cycle
-
-			If ALU(z) is true
-				generate new PC value, equality check successful
-			else
-				use whatever PC currently contains, as equality check unsuccessful
-
-	Datapath and Control Unit
-
-		ALU used for [add, sub, and, or, lw, sw, beq]
-		add - to calculate m]emory address
-		sub - for beq
-		ALUop[0,1] generated by main control unit, used for opcode conversion/translation for actual ALU operation input
-
-	Control Signal for ALU
-			ALUop	
-		lw	00
-		sw	00
-		beq	01
+		\begin{itemize}
+			\item ALU ADD - used for calculating new memory address
+			\item ALU SUB - used to check for equality
+			\item Control Signal for ALU
+			\begin{itemize}
+				\item lw 00
+				\item sw 00
+				\item beq 01
+			\end{itemize}
+		\end{itemize}
 		
-Lecture 13
+\section{Lecture 13 \& 14}
 	Single Cycle Datapath Impelementation cont.
 		(11) not correct as inputs for read/write registers for src/dest of some operatiions not guaranteed. Some have OP rs rd and some have OP rd rs
 
@@ -745,7 +764,7 @@ Lecture 13
 
 			Goal: to separate it to allow for multiple cycles for a single instruction
 
-Lecture 15 \& 16
+\section{Lecture 15 \& 16}
 	Multicycle implementation of MIPS ISA
 		\begin{itemize}
 			\item Mutltiple clock cycle for single full instruction
@@ -843,7 +862,7 @@ Lecture 15 \& 16
 
 	Performance depends on both clock period and average instructions per instruction so need to find best balance between the two.
 
-Lecture 17 \& 18
+\section{Lecture 17 \& 18}
 	Went over question on slide 4.
 
 	Exceptions and Interrupts
@@ -910,7 +929,7 @@ Lecture 17 \& 18
 		Special registers EPC and Cause used
 			The value of cause will determine which kind of exception was thrown
 
-\section*{Lecture 17 \& 18}
+\section{Lecture 17 \& 18}
 	Pipelining
 		Basically doing stuff concurrently if not dependent on each other
 		If washing machine done, put in drier so next person can use washing machine
@@ -977,7 +996,7 @@ Lecture 17 \& 18
 
 				
 
-\section*{Caches 1 - Generic/Introduction}
+\section{Caches 1 - Generic/Introduction}
 	\subsection*{CPUs need fast memory}
 		CPUs have frequencies of 3GHz, and \textbf{random} memory accessing takes approximately 1.2ns (and occurs about 25\% of the time). The fact that random is bolded is due to the fact that sequential accessing is much much faster than random access.\\
 
@@ -1040,7 +1059,7 @@ Lecture 17 \& 18
 
 		(4 * 0.95) + (11 * 0.025) + (21 * 0.01) + (120 * 0.015) = 6.085 cycles of perceived memory access time
 
-\section*{Caches 2 - Organisation}
+\section{Caches 2 - Organisation}
 	\subsection*{Cache Design}
 		\subsubsection*{Objectives}
 		\begin{itemize}
