@@ -414,52 +414,8 @@ exit:	#out of the for loop
 		If have nested functions then need to save and restore value of \$31. Save this in the current stack so the value can be extracted and restored.
 		
 
-
 \section*{Lectures 7 \& 8}
 
-	Stackframes
-		in MIPS have predetermined allocated area
-		areas of stackframe
-			Local and Temp variables
-			Saved Register (+ return reg)
-			argument build
-		It will try to use registers if possible, but if memory requirements too high then will use stack frame
-		Size of stack frame should be multiple of 16
-
-	Memory layout
-		kernel bit
-			top up to 0x7ffffffffffffffffffffffffffffffff
-		text segment
-			program instruction program
-			lower bit reserved for OS special task
-		data segment
-			objects with known size
-			above text segment growing up
-
-		stack segment
-			stack starting from 0x7ffffffffff growing down
-
-		Problem 
-			If have nested functions then \$31 contents will be overwritten. Therefore you save the value of \$31 when you call more functions in the stack frame
-			Use offset of 16 to store these values in the stackframe
-
-	Example
-		Translate below to MIPS
-
-		main(){
-			int a, b, c, d, e, f, z;
-			a = 10; b = -12; c = 120; d = 18; e = -2; f = 23;
-			z = func1(a,b,c,d,e,f);
-		}
-
-		int func1(int x1, x2, x3, x4, x5, x6){
-			int result;
-			result = x1 + x2 - x3 + x4 + x5 + x6;
-			return result;
-		}
-
-	Summary of stack frame usage
-		SUMMARY HERE
 
 Lecture 8
 	MIPS assembly programming
@@ -931,6 +887,100 @@ Lecture 17 \& 18
 				Therefore make operation have no effect by setting all control signals to 0 in EX, MEM, and WB stages
 
 				
+
+\section*{Caches 1 - Generic/Introduction}
+	\subsection*{CPUs need fast memory}
+		CPUs have frequencies of 3GHz, and \textbf{random} memory accessing takes approximately 1.2ns (and occurs about 25\% of the time). The fact that random is bolded is due to the fact that sequential accessing is much much faster than random access.\\
+
+		Problem is that \textbf{RAM} has 40ns+ access time. Therefore faster cache exist and if had to only rely on that, the CPU would be doing nothing and waiting a lot of the time.\\
+
+		However, \textbf{Static RAM} (SRAM) is much faster at 0.5-2ns access times, but is very expensive. Also need to be \textbf{small to be fast.} The larger the total size, the larger it is and the longer it takes for you to access something at a random location.\\
+
+		Classic memory heirarchy again of [Cache, RAM, Disk]
+
+	\subsection*{Cache Principle}
+		Keep memory consistent and fast.
+		\begin{itemize}
+			\item Higher levels contain copies of the lower level caches
+			\item If try get memory location, start at lower level and go up.
+		\end{itemize}
+
+		\subsubsection*{Cache}
+		\begin{itemize}
+			\item Transparent to program
+			\item Hold subset of memory
+			\item Commonly accessed data/instr in cache
+			\item Different levels in itself. (Usually 3, but can be 2)
+		\end{itemize}
+
+	\subsection*{Locality of Reference}
+		You don't want to just store random things in the cache. Want to actually have a plan of what you want to put there.
+
+		<<SOMETHING>>
+
+		\paragraph{Spatial Locality}
+		If you access an item at a given space, you are likely to access another item next to it, or closeby in memory. Therefore loading more than one item at a time may produce speedup. 
+
+		\paragraph{Temporal Locality}
+		If you access an item, you are likely to do it again within a certain timeframe. Can be things like looping through a section of memory.
+
+	\subsection*{Cache Operation}
+		Ask cache first. If there then is a HIT and return it. Otherwise ask memory (or level of cache).
+
+		\paragraph{Hit rate}
+		Times you hit, per number of memory accesses. The higher the rate the better it is. Different memory access times per level. Measured by timing when you first try get the resource, up until you get it.
+
+		\paragraph{Miss rate}
+		Times you don't get a hit for avery 
+
+		\paragraph{Miss penalty}
+		Access time after miss.
+
+	\subsection*{Cache benefit}
+		<<SOMETHING>>
+
+		The higher you go the faster the memory is perceived.
+
+	\subsection*{Example}
+		L1 = 4 clock	5\%miss
+		L2 = 11 clock	2.5\% gloal miss
+		L3 = 21 clock	1.5\% global miss
+		RAM = 120clock
+
+		Therefore
+
+		(4 * 0.95) + (11 * 0.025) + (21 * 0.01) + (120 * 0.015) = 6.085 cycles of perceived memory access time
+
+\section*{Caches 2 - Organisation}
+	\subsection*{Cache Design}
+		\subsubsection*{Objectives}
+		\begin{itemize}
+			\item High hit rate
+			\item Low access time\\
+			Can't do much about access time in this course, as it is reliant on underlying implementation of hardware)
+		\end{itemize}
+
+		\subsubsection*{Points to consider}
+		\begin{itemize}
+			\item Size of cache
+			\item Block/Line size (doesn't handle bytes or words, but larger entities called blocks and lines)
+			\item Data location mapping
+			\item Replacement (cache is small, gotta remove to add)
+			\item Write policy (what happens if processor wants to write to memory location, and keep consistency)
+			\item Levels of cache, exlusive/inclusive
+		\end{itemize}
+
+	\subsection*{Direct Mapping}
+		Directly using the bits of the address to where it is in memory.
+
+		Look at lower 3 bits and see where it is mapped in memory. But repeated many times in main memory so there is competition for all things with same suffix to have that spot in cache.
+
+	<<STUFF>>
+
+
+
+
+
 
 
 			
