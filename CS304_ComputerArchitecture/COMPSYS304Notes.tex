@@ -6,7 +6,7 @@
 
 \usepackage[
 	lmargin=2.5cm,
-	rmargin=5cm,
+	rmargin=2.5cm,
 	tmargin=1cm,
 	bmargin=3cm,
 	]{geometry}
@@ -14,6 +14,7 @@
 \setlist{noitemsep}
 \usepackage[none]{hyphenat}
 \usepackage{listings}
+\setlength{\parindent}{0pt}
 
 \begin{document} \maketitle{} 
 
@@ -411,43 +412,131 @@ exit:	#out of the for loop
 			\end{itemize}
 		\end{itemize}
 
-		If have nested functions then need to save and restore value of \$31. Save this in the current stack so the value can be extracted and restored.
+		If have nested functions then need to save and restore value of \$31. Save this in the current stack so the value can be extracted and restored.\\
+
+		Send 5th and onwards function input arguments using the stack space.
 		
 
 \section*{Lectures 7 \& 8}
+	\subsection*{Stack Frame Usage Summary}
+		\begin{itemize}
+			\item Procedure that doesn't call another one is a \textbf{leaf}
+			\item Leaf procedure doesn't save \$ra
+			\item Store values in registers used by calling procedure.
+			\item Most of time local variables use registers, but can be stack frame sometimes.
+		\end{itemize}
 
+	\subsection*{MIPS assembly programming}
+		\begin{itemize}
+			\item Main CPU with ALU and special registers for mult/div
+			\item Coprocessor for floating point stuff
+			\item Coprocessor for traps and memory
+		\end{itemize}
 
-Lecture 8
-	MIPS assembly programming
-		main CPU with ALU and special registers for mult/div
-		Coprocessor for floating point stuff
-		Coprocessor for traps and memory
+		\subsubsection*{Assembly directives}
+		Identifiers are used to provide commands to assembler, prefaced with a dot (.)\\
 
-		Assembly directives
-			identifiers are used to provide commands to assembler.
-			prefaced with a dot (.)
+	\textbf{Rest of the lecture about SPIM}
 
-Lecture 9
-	MISSED IT
+\newpage
+\section*{Lecture 9 \& 10}
+	\subsection*{Jump Tables}
+		More efficient way to do switch-case statements than to do a bunch of if-else statements.
 
-Lecture 10 (From slides 20/29 onwards)
-	Can't just add a float to an int
-	mtcZ/mfcZ is move to/from coprocessor. Z value = 1 represents co-processor for floating point
-		This function just moves the bits to/from the registers and doesn't do the conversion
+		\begin{lstlisting}
+switch(k){
+	case 0:		f = i + j;	break;
+	case 1:		f = g + h;	break;
+	case 2:		f = g - h;	break;
+	case 3:		f = i - j;	break;
+}
 
-	cvt = convert instruction
-	.d.s = single precision convert to double precision
-	.d.w = integer convert to double precision
+JumpTable  .word	L0, L1, L2, L3	#Creating jump table
 
-	Class example
-		Do Z = 8*X + Y
+	jr k		#Jump to relevant k value from jump table
 
-	Another example
-		Check how many values in array are -Infinity
+L0:	add f, i, j	#k = 0, f = i + j
+	j exit
 
-		-Infinity cannot be represented so have to check contents of register to see if it contains proper value
+L1:	add f, g, h	#k = 1, f = g + h
+	j exit
 
-Lecture 11 \& 12
+L2:	add f, g, -h	#k = 2, f = g - h
+	j exit
+
+L3: add f, i, -j	#k = 3, f = i - j. No break;
+
+exit:
+		\end{lstlisting}
+
+	\subsection*{Floating Point Representation}
+		Single Precision
+		\begin{itemize}
+			\item bit 31 \tab \tab Sign bit
+			\item bit 30-23 \tab Exponent
+			\item bit 22-00 \tab Mantissa
+		\end{itemize}
+\\
+		Double Precision
+		\begin{itemize}
+			\item bit 63 \tab \tab Sign bit
+			\item bit 62-52 \tab Exponent
+			\item bit 51-00 \tab Mantissa
+		\end{itemize}
+\\
+		Extras
+		\begin{itemize}
+			\item \textbf{zero} \tab \tab Exponent and Mantissa are all 0s
+			\item \textbf{Infinity} \tab Exponent 255, Mantissa 0s. Sign determines if positive or negative.
+			\item \textbf{NaN} \tab \tab Exponent 255, non-zero mantissa
+		\end{itemize}
+
+	\subsection*{MIPS}
+		MIPS has a floating point co-processor with special registers (pairs for doubles) to represent floats.\\
+
+		Co-processor itself has 32 32bit registers. \$f0 \$f31.
+
+		\subsubsection*{Registers}
+		\begin{itemize}
+			\item 00 - 02 \tab Results of a function
+			\item 04 - 10 \tab Temp registers
+			\item 12 - 14 \tab Pass first 2 arguments
+			\item 16 - 18 \tab Temp registers
+			\item 20 - 30 \tab Caller saved registers
+		\end{itemize}
+
+		\textbf{lwc1} and \textbf{swc1} are used to load/store values to the coprocessor 1 (floats)
+
+		\subsubsection*{Operations}
+		\begin{itemize}
+			\item \textbf{Single} \tab add.s, sub.s, mul.s, div.s
+			\item \textbf{Double} \tab add.d, sub.d, mul.d, div.d
+		\end{itemize}
+
+	\subsection*{Compare Instructions}
+		You use \$31 to see comparison instructions between 2 floats.\\
+
+		Function \texttt{c.X.s} or \texttt{c.X.d} is used to compare the values in the registers and return value saved in \$31. X can represent:
+		\begin{itemize}
+			\item eq = equal
+			\item neq = not equal
+			\item lt = less than
+			\item le = less than or equal
+			\item gt = greater than
+			\item ge = greater than or equal
+		\end{itemize}
+
+	\subsection*{Converting}
+		Can convert from any Integer/Word, Single Float, Double Float to any other using \texttt{cvt.X.Y} where y is [w = word, s = single, d = double]
+
+	\subsection*{Moving to/from coprocessor}
+	\textbf{mtcZ/mfcZ} is move to/from coprocessor. Z value = 1 represents co-processor for floating point.\\
+
+	mtc1 \$12, \$15 moves value from Register12 to Register15 in coprocessor1.\\
+
+	This function just moves the bits to/from the registers and doesn't do the conversion.
+
+\section*{Lecture 11 \& 12}
 	(2)Digital Circuit are classified as combinational or sequential circuits
 		Combinational	output only dependent on current input value
 		Sequential 	output dependent on current input and state
