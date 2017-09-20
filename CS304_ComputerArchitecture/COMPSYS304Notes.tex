@@ -798,7 +798,7 @@ exit:
 		\begin{itemize}
 			\item Instruction Fetch
 			\item Decode/Register Fetch
-			\item Execution
+			\item Execution 
 			\item Memory Access, finish R-type, write ALUout to register values
 		\end{itemize}
 
@@ -1084,6 +1084,94 @@ exit:
 		Look at lower 3 bits and see where it is mapped in memory. But repeated many times in main memory so there is competition for all things with same suffix to have that spot in cache.
 
 	<<STUFF>>
+
+
+
+
+\section{Extra Morteza}
+	\subsection{Single Cycle Implementation Control Signals}
+		\begin{enumerate}
+			\item \textbf{RegDst}
+				\\Denotes if ALU will be used
+				\begin{itemize}
+					\item \textbf{ZERO} if ALU not used. For things like \texttt{mult, div, jr, mfc0}
+					\item \textbf{ONE} if ALU used. For thing slike \texttt{add, sub, or, and, lt}
+				\end{itemize}
+
+			\item \textbf{Branch}
+				\\Denotes if branching will happen. Feeds into an AND gate.
+				\begin{itemize}
+					\item If \textbf{ONE} then will get 16 bit offset, shift left by 2, and add 4MSB of PC+4
+					\item If \textbf{ZERO} then continue using PC+4 as next instruction
+				\end{itemize}
+
+			\item \textbf{MemRead}
+				\\Only used for LoadWord operations, however can be used for some R-type
+
+			\item \textbf{MemtoReg}
+				\\Only used for LoadWord operations
+
+			\item \textbf{ALUop}
+				\\Denotes what operation the ALU will do
+				\begin{itemize}
+					\item 000 \tab AND
+					\item 001 \tab OR
+					\item 010 \tab ADD
+					\item 011 \tab SUB
+					\item 111 \tab LessThan
+				\end{itemize}
+
+			\item \textbf{MemWrite}
+				\\Only used for StoreWords operation
+
+			\item \textbf{ALUsrc}
+				\\Used for Load and Store opeations. Denotes if ALU uses register or 16bit immediate value from instruction
+
+			\item \textbf{RegWrite}
+				\\R-type and load word use. Potentially used for write data for Register File.
+		\end{enumerate}
+
+	\subsection{Multiple Cycle Implementation Control Signals}
+		\begin{enumerate}
+			\item \textbf{RegDst}
+				\\Denotes if ALU will be used
+				\begin{itemize}
+					\item \textbf{ZERO} if ALU not used. For things like \texttt{mult, div, jr, mfc0}
+					\item \textbf{ONE} if ALU used. For thing slike \texttt{add, sub, or, and, lt}
+				\end{itemize}
+
+			\item \textbf{Branch}
+				\\Denotes if branching will happen. Feeds into an AND gate.
+				\begin{itemize}
+					\item If \textbf{ONE} then will get 16 bit offset, shift left by 2, and add 4MSB of PC+4
+					\item If \textbf{ZERO} then continue using PC+4 as next instruction
+				\end{itemize}
+
+			\item \textbf{MemRead}
+				\\Only used for LoadWord operations, however can be used for some R-type
+
+			\item \textbf{MemtoReg}
+				\\Only used for LoadWord operations
+
+			\item \textbf{ALUop}
+				\\Denotes what operation the ALU will do
+				\begin{itemize}
+					\item 000 \tab AND
+					\item 001 \tab OR
+					\item 010 \tab ADD
+					\item 011 \tab SUB
+					\item 111 \tab LessThan
+				\end{itemize}
+
+			\item \textbf{MemWrite}
+				\\Only used for StoreWords operation
+
+			\item \textbf{ALUsrc}
+				\\Used for Load and Store opeations. Denotes if ALU uses register or 16bit immediate value from instruction
+
+			\item \textbf{RegWrite}
+				\\R-type and load word use. Potentially used for write data for Register File.
+		\end{enumerate}
 
 
 
