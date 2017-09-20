@@ -1613,6 +1613,255 @@ Week 3 Wednesday
 		UNIX process communication
 			SIGUSR1		user level signal you were sending
 
+\section{Lecture 14}
+	\subsection{Sockets}
+
+\section{Lecture 15}
+
+\section{Lecture 16}
+	\subsection{Design Decisions}
+		need to store variable files and different types
+		block is smallest addressable region
+			see it as an array of blocks
+		sector is smallest area the device could communicate with
+
+	\subsection{File attributes}
+		Information about files
+		things
+		\begin{itemize}
+			\item Name 
+			\begin{itemize}
+				\item may have more than 1 name for a file
+				\item length of name
+				\item limitations to name (can't use characters) 
+			\end{itemize}
+			\item Location
+			\item Size
+			\item Owner
+			\begin{itemize}
+				\item Protection, and grant access rights
+			\end{itemize}
+			\item Access Information
+			\item Dates/Times (Creation, modification)
+			\item File Types
+		\end{itemize}
+			
+	\subsection{File Name Limits}
+		\begin{itemize}
+			\item NTFS
+			\begin{itemize}
+				\item extend paths up t 32k length
+				\item ordinary path up to 256chars
+				\item Win10 can ignore limit
+			\end{itemize}
+
+			\item Linux
+			\begin{itemize}
+				\item Path limit 4k bytes
+				\item commonly 255 bytes per path component
+			\end{itemize}
+
+			\item APFS
+			\begin{itemize}
+				\item 255 characters per path component
+			\item Don't know maximum length
+			\item iOS 10.3 converted this on devices on the fly.
+			\end{itemize}
+		\end{itemize}
+
+	\subsection{File Type}
+		System has to know about it to perform operations
+
+		<<EG SECTION TO COPY>>
+
+		All OS know about executable binary files
+		OS specific structure about how to load information from file/s
+
+		\subsubsection*{Dealing with File Types}
+			\begin{itemize}
+				\item Easy way to do it - just add file type to the end of the name.
+				\item Extensions are mapped to registry so it knows how to treat it
+				\item Doesn't stop people renaming extension
+				\item UNIX uses numbers in front of file data (first few characters/bytes have this information)
+				\begin{itemize}
+					\item \texttt{ftype M4A} means that it is .m4a type
+					\item \texttt{PDF1.3} - PDF format
+				\end{itemize}
+			\end{itemize}
+
+		\subsubsection*{Old Macintosh Solution}
+			Used to be called MFS (Mac File System)
+			Wanted to have icons for files
+			Stored too much information. stored what program created the file so it can be opened again later.
+
+			2 parts to a file
+				resource fork
+					<<LIST OF THINGS>>
+
+				data fork
+					<<LIST OF THINGS>>
+
+			Done before computers were networked. Things broke due to OS incompatibilities.
+			This is incorporated into NTFS, but extended to have as many parts as you want to a file as programmer wanted.
+
+			in OSX, \texttt{bundles} seem like a single file, but is actually a directory.	
+
+		NTFS
+			Highly structured way to look at a file.
+			File seen as a set of file attributes.
+			Only one of the attributes contain the file data.
+
+			File system commonly have a Btree to make finding files more efficient.
+
+		Alternate Data Streams
+			Hidden information about files
+			Need to use other programs to view it
+
+			Starts with colon. Associates this alternate data stream with current directory.
+
+			Master file table, each file has approximately 1kb allocated to it.
+
+		Representing Files on Disk
+			Have to store files in constant sized blocks on disk
+
+			<<LAST 2 BULLETS>>
+
+		Structure
+			metadata = <<DEFINITION>>
+			single level = <<DEFINITION AND USE>>
+				Number of files grow as you put files in, B-tree used sometimes.
+
+			Two level
+				users are top level, can only have flat directory
+				not used by many OS
+
+			Normal
+				tree structure
+				files organised by using collections of more files
+
+				Should you be able to write directory that you own
+					Don't want to lose some of the metadata that contains what is stored inside directory
+					can also lose list of blocks allocated, then you get full access to disk if you modify this
+
+		Sharing Files and Directories
+			<<LOTTA TEXT>>
+
+		Hard Links
+			<<MORE TEXT>>
+			With hard links, both files are treated equal.
+
+			\texttt{ln old\_filename new\_filename}
+			Create directory entry with pointer to file inode (hold real information about a file)
+
+			\texttt{mklink /H newfilename oldfilename}
+			How to do it in Windows.
+			/H to denote that it is to be a hard link.
+			Make entry of master file table. But also puts a bunch of information in so you don't have to go to the master file table every single time.
+
+		Soft/Symbolic Links
+			The contents of a symlink is the identifier to the real file.
+			OS knows to treat it as link due to the \texttt{l} in \texttt{ls -l}
+			Length of the file is length of filename that it points to
+			Only holds real name of the file. If you rename file, symlink breaks
+
+			Windows shortcuts
+				<<THING>>
+				Windows should be able to continue tracking even if you do things to the original file.
+				Such as moving file to different volume, move to network.
+				However this uses lots more resources and does more work to allow this.
+
+			Mac Aliases
+				Can make alias from GUI.
+				Contains real identifier of the file. 
+
+				However, they moved to UNIXlink at some point and incorporated symlinks.
+				But symlinks work differently and are 'dumber'
+
+				Now MacOS stores both ID and filename. Checks the file name first, then ID if file doesn't exist.
+
+\section{Lecture 17}
+	\subsection{Cycles}
+		Generally don't want cycles in the directory graphs
+		Have infinitely many names for all files in the cycle.
+		Naive search would fail, since you may get stuck in the loop and never reach file you're searching for.
+
+		One solution would be to just not allow hardlinks, but allow symlinks.
+		Can still get infinite loop, but OS thinks its in loop if it reaches a certain number of symlinks.
+
+	\subsection{deletion}
+		Have count of how many links to files
+		If delete, then reduce the number so other names can still point to data
+		If real file deleted then could have dangling pointers
+
+	\subsection{What's in directory entry}
+		UNIX
+			\begin{itemize}
+				\item filename
+				\item file attributes (How much more?)
+				\item pointer to file attributes
+			\end{itemize}
+
+			UNIX stores this attribute information in \textbf{inode} that also contains number of hard links to file.
+			UNIX directory is a table of names, and their inode numbers
+
+			inode table replicated so not a single point of failure.
+
+		NTFS
+			Master file table contains folder information.
+
+			<<YEP NEED TO TYPE A BIT>>
+
+			Not all information you get may be correct
+
+	\subsection{Terminology}
+
+	\subsection{Finding File Blocks/Metadata}
+		data on disk that isn't contents of file
+		\subsubsection{Continguous }
+			store start block and length of each file.
+			Efficient for hard disk as head doesn't have to move very much.
+			If have both of these values then can deal with any part of the file.
+
+			Can't do simple things like make file larger. Need to find hole large enough in disk to fit new file size.
+
+			\begin{enumerate}
+				\item \textbf{First fit}\\
+					Find first hole that will fit
+				\item \textbf{Next fit}\\
+					Continue searching where you last finished searching
+				\item \textbf{Best fit}\\
+					Fit as best you can, hole closest in size. Disk ends up with small holes left that you can't fit more files in
+				\item \textbf{Worst fit}\\
+					Find hole with largest space, lets you fit more files in there later.
+				\item \textbf{Buddy algorithm}\\
+
+			\end{enumerate}
+
+			Figuring out how much space to allocate is also difficult thing to do.
+			If give too little space then increase in file size annoying
+			Otherwise, may be wasting space.
+
+		\subsubsection{Linked Allocation}
+			Little bit of block used to point to next block that is part of a file.
+			Linked list implementation.
+
+			Simple.
+			No more external fragmentation, all blocks can be used.
+
+			Direct or random access is difficult.
+			Need to read block to know where next block is.
+			If one block fails, can lose rest of file.
+
+			Can cache blocks associated with a given file.
+
+		\subsubsection{MS-DOS \& OS2 FAT}
+			File allocation table.
+			Part of disk holds this table, is array of numbers that represent blocks.
+
+			If can load whole allocation table to memory, then can do direct access.
+
+			Works best if number of things allocated isn't very large as it is preferable to load whole table into memory.
+
 
 
 \end{document}
