@@ -470,21 +470,21 @@ exit:
 		\end{lstlisting}
 
 	\subsection*{Floating Point Representation}
-		Single Precision
+		\subsubsection*{Single Precision}
 		\begin{itemize}
 			\item bit 31 \tab \tab Sign bit
 			\item bit 30-23 \tab Exponent
 			\item bit 22-00 \tab Mantissa
 		\end{itemize}
-\\
-		Double Precision
+
+		\subsubsection*{Double Precision}
 		\begin{itemize}
 			\item bit 63 \tab \tab Sign bit
 			\item bit 62-52 \tab Exponent
 			\item bit 51-00 \tab Mantissa
 		\end{itemize}
-\\
-		Extras
+		k
+		\subsubsection*{Extras}
 		\begin{itemize}
 			\item \textbf{zero} \tab \tab Exponent and Mantissa are all 0s
 			\item \textbf{Infinity} \tab Exponent 255, Mantissa 0s. Sign determines if positive or negative.
@@ -994,6 +994,98 @@ exit:
 				If need to do this, make sure that PC isn't changed as it may skip the executing of the instruction you want to delay
 				Therefore make operation have no effect by setting all control signals to 0 in EX, MEM, and WB stages
 
+
+
+
+
+
+\section{Extra Morteza}
+	\subsection{Single Cycle Implementation Control Signals}
+		\begin{enumerate}
+			\item \textbf{RegDst}
+				\\Denotes if ALU will be used
+				\begin{itemize}
+					\item \textbf{ZERO} if ALU not used. For things like \texttt{mult, div, jr, mfc0}
+					\item \textbf{ONE} if ALU used. For thing slike \texttt{add, sub, or, and, lt}
+				\end{itemize}
+
+			\item \textbf{Branch}
+				\\Denotes if branching will happen. Feeds into an AND gate.
+				\begin{itemize}
+					\item If \textbf{ONE} then will get 16 bit offset, shift left by 2, and add 4MSB of PC+4
+					\item If \textbf{ZERO} then continue using PC+4 as next instruction
+				\end{itemize}
+
+			\item \textbf{MemRead}
+				\\Only used for LoadWord operations, however can be used for some R-type
+
+			\item \textbf{MemtoReg}
+				\\Only used for LoadWord operations
+
+			\item \textbf{ALUop}
+				\\Denotes what operation the ALU will do
+				\begin{itemize}
+					\item 000 \tab AND
+					\item 001 \tab OR
+					\item 010 \tab ADD
+					\item 011 \tab SUB
+					\item 111 \tab LessThan
+				\end{itemize}
+
+			\item \textbf{MemWrite}
+				\\Only used for StoreWords operation
+
+			\item \textbf{ALUsrc}
+				\\Used for Load and Store opeations. Denotes if ALU uses register or 16bit immediate value from instruction
+
+			\item \textbf{RegWrite}
+				\\R-type and load word use. Potentially used for write data for Register File.
+		\end{enumerate}
+
+	\subsection{Multiple Cycle Implementation Control Signals}
+		\begin{enumerate}
+			\item \textbf{RegDst}
+				\\Denotes if ALU will be used
+				\begin{itemize}
+					\item \textbf{ZERO} if ALU not used. For things like \texttt{mult, div, jr, mfc0}
+					\item \textbf{ONE} if ALU used. For thing slike \texttt{add, sub, or, and, lt}
+				\end{itemize}
+
+			\item \textbf{Branch}
+				\\Denotes if branching will happen. Feeds into an AND gate.
+				\begin{itemize}
+					\item If \textbf{ONE} then will get 16 bit offset, shift left by 2, and add 4MSB of PC+4
+					\item If \textbf{ZERO} then continue using PC+4 as next instruction
+				\end{itemize}
+
+			\item \textbf{MemRead}
+				\\Only used for LoadWord operations, however can be used for some R-type
+
+			\item \textbf{MemtoReg}
+				\\Only used for LoadWord operations
+
+			\item \textbf{ALUop}
+				\\Denotes what operation the ALU will do
+				\begin{itemize}
+					\item 000 \tab AND
+					\item 001 \tab OR
+					\item 010 \tab ADD
+					\item 011 \tab SUB
+					\item 111 \tab LessThan
+				\end{itemize}
+
+			\item \textbf{MemWrite}
+				\\Only used for StoreWords operation
+
+			\item \textbf{ALUsrc}
+				\\Used for Load and Store opeations. Denotes if ALU uses register or 16bit immediate value from instruction
+
+			\item \textbf{RegWrite}
+				\\R-type and load word use. Potentially used for write data for Register File.
+		\end{enumerate}
+
+
+
 				
 
 \section{Caches 1 - Generic/Introduction}
@@ -1083,95 +1175,467 @@ exit:
 
 		Look at lower 3 bits and see where it is mapped in memory. But repeated many times in main memory so there is competition for all things with same suffix to have that spot in cache.
 
+		If it goes into cache, it goes into into the same position in cache.
+
+
 	<<STUFF>>
+		\begin{itemize}
+			\item \textbf{Valid bit}. Associated with cache entry. Represents if that position in cache has value loaded in it
+			\item \textbf{Index}. Lower part of address, specifies where it will go if cached
+			\item \textbf{Tag}. Upper part of address, specifies memory location
+		\end{itemize}
+
+		Therefore [Tag][Index] represents full memory address of relevant cached resource.
+
+	Address to cache entry
+		[Tag][index][Offset]
+
+		<<YAY>>
+
+	Cache Metrics
+		Machine dependent
+			q = word size
+			p = address size
+
+		Byte Addressed Memory
+			m = byte offset bits (dependent on word size)
+			b = block bits
+			k = index bits
+
+		64byte line example
+			18bit tag
+			8bit index
+			4bit block offset
+			2bit byte offset
+
+	Direct Mapping Analysis
+		Simple :) 
+			both conceptually and hardware
+
+		Low hardware cost :)
+			single comparator
+
+		High potential for conflict :(
+			<<XD>>
 
 
+Fully Associative
+	Memory location go to any line of cache
+	Line index no relation to address
+		Larger TAG
+		no K
+		no line index
+	Comparator for every line
+		Lots of comparators
+		Memory location could be anywhere
+		Sequential comparison slow
+
+	Replacement policy needed.
+
+	<<MORE YAY>>
+
+Set Associative
+	Hybrid
+		Doesn't have a single direct mapped section, but multiple of them.
+
+	Depends how wide or tall you want to go with the design.
+
+N - way associative
+	Performance simnilar to fully associative, as n increases.
+	Much less hardware than having it fully associative
+
+Performance Comparison
+	Using SPEC2000
+	15Kbyte cache, 64bytes per line
+	p = 32bit word, 16 per line
+	k = 8 = 256 lines
+
+	Associativity
+	1	10.3\%
+	2	8.5\%
+	4	8.3\%
+	8	8.1\%
+
+	If change size of cache, then significant redution in miss rate up to approx 64KB cache size. Negligible after then. Most significant from 1KB to 2KB
+
+	<<STOPPED LISTENING>> @ slide 18
+
+\section{Cache 3}
+	Line replacement
+	Replacement Policy
+		Optimal Policy
+			If you used it recently, you might want to use it again
+			remove the item that is oldest (has oldest last access time)
+
+		Random
+			Doesn't trigger worst case scenario
+			Bad for average performance
+
+		FIFO
+			Replace longest item that's been in cache
+			Round robin over sets
+			Needs k pointers.
+			Doesn't mean that something isn't used if in cache for a long time.
+
+		LRU (Least Recently Used)
+			Replace line that was accessed long ago
+			Normally not good enough
+			Can be difficult to implement
+
+			Can be done by "flipping" the bits so that next cache position changes every time.
+
+			4 way pretty good but an approximation
+			8 way is a single more level
+			16 way gets to the point where it isn't worth it anymore to continue getting deeper as the cost of storing all these bits increases.
+				8 line pairs
+				Choose random pair and choose single LRU
+
+	Writing to memory
+		Due to nature of multilevel cache, if you write to something you have to ensure that it propagates throughout all levels of cache.
+		Don't want file written to to be replaced and updates lost.
+
+		Write through
+			Every write goes through memory. Write updates go through heirarchy
+
+			If cache hit
+				modify cache line
+				write to memory
+
+			If cache miss
+				Write allocate
+					Item put into cache
+					Write over it
+					Then update propagates through levels to memory
+
+				Write no allocate
+					CPU ignores cache and updates memory directly.
+
+			Uses write buffer so that processor doesn't stall.
+			Writes done in parallel with other proceses, and has low priority compared to reads.
+
+		Write Back
+			Write only goes to cache
+			Modification indicated with \textbf{dirty bit}
+
+			If cache hit
+				modify cache line
+				set bit
+
+			If cache miss
+				Evict conflicting cache line
+					Write to memory if dirty bit set
+				Fetch cache line
+				modify cache line
+				set dirty bit
+			Can also use a write buffer for cache misses
 
 
-\section{Extra Morteza}
-	\subsection{Single Cycle Implementation Control Signals}
+		Comparison
+			Write Through
+				Efficient Use of bus interface queuing
+					Priority to reads
+				Lots of traffic
+					Cannot use burst mode
+						Only one word written, not entire line
+
+			Write Back
+				Better for typical program. When generated writes > bandwidth
+				More difficult to implement.
+
+\section{Cache 4}
+	\subsection{Optimising cache performance}
+		\subsubsection{Performance determined by}
+			\begin{enumerate}
+				\item Miss rate
+				\item Hit rate
+				\item Miss penalty
+			\end{enumerate}
+
+		\subsubsection{Causes of cache misses}
+			\begin{itemize}
+				\item Compulsory misses
+				\begin{itemize}
+					\item First time cache line accessed
+					\item Reduced by larger blocks
+				\end{itemize}
+
+				\item Capacity Misses
+				\begin{itemize}
+					\item Working set > Cache size
+					\item Reduced by larger cache
+				\end{itemize}
+
+				\item Conflict misses
+				\begin{itemize}
+					\item Data compete for same cacheline
+					\item Reduced by higher associativity (\& Better replacement policy)
+					\item Reduced by larger cache
+					\item Reduced by \textbf{smaller} block
+					\begin{itemize}
+						\item The larger the cache line, the more misses you get (more conflicts)
+					\end{itemize}
+				\end{itemize}
+			\end{itemize}
+
+		\subsubsection{Changing Cache Aspects}
+			\begin{enumerate}
+				\item Larger cache size
+				\begin{itemize}
+					\item :) \tab Reduce miss rate
+					\item :( \tab Increases hit time
+				\end{itemize}
+
+				\item Larger cache blocks
+				\begin{itemize}
+					\item :) \tab reduces miss rate (compulsory)
+					\item :( \tab Increases miss rate (conflict)
+					\item :( \tab Increases miss penalty (mitigated with higher bandwidth)
+				\end{itemize}
+
+				\item Higher associativity
+				\begin{itemize}
+					\item :) \tab Reduces miss rate
+					\item :( \tab Increases hit time (possibly)
+				\end{itemize}
+
+				\item Write through/back
+				\begin{itemize}
+					\item No clear influence on cache performance
+					\item More influence on system bus traffic
+				\end{itemize}
+			\end{enumerate}
+
+	\subsection{Multilevel Cache}
+		Solution to memory not being able to be fast and large at the same time
 		\begin{enumerate}
-			\item \textbf{RegDst}
-				\\Denotes if ALU will be used
-				\begin{itemize}
-					\item \textbf{ZERO} if ALU not used. For things like \texttt{mult, div, jr, mfc0}
-					\item \textbf{ONE} if ALU used. For thing slike \texttt{add, sub, or, and, lt}
-				\end{itemize}
+			\item L1 cache
+			\begin{itemize}
+				\item Small
+				\item Split cache (DATA and INSTRUCTION)
+				\item Hit time very important
+			\end{itemize}
 
-			\item \textbf{Branch}
-				\\Denotes if branching will happen. Feeds into an AND gate.
-				\begin{itemize}
-					\item If \textbf{ONE} then will get 16 bit offset, shift left by 2, and add 4MSB of PC+4
-					\item If \textbf{ZERO} then continue using PC+4 as next instruction
-				\end{itemize}
-
-			\item \textbf{MemRead}
-				\\Only used for LoadWord operations, however can be used for some R-type
-
-			\item \textbf{MemtoReg}
-				\\Only used for LoadWord operations
-
-			\item \textbf{ALUop}
-				\\Denotes what operation the ALU will do
-				\begin{itemize}
-					\item 000 \tab AND
-					\item 001 \tab OR
-					\item 010 \tab ADD
-					\item 011 \tab SUB
-					\item 111 \tab LessThan
-				\end{itemize}
-
-			\item \textbf{MemWrite}
-				\\Only used for StoreWords operation
-
-			\item \textbf{ALUsrc}
-				\\Used for Load and Store opeations. Denotes if ALU uses register or 16bit immediate value from instruction
-
-			\item \textbf{RegWrite}
-				\\R-type and load word use. Potentially used for write data for Register File.
+			\item L2 \& L3 Cache
+			\begin{itemize}
+				\item Larger (lines may also be larger)
+				\item Unified (not split to I and D)
+				\item Reduces miss penalty for L1
+				\item Faster than main, slower than L1
+			\end{itemize}
 		\end{enumerate}
 
-	\subsection{Multiple Cycle Implementation Control Signals}
-		\begin{enumerate}
-			\item \textbf{RegDst}
-				\\Denotes if ALU will be used
+		\begin{itemize}
+			\item \textbf{Inclusive}
+			\begin{itemize}
+				\item Populated from main memory up to L1
+				\item Simple management
+				\item Coherent easily (if in L2, also in L3)
+				\item Total size is size of L3
+				\item Used by Intel
+			\end{itemize}
+
+			\item \textbf{Exclusive}
+			\begin{itemize}
+				\item If exist in L2, doesn't exist in other cache levels
+				\item Complex management
+				\item Difficult to keep coherent
+				\item Works like victim cache
 				\begin{itemize}
-					\item \textbf{ZERO} if ALU not used. For things like \texttt{mult, div, jr, mfc0}
-					\item \textbf{ONE} if ALU used. For thing slike \texttt{add, sub, or, and, lt}
+					\item Line removed from L2 goes to L3
+				\end{itemize}
+				\item Total size is sum of size of levels of cache (higher than inclusive)
+				\item Used by AMD Bulldozer/Piledriver
+			\end{itemize}
+		\end{itemize}
+
+	\subsection{Programming for cache performance}
+		\subsubsection*{Objectives}
+			\begin{itemize}
+				\item Minimise miss rate
+				\item Hide latency
+			\end{itemize}
+
+		\begin{itemize}
+			\item \textbf{Programmers}\tab can't change hardware, access times or penalties
+			\item \textbf{Prefetching}\tab hides latency by loading cache line before accessing it. HW = CPU prefetching, SW = machine instruction
+			\item \textbf{Bypassing}\tab reduces miss rate by not caching writes. SW = machine instructions
+		\end{itemize}
+
+		\subsubsection{Mimising miss rate}
+			\begin{itemize}
+				\item Programmer needs to know size of cache, line size and organisation.
+				\item Try to use as much of lines as possible, physically and frequency before overwriting it.
+				\item Maximise spatial and temporal locality
+			\end{itemize}
+
+		\subsubsection{Programming approaches: adjust...}
+			\begin{itemize}
+				\item Size of working set
+				\begin{itemize}
+					\item Divide problems to smaller chuck to fit in cache level
+					\item Usually not use full cache size, due to competition with instructions and OS calls.
 				\end{itemize}
 
-			\item \textbf{Branch}
-				\\Denotes if branching will happen. Feeds into an AND gate.
+				\item Access patterns
 				\begin{itemize}
-					\item If \textbf{ONE} then will get 16 bit offset, shift left by 2, and add 4MSB of PC+4
-					\item If \textbf{ZERO} then continue using PC+4 as next instruction
+					\item Algorithm have freedom
+					\item Choose best for performance (row major and column major)
 				\end{itemize}
 
-			\item \textbf{MemRead}
-				\\Only used for LoadWord operations, however can be used for some R-type
-
-			\item \textbf{MemtoReg}
-				\\Only used for LoadWord operations
-
-			\item \textbf{ALUop}
-				\\Denotes what operation the ALU will do
+				\item Stride
 				\begin{itemize}
-					\item 000 \tab AND
-					\item 001 \tab OR
-					\item 010 \tab ADD
-					\item 011 \tab SUB
-					\item 111 \tab LessThan
+					\item Longer the stride the worse it is.
 				\end{itemize}
+			\end{itemize}
 
-			\item \textbf{MemWrite}
-				\\Only used for StoreWords operation
+\section{Virtual Memory 1}
 
-			\item \textbf{ALUsrc}
-				\\Used for Load and Store opeations. Denotes if ALU uses register or 16bit immediate value from instruction
+\section{Virtual Memory 2}
+	\subsection{TLB - Translation Look-aside Buffer}
+		\subsubsection{Performance problem}
+			Have to translate every address before it is accessed
+			Therefore 3 memory accesses required: page table, data and address + translation
+			More chance for cache miss.
 
-			\item \textbf{RegWrite}
-				\\R-type and load word use. Potentially used for write data for Register File.
-		\end{enumerate}
+			TLB in memory management unit of every modern CPU.
+			Address translation done before going to L1 cache.
+
+		\subsubsection{TLB metrics}
+			\begin{itemize}
+				\item Metrics - Typical
+					\begin{itemize}
+						\item Size: 16-512 entries
+						\item Block size: 1-2 page table entries
+						\item Hit time: 0.5-1 cycle
+						\item Miss penalty: 10-100 cycles
+						\item Miss rate: 0.01\% - 1\%
+						\item Levels: 1-2
+						\item Split: data and instruction split
+					\end{itemize}
+					
+				\item Associativity
+					\begin{itemize}
+						\item TLB’s are small
+						\item Need to be fast
+						\item Fully associative OK for small caches
+						\item LRU too expensive
+						\item Rarely low associativity
+						\item Miss expensive, aim for low miss rate
+					\end{itemize}
+			\end{itemize}
+
+		(6) the addresses of physical page number + page offset are the same as address tag + cache index + block offset + byte offset
+
+		amd has level 0 caches as their fastest level
+		\subsubsection{TLB misses}
+		\begin{itemize}
+			\item Not the same as page fault!
+			
+			\item Page hit
+			\begin{itemize}
+				\item Can be handled by hardware or software
+			\end{itemize}
+			
+			\item Page fault - When quick translation doesn't find anything and therefore not in memory and must get from disk
+			\begin{itemize}
+				\item Handled by software
+			\end{itemize}
+			
+			\item Software is invoked via exceptions
+		\end{itemize}
+
+\section{Parallelisation 1}
+	\subsection{Principles}
+		Motivation = 
+		Types =
+
+		\subsubsection{Forms of CPU parallelism}
+		\begin{itemize}
+			\item Instruction level
+			\begin{itemize}
+				\item Pipeline
+				\item Multiple issue
+				\begin{itemize}
+					\item Large instruction word (static)
+					\item Superscalar (dynamic)
+				\end{itemize}
+				\item SIMD
+			\end{itemize}
+			\item Thread level parallelism
+			\begin{itemize}
+				\item Simultaneous multithreading
+				\item Modules - AMD bulldozer
+				\item Multicore
+			\end{itemize}
+		\end{itemize}
+
+	\subsection{Thread level parallelism}
+		Have to rewrite the programs
+		Frequency of processors aren't improving much anymore, therefore need to utilise more cores.
+
+		SMT - Simultaneous multithreading (Hyperthreading)
+			Still single pipeline, but 2 registers for each pipeline stage
+			Can process 2 threads
+			Superscalar (usually)
+			Situations where HT is good, and others where it is bad/neutral
+
+		Modules - AMD bulldozer
+			halfway between SMT and multicore
+			Almost everything doubled, except for IF, ID and commit unit
+
+		Multicore
+			Multiple independent processor on the same die
+			Share caches (partially)
+			Combined with SMT/HT
+
+\section{Parallelism 2}
+	\subsection{Memory and parallel systems}
+		Location and access
+			Location
+				Centralised in PC
+				Distributed in med-large parallel systems
+
+			Access
+				Shared memory with multicore, pc, servers
+				Message passing in clusters and large parallel systems
+
+			Focus on shared memory and multicore processors
+			u
+
+
+
+
+
+
+	\subsection{Shared memory multiprocessors}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
