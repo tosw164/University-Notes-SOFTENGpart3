@@ -2174,10 +2174,67 @@ Week 3 Wednesday
 			\begin{itemize}
 				\item Assumption that if page not used recently then won't be used in near future
 				\item Generally better than FIFO, but not all the time.
+				\item Cannot suffer from Belady's anomaly because recently accessed pages have higher priority and will therefore not be replaced. It does not assume that the first page loaded in is safest to replace.
+				\item More expensive as need to find a way to store last access time for each page.
+				\item \textbf{Or} can have list of pages and move to top of list if accessed.
+				\item \textbf{Approximations:}
+				\begin{itemize}
+					\item \textbf{Reference bit} Set when page is used. One per tick, a right shift is done to the value with either a high or low passed in depending on if the page was accessed. These values are compared for each page and one with lowest value is replaced.
+					\item \textbf{Second chance}: Algorithm based off FIFO, but if referenced bit of first in page is set, it unsets it and moves it to back of queue and checks the next one.
+				\end{itemize}
 			\end{itemize}
-
+			
+			\item \textbf{Least Frequently Used (LFU)}
+			\begin{itemize}
+				\item Uses count of memory accesses per page
+				\item When page needs replacing, does it on page with lowest number
+				\item Pages can stay longer than needed if accessed many times in short period of time.
+				\item Not commonly used
+			\end{itemize}
+			
+			\item \textbf{Most Frequently Used (MFU)}
+			\begin{itemize}
+				\item Reverse of LFU
+				\item Concept behind this is that pages with few accesses are newly added and may need to be used later
+				\item Not commonly used
+			\end{itemize}
 		\end{enumerate}
 
+	\subsection{Windows VMM}
+		\begin{itemize}
+			\item \textbf{Virtual Memory Manager} runs in backgorund maintaining memory policies.
+			
+			\item Processes use working set min/max
+			\begin{itemize}
+				\item Process guaranteed working set min
+				\item If number of frames below max then try to allocate more
+				\item If not enough frames then trimmed to min
+				\item Default size = \texttt{30}
+			\end{itemize}
+			
+			\item Privileged processes lock pages in real memory, for things like real-time processes and device drivers
+			
+			\item \textbf{Clustering} - pages surrounding also get brought in. Assume that if you pull in a page then you may need to use ones around it too to reduce page replacement time.
+			
+			\item Windows prefetching
+			\begin{itemize}
+				\item pages and files references in 10 seconds of opening application
+				\item Keep track of this information, loaded up again next time app opened.
+				\item Defrag every couple of days.
+			\end{itemize}
+		\end{itemize}
+		
+	\subsection{Thrashing}
+		\begin{itemize}
+			\item When number of pages in all working sets higher than number of available pages.
+			\item Everything will be a page fault, severely affecting work efficiency.
+			\item \textbf{Batch system} can thrash if set up to increase number of programs at a time. But low CPU utilisation will lead to thrashing.
+		\end{itemize}
+		
+	\subsection{Location of process memory}
+		Addressable memory in UNIX/Windows scattered in many places and page files not loaded yet or paged out.
+		
+		
 		
 
 		
