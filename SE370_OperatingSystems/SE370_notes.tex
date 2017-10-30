@@ -1,7 +1,7 @@
 \documentclass{article} 
 \newcommand\tab[1][0.5cm]{\hspace*{#1}}
 
-\title{SOFTENG370 Notes 2017} 
+\title{SOFTENG 370 Notes}
 \author{Theodore Oswandi} 
 
 \usepackage[
@@ -14,7 +14,8 @@
 \setlist{noitemsep}
 \usepackage[none]{hyphenat}
 
-\begin{document} \maketitle{} 
+\begin{document} 
+\maketitle{} 
 
 \tableofcontents
 \newpage
@@ -1862,6 +1863,336 @@ Week 3 Wednesday
 
 			Works best if number of things allocated isn't very large as it is preferable to load whole table into memory.
 
+
+<<MISSED A LECTURE>>
+
+	slide 12<<Opening a file in UNIX>>
+
+		fd example doesn't use root directory
+		changing where stuff redirects to/from by closing an opening file.
+
+<<FILE VERSIONING>>
+	
+<<19 slide 15>>
+	Better Methods
+		<<>>
+	Transparency
+		Things are hidden. Not seeing thed details/implementation
+		User shouldn't be able to see differences/complications
+		Location Transparency
+			No connection between name of file and where it is stored
+
+
+		Migration Transparency
+			Moving file without noticing it moving
+			Location Independence - name doesn't change when you move it
+
+
+	Collections of Files
+		 Don't keep all information for all files
+		 <<>>
+
+	Using remote files
+		Need to transfer file data over network to client
+		May cache it to client memory or local disk.
+		Can be expensive
+		Also need to let all users know if cached, that somebody has modified the file.
+
+	Caching
+		Blocks of file cached locally
+		Accessing file done to the cache
+		Modify file:
+			Write through - every write requires user to send black back to server
+			Delayed Write - Update sent to server delayed, or when file closed.
+
+		<<PROS CONS>>>
+
+	Consistency Semantics
+		way changes in data is distributed
+
+		UNIX - changes immediately visible
+		SESSION - process gets copy of file and changes not visible until file is closed.
+	
+\section{Lecture 20}
+	Stateful
+		Server knows who has file and what they can access. Keeps track of file pointer too.
+		Client gets identifier to use to access the file
+		Server can intelligently cache files that it knows client it already trying to access
+		State information lost if server shuts down/crashes.
+		If client dies, 
+
+	Stateless
+		Server doesn't hold anything about state of system
+		Need to pass information to and from server constantly.
+		A lot easier to restart the server/system.
+		If client goes down, not a problem from server POV. Since it only just replies to requests.
+			Only if pure stateless. In reality the server will store some kind of information.
+
+	NFS
+		Remote service technique, mostly stateless
+		Add some information to the inode. Contains a bit to denote if file is local or not.
+		No need for dedicated servers
+		All machines share files with each other. Every machine can be server
+		Can mount things whereever you want (If you're an admin)
+		Works in heterogeneous environment. Doesn't matter what machines were using, NFS can work.
+		Need to make sure that when you perform operation on server, that adaptations/conversions happen since server and client may not be running in same environment.
+
+	Automounter
+		Client mounting/unmounting directories in other systems on demand.
+		<<MORE>>
+
+	NFS protocol
+		make system call
+		virtual file system determine if local or remote
+		??
+		request goes to vfs on remote machine
+		does process locally
+		go back to result
+
+	<<PROBLEMS WITH NFS>>
+
+	AFS
+		mount point at /afs/...
+		tries to cache as much as possible.
+		Uses location database to track where things are.
+		<<:D>>
+
+		Shared access to files
+			Access controllers
+			Session semantics - file only updated when file is closed.
+			Callbacks
+				Promise from server that given file is up to date.
+				Once server gets update to file, breaks all callbacks other clients have about the modified file
+				Lost update possible if 2 clients update the same file.
+
+
+\section{Lecture 21}
+	SAN and NAS
+		NAS <<>>
+		SAN <<>>
+
+\section{Lecture 22 - Memory}
+	classic memory heirarchy
+		primary = ram
+		secondary = Disk
+		Tertiary = Archival
+
+	Address binding
+		Compile Time
+			Put instruction at fixed address, call using jump instruction
+
+		Load Time
+			Object modules uses tables of offsets
+			Mapping done as modules loaded
+			Precompiled libraries
+
+		Run time
+			Mapping of final address maintained on the go
+			Used in conjunction with load and compile times
+
+	Memory spaces
+		Need to protect OS memory from programs, and enabling programs larger than memory to run
+
+		Split memory
+			Can protect with single fence register. 
+
+	Dividing memory
+		2 registers to denote how much memory a job should have access to. If try to get sometin gout of that range then should not work since it is violating your allocated space
+
+	Two different addresses
+		Make process feel like it starts at address 0. Uses an offset to get real address.(relocation register)
+
+		This is a big conceptual change, since it now has 2 addresses to represent the same address.
+
+		Everything needs to be in contiguous memory.
+
+
+	Splitting memory to smaller chunks
+		Uses something similar to file allocation table.
+		Stores [Chunk, base, limit]
+
+		Two approaches
+			Same sized chunks - pages
+			Variable sized chunks - segments
+
+			classic argument about varible and static about flexibility and simplicity
+
+	Paged System address translation
+		Local address divided into
+		\begin{enumerate}
+			\item Page number\\
+				Index to which page table contains base address
+			\item Page offset\\
+				Added to base address to get physical address.
+		\end{enumerate}
+
+	Frames and Pages
+
+	Tables
+
+	Different sized chunks
+
+	Segments
+
+	Allocation stratergies
+		No internal fragmentation, only allocate space we want
+		Can get external fragmentation
+		Stratergies
+		\begin{enumerate}
+			\item First fit
+			\item Next fit
+			\item Best fit
+			\item Worst fit
+		\end{enumerate}
+		Defrag memory if need large chunk, faster than doing it to disk
+
+	How much space in hole
+		Knuth's 50\% rule. If N segments then N/2 holes.
+		If average hole size same as averages segment size, need to keep 1/3 of memory free
+
+
+\section{Lecture 23}
+	\subsection{Half speed memory}
+		\begin{itemize}
+			\item If paged or segmented memory, then need 2 memory access to get logical memory address.
+			\begin{itemize}
+				\item Page/segment table query
+				\item Data query
+			\end{itemize}
+
+			\item Memory management unit caches recent page table information in faster hardware cache
+			Stored in \texttt{Translation look-aside buffer} TLB
+		\end{itemize}
+
+	\subsection{Average access time}
+		Hit ratio - times pages found to not found in associated registers
+
+	\subsection{TLB coverage}
+		Smaller the cache the better
+		But generally need larger page sizes or overall cache too small. But more IO therefore internal fragmentation
+		Variable page size good, but need good allocation algorithm
+
+	\subsection{Page table size}
+		\begin{itemize}
+			\item If 32bit address space with 12bit offest, then get about a million entries
+			\item Most process don't use all memory
+			\item Limit page table values to valid ones
+			\item Use page table lengh register, with valid bit flag
+			\item Only allocate parts of table that we need
+		\end{itemize}
+
+	\subsection{Inverted page tables}
+		Page table now only contains [pid, page number]
+		Frame is the index of the page table.
+		Address based off both pid and page number, hash table can be used for allocation.
+
+	\subsection{Paging and segmentation}
+
+	\subsection{Programs larger than memory}
+		Swapping - moving pages in and out of disk
+
+	\subsection{Does it all have to be there?}
+		Try provide more memory than RAM
+		In x86 there may be less logical memory than physically there.
+
+	\subsection{Locality of reference}
+		
+		
+\section{Lecture 24}
+	\subsection{Effective Access Time}
+		Since processors now thinks it has fast memory, but stored on disk. It will appear that the process is a lot slower due to having to access that much slower memory.
+		
+		\subsubsection*{Calculation}
+		Accommodate for:
+		\begin{itemize}
+			\item TLB hit
+			\item TLB miss and page table hit
+			\item TLB miss and page table miss, requiring getting another page.
+		\end{itemize}
+
+	\subsection{How often we want page faults}
+		Don't want it to happen very often.
+		If want to be half as slow (compared to everyting in RAM) then need to only get page fault 1/600,000 times
+
+	\subsection{Reducing page faults}
+		\begin{itemize}
+			\item Different processes access different number of pages in memory.
+			\item Allocate frames equally or propotionally depending on priority.
+			\item Need to have minimum \& maximum number of pages.
+			\item Need currently required pages in memory
+		\end{itemize}
+
+		
+	\subsection{Working sets}
+		\begin{itemize}
+			\item Used to keep track of pages needed in real memory to keep process running. Observe process over short window and record the page accesses to determine the working set.
+			\item Finding this time window is hard since you don't want it too short (not enough information) or too long (too many pages)
+			\item Using a \textbf{reference bit} on the pages that are accessed allows identification of these used pages.
+		\end{itemize}
+		
+	\subsection{Page Fault Frequency}
+		\begin{itemize}
+			\item Used to control number of frames allocated to process
+			\item The frequency of page faults drops a lot when you initially increase number of pages. But law of diminishing returns exists, so set upper and lower bounds and add/remove frames to stay within them.
+		\end{itemize}
+		
+	\subsection{Choosing pages to replace}
+		\begin{itemize}
+			\item Need to replace page if no free ones left
+			\item 2 ways to select these pages
+				\begin{itemize}
+					\item \textbf{Global}: any frame can be chosen. Number of frames for process varies.
+					\item \textbf{Local}: frame must be in process' allocated frame set. There are less frames to choose from.
+				\end{itemize}
+			\item Normally global replacement used.
+		\end{itemize}
+		
+		\textbf{Picking:}
+		\begin{itemize}
+			\item Unmodified pages don't have to be written to disk. \textbf{Dirty bit} in page table entry used to determine if changes have been made to frame.
+			\item Pages that aren't going to be used soon in the future should be replaced, but can't see into the future.
+		\end{itemize}
+		
+	\subsection{Selection algorithms}
+		\begin{enumerate}
+			\item \textbf{Random}
+			\begin{itemize}
+				\item Every process treated equally
+				\item Easy to implement
+				\item With enough pages the chance of worst case very low
+			\end{itemize}
+			
+			\item \textbf{First In First Out (FIFO)}
+			\begin{itemize}
+				\item Queue of pages, remove at head add to tail
+				\item Simple
+				\item Important pages replaced as often as less important ones
+				\item \textbf{Belady's anomaly }- increasing number of pages can increase page faults.
+			\end{itemize}
+			
+			\item \textbf{Least Recently Used (LRU)}
+			\begin{itemize}
+				\item Assumption that if page not used recently then won't be used in near future
+				\item Generally better than FIFO, but not all the time.
+			\end{itemize}
+
+		\end{enumerate}
+
+		
+
+		
+		
+
+\section{Lecture 25}
+	
+	setuid
+	\texttt{chmod u+s} on something. When program is run, runs as it if was executed by user.
+
+	If you can create another process when in a setuid program, then will be assumed that uid had executed/created it.
+	
+	
+\section{Lecture 31}
+	
 
 
 \end{document}
