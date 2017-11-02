@@ -2343,6 +2343,98 @@ Week 3 Wednesday
 			
 	
 \section{Lecture 26}
+	\subsection{Implementing access matrix}
+		\begin{itemize}
+			\item Too much information required for an overall matrix (cell for every object/domain pair)
+			\item Have sparse matrix (with many 0s)
+			\item \textbf{Hold information in rows}, each row corresponding to rights of domain over all objects it can use. Called \textbf{Capability Lists}
+			\item \textbf{Hold information in columns}, each representing rights over an object. Called \textbf{Access Lists}
+			\item 
+		\end{itemize}
+		
+	\subsection{Confused Deputy}
+		Basically, some program with special rights to some files (like those that store password). If something asks it to change another person's password, should it? (\textit{security implications})
+		
+	\subsection{Capabilities}
+		Is a permission to access object. Stored with domains and refer to object and its access rights.\\\\
+		$<f1, "read, write"> \\<f2, "execute"> \\<d2, "control">$\\\\
+		When process tries to access something protected, passes file name and capability; which is then checked by reference monitor to allow access.
+		\begin{itemize}
+			\item Need to make sure domain can't change its own capability
+			\item The capability list is a protected object
+			\item Should only be created by OS, with owner capability that made process.
+			\item Need to ensure that these cannot be snooped on network
+		\end{itemize}
+		
+		\subsubsection{Keeping them safe}
+			\begin{itemize}
+				\item Ensure they are encrypted or hardware used to ensure safety
+				\item Can store capabilities in protected kernel memory. Best for single system
+				\item Use tags to ensure that only OS can change files relating to capabilities
+				\item Encryption used for distributed systems, with public key to check but not create them.
+			\end{itemize}
+			
+		\subsubsection{Problems}
+			\begin{itemize}
+				\item Hard to determine who has what access rights. Passing stuff down makes it hard to track
+				\item Hard to revoke permissions due to same reason
+				\begin{itemize}
+					\item Keep track of all domains with capability (hard)
+					\item \textit{indirection} - Use pointers to hold capability information. Domain with old ones can't access
+					\item \textit{reacquisition} - use TTL and have them keep requesting capabilities.
+				\end{itemize}
+			\end{itemize}
+	
+	\subsection{Access Control List}
+		Each object has list of domains and their access rights\\\\
+		For object A:\\
+		$<d1, "read, write"> \\<d2, "execute"> \\<d3, "control">$\\\\
+		When something tries to operate on object, it checks its domain against ACL and see if can do it or not.\\
+		No problems revoking as it just modifies the ACL.
+		
+		\subsubsection{AFS \& NTFS}
+			\textbf{AFS} uses ACL only on directories, however \textbf{NTFS} allows you to access files even if you don't have directory permissions.
+			
+		\subsubsection{Problems}
+			\begin{itemize}
+				\item Slow down file searching
+				\item Potentially unnecessarily complex
+				\item Confusing and difficult to understand for flexibility given
+				\item Some prefer simple UNIX file protection mechanism
+			\end{itemize}
+			
+		\subsubsection{Reducing Information}
+			\begin{itemize}
+				\item Lots of permission information in the system
+				\item ACL and cap system have default access to object to reduce necesary information
+				\item ACL can do heirarchical inheritance. But at cost of flexibility (\textit{hidden file harder to implement})
+			\end{itemize}
+			
+	\subsection{UNIX permissions}
+		\begin{itemize}
+			\item Has pemission bits for every file
+			\item \texttt{RWX} for \texttt{owner}, \texttt{group} and \texttt{other}
+			\item Or \texttt{s} for \texttt{setuid/setgid} permission\\
+			\item Done by OS divided to domains. Kernel, and Sys/Usr applications.
+			\item Each domain has minimum permissions, and access to system calls.
+			\item Use strict typing system with no global superuser (each domain has its own admin)
+			\item \textbf{Global administration} done by restarting system with different admin kernel.\\
+			\item \textbf{Domains \& Types} access checking built in and cannot be circumvented.
+		\end{itemize}
+		
+	\subsection{SELinux}
+		\begin{itemize}
+			\item \textbf{S}ecurity \textbf{E}nhanced \textbf{L}inux
+			\item Mandatory Access Control (MAC) to all objects in file system, with Inode containing extra attributes.
+			\item \textbf{Policies} handled by policy files. Roles of user and whatnot
+			\item Roles can be associated with servers
+			\item Normal UNIX permission bit checked before SELinux check
+		\end{itemize}
+		
+\section{Lecture 27}
+	
+
+
 	
 	
 	
