@@ -2234,18 +2234,120 @@ Week 3 Wednesday
 	\subsection{Location of process memory}
 		Addressable memory in UNIX/Windows scattered in many places and page files not loaded yet or paged out.
 		
-		
-		
-
-		
-		
-
 \section{Lecture 25}
+	\subsection{Protection}
+		\begin{itemize}
+			\item \textbf{Protection} mechanism of controlling access to resources
+			\item \textbf{Subjects} active components in system that use resources
+			\item \textbf{Objects} resources being used
+		\end{itemize}
+		
+		Objects can be subjects. Want to ensure that subjects only access the objects they are permitted to.
+		
+	\subsection{Goals}
+		Protect against: Malicious intent, Stupidity, Accident, Errors\\
+		
+		Want to both make sure that subjects only access objects they are permitted to, but also to limit access to the \textbf{minimum} required to achieve their goals. (\textbf{need to know principle})\\
+		
+		Access to objects should be mediated by a \textbf{reference monitor}
+		
+		\subsubsection{Examples}
+			\begin{itemize}
+				\item \textbf{Privileged Instructions} - process must be executing in kernel mode with execute without exception
+				\item \textbf{Memory Protection} - kernel address space protected from user level instructions. Other process addresses are also protected
+				\item \textbf{File System} - User files are protected from another user
+			\end{itemize}
+			
+	\subsection{Protection domains}
+		\begin{itemize}
+			\item Access right associated with protection domain
+			\item Processes execute inside protection domain and has its rights \& privileges.
+			\item Normal system can't keep up with all subject/object/access rights. Therefore combined and stored in pairs of: \tab $<object, rights>$
+		\end{itemize}
+		
+	\subsection{Intersection of domains}
+		\begin{itemize}
+			\item Domains can overlap
+			\item Therefore permission can be shared
+			\item Need way to switch between domains, start domain has to be able to switch to resulting one.
+		\end{itemize}
+		
+	\subsection{Crossing domains}	
+		\begin{itemize}
+			\item Doing so is dangerous
+			\item Commonly used to attack systems
+			\item Want users to have controlled access to resources.
+			\begin{itemize}
+				\item user domain allow access to program
+				\item program domain allow access to resources
+			\end{itemize}
+		\end{itemize}
+		
+		\textbf{UNIX}
+		\begin{itemize}
+			\item Domain associated with user and group
+			\item Running program take on permission of user
+			\item Can choose to make program run in user or group mode.
+		\end{itemize}
+		
+	\subsection{How to \texttt{setuid}}
+		\begin{itemize}
+			\item 	\texttt{chmod u+s} on something. When program is run, runs as it if was executed by user.
+			\item 	If you can create another process when in a setuid program, then will be assumed that uid had executed/created it.
+			\item 	Very dangerous, if \texttt{superuser} then will have full permissions
+		\end{itemize}
+		
+		\subsubsection{Precautions}
+			\begin{itemize}
+				\item Restrict UID. Don't use \texttt{root}
+				\item Reset UID when calling \texttt{exec}
+				\item Close unnecessary files before calling \texttt{exec}. If priviledged file open then will still be able to access it.
+				\item If need to use \texttt{root} then do it in restricted root directory. (using \texttt{chroot} command)
+				\item Invoke subprogram using fully fledged name
+			\end{itemize}
+			
+	\subsection{Multics}
+		\paragraph{Ring structure} If ring more outer than another then has more privileges.\\
+		
+		\textbf{Segments}:
+		\begin{itemize}
+			\item Each file loaded as segment. Has associated permissions and ring number
+			\item Access to other segment depend on: [current ring number, target ring number, type of access required]
+			\item Sometimes lower ring number needs to do something in higher permission ring. Only specific entry points allow this.
+		\end{itemize}
+		
+		\textbf{Other approaches:}
+		\begin{itemize}
+			\item \textbf{Special Directories} with programs running in privileges of directory. \\Safer than \texttt{setuid}
+			\item Have server be the ones that execute privileged instructions
+			\item Ensure return of domain after system call
+		\end{itemize}
+		\textbf{NOTE}: Be careful when doing all of these
+		
+	\subsection{Access Matrix}
+		\begin{itemize}
+			\item \textbf{rows} represent domain
+			\item \textbf{columns} represent objects
+		\end{itemize}
+		
+		\texttt{access(i,j)} is set of operations that process in domain (i) can invoke on object (j)
+		
+		\subsubsection{Changing permissions}
+			\begin{itemize}
+				\item When new object, new column added and permisisons set.
+				\item Domains objects too, therefore switching domain is only allowed when you can execute the object
+				\item 
+				\item When something has a star (\texttt{read*}) then can copy permission on the same object/column. 
+				\item If something has \textbf{owner} then can do whatever they want to that column.
+			\end{itemize}
+			
 	
-	setuid
-	\texttt{chmod u+s} on something. When program is run, runs as it if was executed by user.
-
-	If you can create another process when in a setuid program, then will be assumed that uid had executed/created it.
+\section{Lecture 26}
+	
+	
+	
+	
+	
 	
 	
 \section{Lecture 31}
