@@ -2655,9 +2655,89 @@ Week 3 Wednesday
 			\end{itemize}
 			\item \textbf{iOS}: files can only be created in sandboxed area with limited access.
 		\end{itemize}
+		
+		
+\section{Lecture 29}
+	\subsection{Device drivers}
+		\begin{itemize}
+			\item Connect OS I/O to hardware. 
+			\item Devices vary.
+			\item I/O system call encapsulate device behaviour			
+		\end{itemize}
 	
+	\subsection{Services}
+		\begin{itemize}
+			\item Current OS make device act like file
+			\item \textbf{open} - make device usable
+			\item \textbf{read} - get input
+			\item \textbf{write} - send output
+			\item \textbf{control} - special command to device.
+			\item \textbf{close} - close connection between device and process
+		\end{itemize}
+			
+	\subsection{Connections}
+		\begin{itemize}
+			\item Connections between device and kernel close.
+			\item Drivers need: reserve memory, interrupt handle, privileged access
+			\item Loaded \& initialised at different times. Boot/running.
+		\end{itemize}
+		
+	\subsection{How OS knows}
+		\begin{itemize}
+			\item OS checks for standard devices. (Device probing)
+			\item Admin edit config files depending on attached devices
+			\item Design hardware to idenfity itself to OS
+		\end{itemize}
+		
+	\subsection{Conflicts}
+		\begin{itemize}
+			\item Computers have limited IO ports. Therefore device conflict
+			\item Bus interfaces help. It shares resources amongst many devices
+			\item Plug and Play.
+			\begin{itemize}
+				\item No HW addresses, configurable in Software
+				\item Identify themselves and drivers can be loaded
+				\item Automatic resource allocation
+			\end{itemize}
+		\end{itemize}
+		
+	\subsection{Finding device}
+		\begin{itemize}
+			\item Program have to be able to find device name
+			\item Device can public name to systemwide table.
+			\item UNIX has it in /dev directory and marked (c or b) as devices.
+		\end{itemize}
+		
+		\subsubsection{Block devices}	
+			\begin{itemize}
+				\item Addressing complete blocks using a buffer.
+			\end{itemize}
+			
+		\subsubsection{Character Devies}
+			\begin{itemize}
+				\item Everything that doesn't use block buffer chache
+				\item peripherals
+				\item Uses Raw/Cooked(modified) data and passes to requesting program.
+			\end{itemize}
 	
-	
+	\subsection{Talking to driver}
+		\begin{itemize}
+			\item IO request block to data structure to complete IO request.
+			\item Constructed by IO system calls.
+			\item \textbf{Pressing key on keyboard}
+			\begin{itemize}
+				\item Press key
+				\item Interrupt happens, get keycode
+				\item send to program and unblocks
+			\end{itemize}
+		\end{itemize}
+		
+	\subsection{Tree of devices}
+		\begin{itemize}
+			\item Device drivers can be in heirarchy
+			\item Can use same method to add drivers/functionality
+		\end{itemize}
+		
 \section{Lecture 31}
 	
 
