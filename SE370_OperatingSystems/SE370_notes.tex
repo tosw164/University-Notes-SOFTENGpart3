@@ -2543,9 +2543,118 @@ Week 3 Wednesday
 			\end{itemize}
 			
 			\item \textbf{Knowledge}
+			\begin{itemize}
+				\item \textbf{Password guessing}
+				\item Brute force, trying all combinations. System should wait a bit so brute force less viable
+				\item The longer the password the harder it is to guess
+				\item Intelligent search. Things like rainbow tables and other common passwords
+			\end{itemize}
 		\end{enumerate}
+
+\section{Lecture 28}	
+	\subsection{Stealing Passwords}
+		\begin{itemize}
+			\item Shoulder surfing
+			\item Video cameras
+			\item Snooping on a network of plain text passwords
+			\item Keyloggers
+			\item Trojan horse login screen
+			\item Keyboard sniffing
+		\end{itemize}
+		
+	\subsection{Making password safe}
+		\begin{enumerate}
+			\item Don't write them down
+			\item Mix cases
+			\item Change them regularly
+			\item System produced passwords			
+		\end{enumerate}
+		
+	\subsection{Password files}
+		\begin{itemize}
+			\item Need to store password files somewhere
+			\item Keep file secret or make one way encryption.
+			\item One time passwords. At end of session or token based.
+			\item Use algorithm instead of password.
+			\item Two factor (PIN sent to another device)
+		\end{itemize}
 	
+	\subsection{Single sign-on}
+		\begin{itemize}
+			\item Don't want people to log in everywhere on distributed system
+			\item User SSO service instead, which remembers password and give them to systems that need them.
+			\item Make sure not to store/transmit passwords in cleartext
+		\end{itemize}
+		
+	\subsection{Kerberos}
+		\begin{itemize}
+			\item Uses tickets granted by central security servers
+			\item \textbf{KAS} Kerberos Authentication Server check user and server at logic and issues tickets
+			\item \textbf{TGS} Ticket Granting Server issues tickets to services.
+			\item Based on the Needham-Schroeder Protocol
+			\item \textbf{Authentication:}
+			\begin{itemize}
+				\item Ask for session key from KAS and ticket to TGS.
+				\item Ticket encrypted so user can't modify it
+				\item \textit{More stuff I don't want to write down}
+			\end{itemize}
+		\end{itemize}
+		
+		\subsubsection{Aspects}
+			\begin{itemize}
+				\item KAS and TGS DB need updating
+				\item Keep track of expiry times.
+				\item Kerberos \textit{realm} is servers under one admin domain
+			\end{itemize}
+			
+	\subsection{Program threats}
+		Things can go wrong if you run program made by another person.
+		\begin{itemize}
+			\item Trojan horse
+			\item Spoofing and Phishing. Man in middle attacks
+			\item Backdoors
+			\item Logic bomb
+			\item Rootkit. Replace command with version that hide its existence
+		\end{itemize}
+		
+	\subsection{System threats}
+		\begin{itemize}
+			\item Worms - replicate and spread
+			\item DDoS
+			\item Virus - spread and do damage. Dangerous on PC.
+		\end{itemize}
+		
+	\subsection{Mobile Security}
+		\begin{itemize}
+			\item Devices portable
+			\item Convenienct (therefore security tradeoff)
+			\item Use to \textit{combat}: permissions, sandboxing, code signing.
+		\end{itemize}
+		
+		\begin{itemize}
+			\item \textbf{Attack surface} - code run without authenticaiton. The less code the better.
+			\item \textbf{Check before running} - reduces chance of running malware. App store does checks on submitted apps.
+			\item \textbf{Code signing} - make sure code you are running is the verified one.
+		\end{itemize}
+		
+	\subsection{Permissions}
+		\begin{itemize}
+			\item Bad idea to give full permissions to apps
+			\item Android (before ver6) asked during install. No explanation given
+			\item Android (after ver6) will ask at runtime
+			\item iOS didn't ask for location. However it now asks for things.
+		\end{itemize}
 	
+	\subsection{Sandboxing}
+		\begin{itemize}
+			\item Last protection
+			\item \textbf{Android}: 
+			\begin{itemize}
+				\item By default files are onl accessible by creating app.
+				\item Files on external storage globally accessible and writable.
+			\end{itemize}
+			\item \textbf{iOS}: files can only be created in sandboxed area with limited access.
+		\end{itemize}
 	
 	
 	
