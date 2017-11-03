@@ -2431,12 +2431,119 @@ Week 3 Wednesday
 			\item Normal UNIX permission bit checked before SELinux check
 		\end{itemize}
 		
-\section{Lecture 27}
+\section{Lecture 27 - Security}
+	\subsection{Key pairs}
+		\begin{itemize}
+			\item Capabilities use cryptography
+			\item \textbf{Symmetric algorithm} use same key twice, but has to be secret
+			\item \textbf{Asymmetric algorithm} use different keys for encrypt and decrypt. Impossible to produce one from another.
+		\end{itemize}
+
+	\subsection{Public key use}
+		\begin{itemize}
+			\item \textbf{Public encoding key} used to ensure message only seem by intended party
+			\item \textbf{Public decryption key} Ensure message came from a certain party.
+		\end{itemize}
+		
+	\subsection{Digital signing}
+		\begin{itemize}
+			\item Prove message came from certain party
+			\item Sender hashes their message and encrypt with sercret key to create \textbf{signature}
+			\item Both message and signature sent so receiver can verify that it was sent by them using sender's public key
+		\end{itemize}
+		
+	\subsection{Sharing Keys}
+		\begin{itemize}
+			\item Need to ensure that keys are authentic, and right domain gets key if private.
+			\item Checking authenticity:
+			\begin{itemize}
+				\item Sign key and use another key to check authenticity of key. Chain of trust
+				\item Use trusted third party that certify key and check \textit{fingerprints}
+			\end{itemize}
+		\end{itemize}
+		
+	\subsection{Diffie-Hellman Protocol}
+		\begin{itemize}
+			\item Used to co-operatively form secret keys.
+			\item Usual OS approach is to have server store secret keys. (NOT DHP)\\
+			\item A and B want to communicate securely
+			\item Both A and B use large prime to generate something, pass it to the other and they do the same thing. 
+			\item After this, both will have identical keys that can be used to encrypt data that they share. (a common secret)
+		\end{itemize}
+		
+		\begin{enumerate}
+			\item Public prime = 23 \tab rootmodp = 5
+			\item A chooses 6,  Generate $5^6 mod 23 = 8$ and send to B
+			\item B chooses 15, Generate $5^{15} mod 24 = 19$ and send to A
+			\item A does $15^{6} mod 23 = 2$
+			\item B does $8^{15} mod 23 = 2$
+			\item \textbf{Therefore} 2 can be used as secret key
+		\end{enumerate}
 	
 
-
+	\subsection{Certification}
+		Ensure that communication to third party secure so can get information about others' secret keys.\\
+		
+		\textbf{Needham-Schroeder Protocol}
+		\begin{enumerate}
+			\item A and B are parties that want to communicate securely
+			\item S is server that has secret key for both A and B
+			\item Both A and B can communicate securely with S
+			\item A tells S he wants to talk to B
+			\item S creates key for A to communicate securely with B. $K_{AB}$
+			\item A sends a message also received by S and signed with new $K_{AB}$ and verified by B
+		\end{enumerate}
+		Algorithm used by Kerberos (so used by AFS)
 	
-	
+	\subsection{How things go wrong}
+		Three Cs of security failure
+		\begin{enumerate}
+			\item \textbf{Change}
+			\begin{itemize}
+				\item Odd version of things fix security holes
+				\item When changing something, hole may be created allowing security exploit
+			\end{itemize}
+			
+			\item \textbf{Complacency}
+			\begin{itemize}
+				\item Checking bounds important
+				\item Don't allow things like inputs to \textbf{overflow buffer} into next instruction.
+				\item \textit{VMS login} didn't check length of input and therefore could overwrite privilege masks and do whatever you wanted.
+				\item Add \textbf{canary} that is checked before execution. If changed then something tampered.
+				\item \textbf{Data Execution Protection} to prevent execution of code in data space. Or randomising location of code.
+				\item \textbf{Syntax checking} for things such as login. Don't want injection of commands or options allowing user to access something without a password.
+			\end{itemize}
+			
+			\item \textbf{Convenience}
+			\begin{itemize}
+				\item Adding security makes something less usable.
+				\item Always tradeoff between convenience and security
+			\end{itemize}
+		\end{enumerate}
+		
+	\subsection{Authentication}
+		\begin{itemize}
+			\item Security doens't matter if they think you're an authenticated user.
+			\item Policies need to exist that prevent \textit{sharing} of identities
+		\end{itemize}
+		
+		\begin{enumerate}
+			\item \textbf{Possesions}
+			\begin{itemize}
+				\item Keys or cards
+				\item Many ways for attackers to manipulate keys or cards to get information.
+				\item Manipulate power supply, observe computation times, and trying random values.
+			\end{itemize}
+			
+			\item \textbf{Attributes}
+			\begin{itemize}
+				\item Uses physical characteristics of user
+				\item Palm print, fingerprint, iris pattern, etc...
+				\item False positive and negatives can happen
+			\end{itemize}
+			
+			\item \textbf{Knowledge}
+		\end{enumerate}
 	
 	
 	
